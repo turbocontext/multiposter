@@ -1,5 +1,5 @@
-ENV['twitter_id'] = 'VUEmhq7CtC5JLUTDv4KhHA'
-ENV['twitter_secret'] = 'bKt4l6bBerou2c0v8ftkjnIySw6wtvGEJIa7ZShpWU'
+ENV['twitter_id'] = 'xm3Qs8dBIjbGetu48ukvg'
+ENV['twitter_secret'] = 'jSPmnSGvUoaTaXUZ7B0WugYZvOuP9iqyeYc6s0VE98'
 
 ENV['google_oauth2_id'] = '775116629039.apps.googleusercontent.com'
 ENV['google_oauth2_secret'] = '0PUtphXFPDtgpEufBPyxXOwU'
