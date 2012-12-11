@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
+      user.access_token = auth.credentials.token
       if ["twitter"].include?(auth.provider) and auth.info.email.nil?
         user.email = "#{auth.info.nickname}@#{auth.provider}.com"
       end
