@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20121211131348) do
 
+  create_table "social_users", :force => true do |t|
+    t.string  "uid"
+    t.string  "provider"
+    t.string  "access_token"
+    t.integer "user_id"
+    t.string  "email"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -26,9 +34,6 @@ ActiveRecord::Schema.define(:version => 20121211131348) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "uid"
-    t.string   "provider"
-    t.string   "access_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

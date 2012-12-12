@@ -1,2 +1,15 @@
 = link_to "Sign in", new_user_session_path
+%br
 = link_to "Sign out", destroy_user_session_path
+%br
+= link_to "Sign in with Twitter", "/auth/twitter"
+%table
+  %tr
+    %th Email
+    %th AccessToken
+    %th Email
+  %tr
+    - @users.each do |user|
+      %td= user.email
+      %td= user.access_token
+      %td= user.user.email

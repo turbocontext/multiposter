@@ -206,11 +206,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  config.omniauth :twitter, ENV['twitter_id'], ENV['twitter_secret']
-  config.omniauth :google_oauth2, ENV['google_oauth2_id'], ENV['google_oauth2_secret'], {access_type: 'online', approval_prompt: ''}
-  config.omniauth :facebook, ENV['facebook_id'], ENV['facebook_secret'], {:client_options => {:ssl => {:verify => false}}} #, :scope => 'email,offline_access,read_stream', :display => 'popup', :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
-  config.omniauth :vkontakte, ENV['vkontakte_id'], ENV['vkontakte_secret'], :display => 'popup'
-
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
