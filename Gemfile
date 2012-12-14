@@ -21,6 +21,7 @@ gem 'omniauth-mailru'
 gem 'omniauth-yandex'
 gem 'omniauth-vkontakte'
 
+gem 'fb_graph'
 gem 'hirb'
 
 group :assets do
