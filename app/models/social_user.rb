@@ -33,7 +33,6 @@ class UserInfo
   attr_reader :uid, :access_token, :provider
 
   def email
-    puts @auth.to_yaml
     if @auth.info.email.nil?
       "#{@auth.info.nickname}@#{@auth.provider}.com"
     else
