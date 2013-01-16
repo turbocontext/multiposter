@@ -12,9 +12,9 @@
   %tr
     %th Email
     %th AccessToken
-    %th Email
+    %th SecretToken
   - @users.each do |user|
     %tr
       %td= user.email
       %td= user.access_token
-      %td= user.user.email
+      %td= user.secret_token

@@ -1,8 +1,9 @@
 class SocialUser < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :email, :access_token, :uid, :provider, :user_id
+  attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id
 
   def self.from_omniauth(auth, current_user)
+    puts auth.to_yaml
     user_info = UserInfo.new(auth)
     if user = find_by_email_and_provider(user_info.email, user_info.provider)
       user.update_attributes(access_token: user_info.access_token)
@@ -17,7 +18,8 @@ class SocialUser < ActiveRecord::Base
       uid:      info.uid,
       email:    info.email,
       user_id:  current_user.id,
-      access_token: info.access_token
+      access_token: info.access_token,
+      secret_token: info.secret_token
     )
   end
 
@@ -28,9 +30,10 @@ class UserInfo
     @auth = auth
     @uid          = auth.uid
     @access_token = auth.credentials.token
+    @secret_token = auth.credentials.secret
     @provider     = auth.provider
   end
-  attr_reader :uid, :access_token, :provider
+  attr_reader :uid, :access_token, :provider, :secret_token
 
   def email
     if @auth.info.email.nil?
