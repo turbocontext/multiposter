@@ -10,11 +10,17 @@
 = link_to "Sign in with facebook", "/auth/facebook"
 %table
   %tr
+    %th
     %th Email
     %th AccessToken
     %th SecretToken
   - @users.each do |user|
     %tr
+      %td= check_box_tag "model_ids[]", user.id
       %td= user.email
       %td= user.access_token
       %td= user.secret_token
+= link_to "Magic button", "#", id: "magic_button"
+= form_for "form_id", url: {action: :mass_destroy, controller: :social_users}, html: {id: "form_id"} do |f|
+  = f.hidden_field :model_ids
+  = f.text_area :title

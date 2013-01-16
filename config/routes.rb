@@ -4,6 +4,11 @@ TemplateApp::Application.routes.draw do
   match "/auth/:provider/callback" => "social_users#create"
 
   resources :pages
+  resources :social_users do
+    collection do
+      match :mass_destroy
+    end
+  end
   root to: "pages#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

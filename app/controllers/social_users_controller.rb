@@ -5,4 +5,7 @@ class SocialUsersController < ApplicationController
     redirect_to root_path
   end
 
+  def mass_destroy
+    raise params.to_yaml
+  end
 end
