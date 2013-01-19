@@ -3,3 +3,7 @@
 https://developers.facebook.com/roadmap/offline-access-removal/
 Once the migration is enabled, if the access_token is generated from a server-side OAuth call, the resulting access_token will have the longer expiration time by default. If the call is made while there is still a valid long-lived user access_token for that user, the returned user access_token from this second call may be the same or may have changed, but in either case the expiration time will be set to a long expiration time.
 Note: The user must access your application before you're able to get a valid "authorization Code" to be able to make the server-side OAuth call again. Apps will not be able to setup a background/cron job that tries to automatically extend the expiration time, because the "authorization code" is short-lived and will have expired.
+
+
+MessageSet accepts_nested_attributes_for messages
+http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html

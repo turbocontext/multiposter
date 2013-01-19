@@ -23,4 +23,3 @@ webrat.log
 coverage
 .bin/*.*
 config/database.yml
-config/environment_variables.rb
