@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
+  has_many :message_sets, dependent: :destroy
   has_many :social_users, dependent: :destroy
+  has_many :messages, through: :social_users
 
 end

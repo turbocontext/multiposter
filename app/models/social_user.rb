@@ -1,6 +1,11 @@
 class SocialUser < ActiveRecord::Base
+
   belongs_to :user
+  has_many :message_sets
+  has_many :messages, through: :message_sets
   attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id
+
+  validates_presence_of :access_token, :provider
 
   def self.from_omniauth(auth, current_user)
     puts auth.to_yaml
