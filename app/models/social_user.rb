@@ -33,18 +33,18 @@ end
 class UserInfo
   def initialize(auth)
     @auth = auth
-    @uid          = auth.uid
-    @access_token = auth.credentials.token
-    @secret_token = auth.credentials.secret
-    @provider     = auth.provider
+    @uid          = auth[:uid]
+    @access_token = auth[:credentials][:token]
+    @secret_token = auth[:credentials][:secret]
+    @provider     = auth[:provider]
   end
   attr_reader :uid, :access_token, :provider, :secret_token
 
   def email
-    if @auth.info.email.nil?
-      "#{@auth.info.nickname}@#{@auth.provider}.com"
+    if @auth[:info][:email].nil?
+      "#{@auth[:info][:nickname]}@#{@auth[:provider]}.com"
     else
-      @auth.info.email
+      @auth[:info][:email]
     end
   end
 end
