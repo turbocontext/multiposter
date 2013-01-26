@@ -123,6 +123,6 @@ describe SocialUser do
   end
 
   it "should create new user from omniauth" do
-    expect {SocialUser.from_omniauth(@oauth1)}.to change{SocialUser.count}.by(1)
+    expect {SocialUser.from_omniauth(@oauth1)}.to change(SocialUser, :count).by(1)
   end
 end
