@@ -7,6 +7,15 @@ FactoryGirl.define do
     password_confirmation 'please'
   end
 
+  factory :social_user do
+    uid "123"
+    provider "facebook"
+    access_token "access_token"
+    secret_token "secret_token"
+    user
+    email
+  end
+
   sequence :email do |n|
     "example_#{n}@example.com"
   end
