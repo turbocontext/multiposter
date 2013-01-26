@@ -14,6 +14,8 @@ class SocialUsersController < ApplicationController
     user = SocialUser.find(params[:id])
     user.destroy
     redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 
   def mass_destroy
