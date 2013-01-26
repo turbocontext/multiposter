@@ -5,7 +5,7 @@ class SocialUsersController < ApplicationController
   end
 
   def create
-    user = SocialUser.from_omniauth(request.env['omniauth.auth'], current_user)
+    user = SocialUser.from_omniauth(request.env['omniauth.auth'])
     user.update_attributes(user_id: current_user.id) if user
     redirect_to root_path
   end
@@ -24,5 +24,7 @@ class SocialUsersController < ApplicationController
       SocialUser.find_all_by_id(ids).each(&:destroy)
     end
     redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 end

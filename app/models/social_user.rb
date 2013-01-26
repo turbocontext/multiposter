@@ -14,6 +14,8 @@ class SocialUser < ActiveRecord::Base
     else
       create_with(user_info)
     end
+  rescue InsufficientInfoError
+    return nil
   end
 
   def self.create_with(info)
@@ -28,9 +30,12 @@ class SocialUser < ActiveRecord::Base
 
 end
 
+class InsufficientInfoError < StandardError; end
+
 class UserInfo
   def initialize(auth)
     @auth = auth
+    raise InsufficientInfoError unless valid?
     @uid          = auth[:uid]
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
@@ -44,5 +49,9 @@ class UserInfo
     else
       @auth[:info][:email]
     end
+  end
+
+  def valid?
+    @auth && @auth[:uid] && @auth[:credentials] && @auth[:credentials][:token] && @auth[:provider]
   end
 end

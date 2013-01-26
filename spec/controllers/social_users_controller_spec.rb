@@ -5,7 +5,6 @@ describe SocialUsersController do
   before(:each) do
     user = FactoryGirl.create(:user)
     sign_in user
-    @oauth = OmniauthExamples.facebook_oauth
   end
 
   describe "GET 'index'" do
@@ -27,8 +26,25 @@ describe SocialUsersController do
   end
 
   describe "POST 'create'" do
-    it "should create user from omniauth" do
+    before(:each) do
+      @oauth = OmniauthExamples.facebook_oauth
+    end
 
+    it "should not create anything withou proper oauth hash" do
+      expect {post :create}.not_to change(SocialUser, :count)
+    end
+
+    it "should create user from omniauth" do
+      request.env['omniauth.auth'] = @oauth
+      post :create
+    end
+  end
+
+  describe "DELETE 'mass_destroy'" do
+    it "should delete given social users" do
+      user1 = FactoryGirl.create(:social_user)
+      user2 = FactoryGirl.create(:social_user)
+      expect {delete :mass_destroy, mass_destroy: {model_ids: "#{user1.id},#{user2.id}"}}.to change(SocialUser, :count).by(-2)
     end
   end
 end
