@@ -7,15 +7,11 @@
     = csrf_meta_tags
   %body
     .page
-      .page-header
-        .page-header-content
-          = render 'header'
+      = render 'header'
     .page
-      .page-header
-        .page-header-content
-          %h2 Заголовок
-      .page-region
-        .page-region-content
-          .row
-            .span12
-              = yield
+      .row
+        .span32
+          %h2= @page_header
+    .page.row
+      .span12
+        = yield

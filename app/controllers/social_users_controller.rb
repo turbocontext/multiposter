@@ -1,7 +1,9 @@
+# -*- encoding: utf-8 -*-
 class SocialUsersController < ApplicationController
 
   def index
     @users = SocialUser.scoped
+    @page_header = "Учетные записи социальных сетей"
   end
 
   def create
