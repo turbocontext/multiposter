@@ -60,3 +60,4 @@ group :test do
   gem 'simplecov', :require => false
   gem 'rb-inotify', '~> 0.8.8'
 end
+gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
