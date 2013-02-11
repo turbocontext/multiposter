@@ -28,8 +28,9 @@
 @import "modern-ui/slider";
 @import "modern-ui/dialog";
 
-@import "media_styles";
+@import "modern-ui/responsive";
 
+@import "media_styles";
 .page-region{ padding-left: 20px;}
 table{
   table-layout: fixed;
@@ -51,6 +52,7 @@ table{
     padding-top: 7px;
   }
 }
+
 
 // The Grid
 @mixin grid-core($gridColumnWidth, $gridGutterWidth) {

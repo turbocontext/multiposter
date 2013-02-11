@@ -7,12 +7,12 @@
   - if signed_in?
     .span12
       %a{href: "#"}
-        %h3.to_right
+        %h3.user_email
           %i.icon-user
           = "#{current_user.email}"
     .span4
       %a{href: destroy_user_session_path, "data-method"=> "delete", rel: "nofollow"}
-        %h3.to_right.fg-color-blue
+        %h3.fg-color-blue.sign_out
           Sign out
           %i.icon-exit
   - else

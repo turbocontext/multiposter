@@ -104,7 +104,9 @@ hr {
     position: absolute;
 }
 
+    .user_email, .sign_out{ float: right;}
 @media (min-width: 768px) and (max-width: 979px) {
+
     .page {
         width: 724px;
     }
@@ -114,9 +116,14 @@ hr {
     .browsers-icons img {
         zoom: .8;
     }
+
+    .user_email,.sign_out{ float: none;}
+
 }
 
 @media (max-width: 767px) {
+
+    .user_email,.sign_out{ float: none;}
     .page {
         width: 100%;
     }
