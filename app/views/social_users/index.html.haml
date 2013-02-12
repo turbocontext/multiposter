@@ -1,8 +1,14 @@
-
+%a.shortcut{href: "/auth/facebook"}
+  %span.icon
+    %i.icon-facebook
+  %span.label
+    Facebook
+  %span.badge= current_user.social(:facebook).count
 %br
 = link_to "Sign in with Twitter", "/auth/twitter"
 %br
 = link_to "Sign in with facebook", "/auth/facebook"
+%hr
 %table.stripped.bordered
   %thead
     %tr
@@ -18,7 +24,7 @@
         %td= user.email
         %td= user.access_token
         %td= user.secret_token
-        %td= link_to "Destroy", social_user_path(user), method: :delete
+        %td= raw(html_button_to "",social_user_path(user), {method: :delete}, content_tag(:i, "", class: "icon-remove"))
 = link_to "Mass destroy", "#", id: "magic_button"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "form_id"} do |f|
   = f.hidden_field :model_ids

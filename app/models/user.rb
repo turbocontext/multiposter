@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   has_many :social_users, dependent: :destroy
   has_many :messages, through: :social_users
 
+  def social(net)
+    social_users.where(provider: net)
+  end
+
 end
