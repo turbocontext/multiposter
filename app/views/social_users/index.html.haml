@@ -1,28 +1,35 @@
 .row
   .span32
-    %h2 Добавить учетную запись социальной сети
-= shortcut_for(:facebook)
-= shortcut_for(:twitter)
+    %h2 Add social network account:
+.row
+  .span32
+    = shortcut_for(:facebook)
+    = shortcut_for(:twitter)
 %hr
+.row
+  .span32
+    %a.button.command-button.default{href: "#"}
+      Create message
+      %small Message will be sent within marked accounts
 %table.stripped.bordered
   %thead
     %tr
       %th
-        %input#mark_all(type="checkbox")
+        %input#mark_all(type="checkbox" checked="checked")
       %th Email
       %th AccessToken
       %th SecretToken
-      %th Actions
+      %th.actions Actions
   %tbody
     - @users.each do |user|
       %tr
-        %td= check_box_tag "model_ids[]", user.id
+        %td= check_box_tag "model_ids[]", user.id, checked: true
         %td= user.email
         %td= user.access_token
         %td= user.secret_token
         %td
           .toolbar
             = raw(html_button_to "",social_user_path(user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
-= link_to "Удалить отмеченные", "#", id: "magic_button", class: "button default"
+= link_to "Delete selected", "#", id: "magic_button", class: "button default"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "form_id"} do |f|
   = f.hidden_field :model_ids
