@@ -1,0 +1,47 @@
+.page-region{ padding-left: 20px;}
+
+table{
+  table-layout: fixed;
+  td{
+    word-wrap: break-word;
+  }
+}
+
+th.actions{ width: 70px;}
+
+.center{
+  text-align: center;
+  vertical-align: middle;
+}
+
+table{
+
+  tr th:first-child, tr td:first-child{
+    @extend .center;
+    width: 35px;
+  }
+  button.big{
+    font-size: 1.5em;
+  }
+  tr th:last-child, tr td:last-child{
+    @extend .center;
+  }
+}
+
+.logo{
+  font-weight: 400;
+}
+
+.to_right{
+  float: right;
+}
+
+.header{
+  h3{
+    padding-top: 7px;
+  }
+}
+.create_message{
+  font-size: 1.5em;
+  font-weight: 400;
+}
