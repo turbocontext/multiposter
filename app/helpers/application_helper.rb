@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  def shortcut_for(net, name = nil)
+    name ||= net.to_s.capitalize
+    raw %Q{<a class="shortcut" href="/auth/#{net}">
+          <span class="icon">
+            <i class="icon-#{net}"></i>
+          </span>
+          <span class="label">
+            #{name}
+          </span>
+        <span class="badge">#{current_user.social(net).count}</span>
+      </a>
+      }
+  end
+
   def html_button_to(name, options = {}, html_options = {}, button_html = nil)
     html_options = html_options.stringify_keys
     convert_boolean_attributes!(html_options, %w( disabled ))

@@ -1,42 +1,33 @@
+
 @import "modern-ui/variables";
 
 @import "modern-ui/routines";
-@import "modern-ui/icons";
-@import "modern-ui/reset";
-@import "modern-ui/bricks";
-@import "modern-ui/typography";
-@import "modern-ui/layout";
-@import "modern-ui/buttons";
-@import "modern-ui/tables";
-// @import "modern-ui/grid";
-
-@import "modern-ui/hero";
-@import "modern-ui/menus";
-@import "modern-ui/sidebar";
-@import "modern-ui/notices";
-@import "modern-ui/tiles";
-@import "modern-ui/forms";
-@import "modern-ui/images";
-@import "modern-ui/cards";
-@import "modern-ui/code";
-@import "modern-ui/pagecontrol";
-@import "modern-ui/accordion";
-@import "modern-ui/rating";
-@import "modern-ui/progress";
-@import "modern-ui/carousel";
-@import "modern-ui/listview";
-@import "modern-ui/slider";
-@import "modern-ui/dialog";
-
-@import "modern-ui/responsive";
-@import "open_sans";
-
-@import "media_styles";
 .page-region{ padding-left: 20px;}
+
 table{
   table-layout: fixed;
   td{
     word-wrap: break-word;
+  }
+}
+
+
+.center{
+  text-align: center;
+  vertical-align: middle;
+}
+
+table{
+
+  tr th:first-child, tr td:first-child{
+    @extend .center;
+    width: 35px;
+  }
+  button.big{
+    font-size: 1.5em;
+  }
+  tr th:last-child, tr td:last-child{
+    @extend .center;
   }
 }
 
@@ -258,3 +249,35 @@ $fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768) 
   float: right;
 }
 
+
+@import "modern-ui/icons";
+@import "modern-ui/reset";
+@import "modern-ui/bricks";
+@import "modern-ui/typography";
+@import "modern-ui/layout";
+@import "modern-ui/buttons";
+@import "modern-ui/tables";
+// @import "modern-ui/grid";
+
+@import "modern-ui/hero";
+@import "modern-ui/menus";
+@import "modern-ui/sidebar";
+@import "modern-ui/notices";
+@import "modern-ui/tiles";
+@import "modern-ui/forms";
+@import "modern-ui/images";
+@import "modern-ui/cards";
+@import "modern-ui/code";
+@import "modern-ui/pagecontrol";
+@import "modern-ui/accordion";
+@import "modern-ui/rating";
+@import "modern-ui/progress";
+@import "modern-ui/carousel";
+@import "modern-ui/listview";
+@import "modern-ui/slider";
+@import "modern-ui/dialog";
+
+@import "modern-ui/responsive";
+@import "open_sans";
+
+@import "media_styles";
