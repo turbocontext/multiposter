@@ -1,8 +1,7 @@
 class SocialUser < ActiveRecord::Base
 
   belongs_to :user
-  has_many :message_sets
-  has_many :messages, through: :message_sets
+  has_many :messages
   attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id
 
   validates_presence_of :access_token, :provider

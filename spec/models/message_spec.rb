@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Message do
 
   it "should create a message with valid attributes" do
-    Message.create(text: "sand", message_set_id: 1, social_user_id: 1).should be_true
+    Message.create(text: "sand", user_message_id: 1, social_user_id: 1).should be_true
   end
 
   describe "constraints" do
@@ -12,11 +12,11 @@ describe Message do
     end
 
     it "should be invalid without text" do
-      Message.new(social_user_id: 1, message_set_id: 1).should_not be_valid
+      Message.new(social_user_id: 1, user_message_id: 1).should_not be_valid
     end
 
     it "should be invalid without social user id" do
-      Message.new(text: "sand", message_set_id: 1).should_not be_valid
+      Message.new(text: "sand", user_message_id: 1).should_not be_valid
     end
   end
 

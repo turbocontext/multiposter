@@ -13,18 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20130124143844) do
 
-  create_table "message_sets", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "messages", :force => true do |t|
     t.text     "text"
     t.integer  "social_user_id"
-    t.integer  "message_set_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "user_message_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "social_users", :force => true do |t|
@@ -34,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20130124143844) do
     t.string  "secret_token"
     t.integer "user_id"
     t.string  "email"
+  end
+
+  create_table "user_messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

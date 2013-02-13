@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe MessageSet do
+describe UserMessage do
   describe "associations" do
     it "should respond to messages call" do
-      MessageSet.new.should respond_to(:messages)
+      UserMessage.new.should respond_to(:message)
     end
 
     it "should belong to user" do
-      MessageSet.new.should respond_to(:user)
+      UserMessage.new.should respond_to(:user)
     end
   end
 end

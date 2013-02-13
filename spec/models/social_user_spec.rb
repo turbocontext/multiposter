@@ -29,8 +29,7 @@ describe SocialUser do
   end
 
   describe "relations" do
-    it "should have many message sets and messages through it" do
-      SocialUser.new.should respond_to(:message_sets)
+    it "should have many messages" do
       SocialUser.new.should respond_to(:messages)
     end
   end

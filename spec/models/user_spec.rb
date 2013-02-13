@@ -11,7 +11,7 @@ describe User do
     end
 
     it "should have messages" do
-      User.new.should respond_to(:message_sets)
+      User.new.should respond_to(:user_messages)
     end
 
     it "should have messages" do
