@@ -9,7 +9,8 @@ describe SocialUser do
       access_token: "secret",
       secret_token: "secrete",
       user_id: "12",
-      email: "email@email.com"
+      email: "email@email.com",
+      nickname: "ddd"
     }
     @oauth1 = OmniauthExamples.facebook_oauth
     @oauth2 = OmniauthExamples.twitter_oauth

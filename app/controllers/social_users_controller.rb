@@ -7,6 +7,7 @@ class SocialUsersController < ApplicationController
   end
 
   def create
+    # raise request.env['omniauth.auth'].to_yaml
     user = SocialUser.from_omniauth(request.env['omniauth.auth'])
     user.update_attributes(user_id: current_user.id) if user
     redirect_to root_path

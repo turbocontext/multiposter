@@ -2,7 +2,7 @@ class SocialUser < ActiveRecord::Base
 
   belongs_to :user
   has_many :messages
-  attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id
+  attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id, :nickname, :expires
 
   validates_presence_of :access_token, :provider
 
@@ -22,8 +22,10 @@ class SocialUser < ActiveRecord::Base
       provider: info.provider,
       uid:      info.uid,
       email:    info.email,
+      nickname: info.nickname,
       access_token: info.access_token,
-      secret_token: info.secret_token
+      secret_token: info.secret_token,
+      expires:  info.expires
     )
   end
 
@@ -36,11 +38,13 @@ class UserInfo
     @auth = auth
     raise InsufficientInfoError unless valid?
     @uid          = auth[:uid]
+    @nickname     = auth[:info][:nickname]
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
     @provider     = auth[:provider]
+    @expires      = auth[:credentials][:expires]
   end
-  attr_reader :uid, :access_token, :provider, :secret_token
+  attr_reader :uid, :access_token, :provider, :secret_token, :nickname, :expires
 
   def email
     if @auth[:info][:email].nil?

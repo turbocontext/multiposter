@@ -18,7 +18,7 @@
     %tr
       %th
         %input#mark_all(type="checkbox" checked="checked")
-      %th Email
+      %th Nickname
       %th AccessToken
       %th SecretToken
       %th.actions Actions
@@ -26,7 +26,7 @@
     - @users.each do |user|
       %tr
         %td= check_box_tag "model_ids[]", user.id, checked: true
-        %td= user.email
+        %td= user.nickname
         %td= user.access_token
         %td= user.secret_token
         %td
