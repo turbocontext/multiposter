@@ -45,7 +45,7 @@ group :test do
   gem 'guard-spork'
   gem 'guard-cucumber', git: 'git://github.com/guard/guard-cucumber.git'
   gem 'guard-rspec'
-  gem 'rspec-rails'
+  gem 'rspec-rails', git: 'git@github.com:rspec/rspec-rails.git'
   gem 'capybara'
   gem 'spork-rails'
   gem 'libnotify'
@@ -58,6 +58,6 @@ group :test do
   gem "email_spec"
   gem 'jasminerice'
   gem 'simplecov', :require => false
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.9'
 end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
