@@ -20,14 +20,16 @@ class SocialUser < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(user_info)
-    if user = find_by_uid(user_info.uid)
-      user.update_attributes(access_token: user_info.access_token)
-    else
-      create_with(user_info)
-    end
-  rescue UserInfo::InsufficientInfoError
-    return nil
+  def self.from_omniauth(auth)
+    provider = auth[:provider]
+    "#{provider}".constantize.new(auth)
+  #   if user = find_by_uid(user_info.uid)
+  #     user.update_attributes(access_token: user_info.access_token)
+  #   else
+  #     create_with(user_info)
+  #   end
+  # rescue UserInfo::InsufficientInfoError
+  #   return nil
   end
 
   def self.create_with(info)

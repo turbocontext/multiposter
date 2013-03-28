@@ -8,9 +8,9 @@ class SocialUsersController < ApplicationController
 
   def create
     # raise request.env['omniauth.auth'].to_yaml
-    info = UserInfo.new(request.env['omniauth.auth'])
-    user = SocialUser.from_omniauth(info)
-    user.update_attributes(user_id: current_user.id) if user
+    SocialUser.from_omniauth(request.env['omniauth.auth']).each do |user|
+      user.update_attributes(user_id: current_user.id)
+    end
     redirect_to root_path
   rescue UserInfo::InsufficientInfoError
     redirect_to root_path
