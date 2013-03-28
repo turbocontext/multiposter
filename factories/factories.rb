@@ -9,7 +9,7 @@ FactoryGirl.define do
 
   factory :social_user do
     uid "123"
-    provider "facebook"
+    provider "test_provider"
     access_token "access_token"
     secret_token "secret_token"
     user

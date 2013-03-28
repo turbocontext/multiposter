@@ -1,15 +1,23 @@
+#-*- encoding: utf-8 -*-
 class SocialUser < ActiveRecord::Base
 
   belongs_to :user
   has_many :messages
   has_ancestry
   attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id, :nickname, :expires
+  after_create :call_after_create_strategy
 
   validates_presence_of :access_token, :provider
 
-  def self.from_omniauth(auth)
-    user_info = UserInfo.new(auth)
-    if user = find_by_email_and_provider(user_info.email, user_info.provider)
+  def call_after_create_strategy
+    if SocialUser.providers.include?(self.provider)
+      strategy = "#{provider.to_s.camelize}::AfterCreateStrategy".constantize.new(user: self)
+      strategy.process
+    end
+  end
+
+  def self.from_omniauth(user_info)
+    if user = find_by_uid(user_info.uid)
       user.update_attributes(access_token: user_info.access_token)
     else
       create_with(user_info)
@@ -30,32 +38,8 @@ class SocialUser < ActiveRecord::Base
     )
   end
 
-end
-
-class InsufficientInfoError < StandardError; end
-
-class UserInfo
-  def initialize(auth)
-    @auth = auth
-    raise InsufficientInfoError unless valid?
-    @uid          = auth[:uid]
-    @nickname     = auth[:info][:nickname]
-    @access_token = auth[:credentials][:token]
-    @secret_token = auth[:credentials][:secret]
-    @provider     = auth[:provider]
-    @expires      = auth[:credentials][:expires]
-  end
-  attr_reader :uid, :access_token, :provider, :secret_token, :nickname, :expires
-
-  def email
-    if @auth[:info][:email].nil?
-      "#{@auth[:info][:nickname]}@#{@auth[:provider]}.com"
-    else
-      @auth[:info][:email]
-    end
+  def self.providers
+    [:facebook, :twitter]
   end
 
-  def valid?
-    @auth && @auth[:uid] && @auth[:credentials] && @auth[:credentials][:token] && @auth[:provider]
-  end
 end

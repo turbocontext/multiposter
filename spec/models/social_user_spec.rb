@@ -5,7 +5,7 @@ describe SocialUser do
   before(:each) do
     @attr = {
       uid: "ddd",
-      provider: "snd",
+      provider: "test_provider",
       access_token: "secret",
       secret_token: "secrete",
       user_id: "12",
@@ -15,8 +15,9 @@ describe SocialUser do
     @oauth1 = OmniauthExamples.facebook_oauth
     @oauth2 = OmniauthExamples.twitter_oauth
   end
+
   it "should create new social user with valid attributes" do
-    SocialUser.create(@attr).should be_true
+    expect{SocialUser.create(@attr)}.to change{SocialUser.count}.by(1)
   end
 
   describe "methods" do
@@ -42,16 +43,20 @@ describe SocialUser do
   end
 
   describe "from omniauth" do
+    before(:each) do
+      @info = UserInfo.new(@oauth1)
+    end
     it "should create new user from omniauth" do
-      expect {SocialUser.from_omniauth(@oauth1)}.to change(SocialUser, :count).by(1)
+      expect {SocialUser.from_omniauth(@info)}.to change(SocialUser, :count).by(1)
     end
 
     it "should update user's access token if it was changed" do
       new_token = "new token"
-      new_auth = @oauth1.deep_merge({provider: 'facebook', info: {email: "example@mail.com"}, credentials: {token: new_token}})
-      user1 = FactoryGirl.create(:social_user, email: "example@mail.com", provider: "facebook", access_token: "old token")
-      expect {SocialUser.from_omniauth(new_auth); user1.reload}.to \
-        change(user1, :access_token).to(new_token)
+      new_info = UserInfo.new(@oauth1.deep_merge({uid: "new_uid", provider: 'facebook', credentials: {token: new_token}}))
+      user1 = FactoryGirl.create(:social_user, uid: "new_uid", provider: "facebook", access_token: "old token")
+      expect do
+        SocialUser.from_omniauth(new_info); user1.reload
+      end.to change(user1, :access_token).to(new_token)
     end
 
     it "should return nil when auth hash is invalid or corrupted" do
@@ -59,19 +64,4 @@ describe SocialUser do
     end
   end
 
-  describe UserInfo do
-    it "should extract info from omniauth hash" do
-      user_info = UserInfo.new(@oauth1)
-      user_info.email.should == @oauth1[:info][:email]
-    end
-
-    it "should modify email if there is no email in auth hash" do
-      user_info = UserInfo.new(@oauth2)
-      user_info.email.should == "offical.kavigator@twitter.com"
-    end
-
-    it "should raise insufficient info error if auth hash is invalid" do
-      expect {UserInfo.new({})}.to raise_error(InsufficientInfoError)
-    end
-  end
 end
