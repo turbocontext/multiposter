@@ -19,6 +19,12 @@ describe SocialUser do
     SocialUser.create(@attr).should be_true
   end
 
+  describe "methods" do
+    it "should should have ancestry" do
+      SocialUser.roots.should be_true
+    end
+  end
+
   describe "validations" do
     it "should reject records without provider" do
       SocialUser.new(@attr.merge(provider: nil)).should_not be_valid

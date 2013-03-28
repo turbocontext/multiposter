@@ -6,6 +6,7 @@ class CreateSocialUsers < ActiveRecord::Migration
       t.string  :access_token
       t.string  :secret_token
       t.string  :nickname
+      t.string  :ancestry
       t.date    :expires
       t.integer :user_id
       t.string  :email
