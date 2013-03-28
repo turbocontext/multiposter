@@ -1,7 +1,7 @@
 #-*- encoding: utf-8 -*-
-class InsufficientInfoError < StandardError; end
 
 class UserInfo
+  class InsufficientInfoError < StandardError; end
   def initialize(auth)
     @auth = auth
     raise InsufficientInfoError unless valid?

@@ -27,7 +27,7 @@ describe SocialUsersController do
 
   describe "POST 'create'" do
     before(:each) do
-      @oauth = OmniauthExamples.facebook_oauth
+      @oauth = OmniauthExamples.test_provider
     end
 
     it "should not create anything withou proper oauth hash" do

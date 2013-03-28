@@ -59,9 +59,6 @@ describe SocialUser do
       end.to change(user1, :access_token).to(new_token)
     end
 
-    it "should return nil when auth hash is invalid or corrupted" do
-      SocialUser.from_omniauth(nil).should be_nil
-    end
   end
 
 end

@@ -26,6 +26,7 @@ describe UserInfo do
   end
 
   it "should raise insufficient info error if auth hash is invalid" do
-    expect {UserInfo.new({})}.to raise_error(InsufficientInfoError)
+    expect {UserInfo.new({})}.to raise_error(UserInfo::InsufficientInfoError)
   end
+
 end

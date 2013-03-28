@@ -22,7 +22,7 @@ class SocialUser < ActiveRecord::Base
     else
       create_with(user_info)
     end
-  rescue InsufficientInfoError
+  rescue UserInfo::InsufficientInfoError
     return nil
   end
 
