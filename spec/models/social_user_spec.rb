@@ -12,8 +12,7 @@ describe SocialUser do
       email: "email@email.com",
       nickname: "ddd"
     }
-    @oauth1 = OmniauthExamples.facebook_oauth
-    @oauth2 = OmniauthExamples.twitter_oauth
+    @oauth = OmniauthExamples.test_provider
   end
 
   it "should create new social user with valid attributes" do
@@ -44,7 +43,7 @@ describe SocialUser do
 
   describe "from omniauth" do
     before(:each) do
-      @info = UserInfo.new(@oauth1)
+      @info = UserInfo.new(@oauth)
     end
     it "should create new user from omniauth" do
       expect {SocialUser.from_omniauth(@info)}.to change(SocialUser, :count).by(1)
@@ -52,11 +51,11 @@ describe SocialUser do
 
     it "should update user's access token if it was changed" do
       new_token = "new token"
-      new_info = UserInfo.new(@oauth1.deep_merge({uid: "new_uid", provider: 'facebook', credentials: {token: new_token}}))
-      user1 = FactoryGirl.create(:social_user, uid: "new_uid", provider: "facebook", access_token: "old token")
+      new_info = UserInfo.new(@oauth.deep_merge({uid: "new_uid", provider: 'facebook', credentials: {token: new_token}}))
+      user = FactoryGirl.create(:social_user, uid: "new_uid", access_token: "old token")
       expect do
-        SocialUser.from_omniauth(new_info); user1.reload
-      end.to change(user1, :access_token).to(new_token)
+        SocialUser.from_omniauth(new_info); user.reload
+      end.to change(user, :access_token).to(new_token)
     end
 
   end

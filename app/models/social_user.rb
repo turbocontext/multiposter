@@ -4,7 +4,11 @@ class SocialUser < ActiveRecord::Base
   belongs_to :user
   has_many :messages
   has_ancestry
-  attr_accessible :email, :access_token, :secret_token, :uid, :provider, :user_id, :nickname, :expires
+  attr_accessible :email, :access_token,
+                  :secret_token, :uid,
+                  :provider, :user_id,
+                  :nickname, :expires,
+                  :parent_id
   after_create :call_after_create_strategy
 
   validates_presence_of :access_token, :provider
@@ -39,7 +43,7 @@ class SocialUser < ActiveRecord::Base
   end
 
   def self.providers
-    [:facebook, :twitter]
+    ["facebook", "twitter"]
   end
 
 end
