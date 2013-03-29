@@ -6,14 +6,14 @@ module OmniauthExamples
       provider: 'facebook',
       uid: '100003700047553',
       info: {
-        nickname: 'offical.kavigator',
-        name: 'Offical Kavigator',
+        nickname: 'official.kavigator',
+        name: 'Official Kavigator',
         email: 'kavigator@gmail.com',
-        first_name: 'Offical',
+        first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
         urls: {
-          "Facebook" => 'http://www.facebook.com/offical.kavigator'
+          "Facebook" => 'http://www.facebook.com/official.kavigator'
         },
         location: 'Makhachkala',
         verified: true
@@ -26,11 +26,11 @@ module OmniauthExamples
       extra: {
         raw_info: {
           id: '100003700047553',
-          name: 'Offical Kavigator',
-          first_name: 'Offical',
+          name: 'Official Kavigator',
+          first_name: 'Official',
           last_name: 'Kavigator',
-          link: 'http://www.facebook.com/offical.kavigator',
-          username: 'offical.kavigator',
+          link: 'http://www.facebook.com/official.kavigator',
+          username: 'official.kavigator',
           location:{
             id: '108527135837627',
             name: 'Makhachkala'
@@ -51,13 +51,13 @@ module OmniauthExamples
       provider: 'twitter',
       uid: '100003700047553',
       info: {
-        nickname: 'offical.kavigator',
-        name: 'Offical Kavigator',
-        first_name: 'Offical',
+        nickname: 'official.kavigator',
+        name: 'Official Kavigator',
+        first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
         urls: {
-          "Facebook" => 'http://www.facebook.com/offical.kavigator'
+          "Facebook" => 'http://www.facebook.com/official.kavigator'
         },
         location: 'Makhachkala',
         verified: true
@@ -70,11 +70,11 @@ module OmniauthExamples
       extra: {
         raw_info: {
           id: '100003700047553',
-          name: 'Offical Kavigator',
-          first_name: 'Offical',
+          name: 'Official Kavigator',
+          first_name: 'Official',
           last_name: 'Kavigator',
-          link: 'http://www.facebook.com/offical.kavigator',
-          username: 'offical.kavigator',
+          link: 'http://www.facebook.com/official.kavigator',
+          username: 'official.kavigator',
           location:{
             id: '108527135837627',
             name: 'Makhachkala'
@@ -95,13 +95,13 @@ module OmniauthExamples
       provider: 'test_provider',
       uid: '100003700047553',
       info: {
-        nickname: 'offical.kavigator',
-        name: 'Offical Kavigator',
-        first_name: 'Offical',
+        nickname: 'official.kavigator',
+        name: 'Official Kavigator',
+        first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
         urls: {
-          "Facebook" => 'http://www.facebook.com/offical.kavigator'
+          "Facebook" => 'http://www.facebook.com/official.kavigator'
         },
         location: 'Makhachkala',
         verified: true
@@ -114,11 +114,11 @@ module OmniauthExamples
       extra: {
         raw_info: {
           id: '100003700047553',
-          name: 'Offical Kavigator',
-          first_name: 'Offical',
+          name: 'Official Kavigator',
+          first_name: 'Official',
           last_name: 'Kavigator',
-          link: 'http://www.facebook.com/offical.kavigator',
-          username: 'offical.kavigator',
+          link: 'http://www.facebook.com/official.kavigator',
+          username: 'official.kavigator',
           location:{
             id: '108527135837627',
             name: 'Makhachkala'

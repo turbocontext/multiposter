@@ -3,9 +3,15 @@ require "spec_helper"
 
 describe Facebook do
   describe User do
-    it "should create user info hash" do
-      user = Facebook::User.new(OmniauthExamples.facebook_oauth)
-      user.main_user.should be_true
+    before(:each) do
+      @user = Facebook::User.new(OmniauthExamples.facebook_oauth)
     end
+
+    it "should create user info hash" do
+      main_user = @user.main_user
+      main_user.nickname.should == 'official.kavigator'
+    end
+
+    it "should fetch all pages and user page info hash"
   end
 end

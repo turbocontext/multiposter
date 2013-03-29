@@ -22,7 +22,7 @@ describe UserInfo do
 
   it "should modify email if there is no email in auth hash" do
     user_info = UserInfo.new(@oauth2)
-    user_info.email.should == "offical.kavigator@twitter.com"
+    user_info.email.should == "official.kavigator@twitter.com"
   end
 
   it "should raise insufficient info error if auth hash is invalid" do
