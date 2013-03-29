@@ -9,27 +9,17 @@ class SocialUser < ActiveRecord::Base
                   :provider, :user_id,
                   :nickname, :expires,
                   :parent_id
-  after_create :call_after_create_strategy
 
-  validates_presence_of :access_token, :provider
-
-  def call_after_create_strategy
-    if SocialUser.providers.include?(self.provider)
-      strategy = "#{provider.to_s.camelize}::AfterCreateStrategy".constantize.new(user: self)
-      strategy.process
-    end
-  end
+  validates_presence_of :access_token, :provider, :uid
 
   def self.from_omniauth(auth)
     provider = auth[:provider]
-    "#{provider}".constantize.new(auth)
-  #   if user = find_by_uid(user_info.uid)
-  #     user.update_attributes(access_token: user_info.access_token)
-  #   else
-  #     create_with(user_info)
-  #   end
-  # rescue UserInfo::InsufficientInfoError
-  #   return nil
+    user = "#{provider.to_s.camelize}::User".constantize.new(auth)
+    main_user = create_with(user.main_user)
+    user.subusers.each do |subuser|
+      tmp = create_with(subuser)
+      tmp.update_attributes(parent_id: main_user)
+    end
   end
 
   def self.create_with(info)
@@ -42,10 +32,6 @@ class SocialUser < ActiveRecord::Base
       secret_token: info.secret_token,
       expires:  info.expires
     )
-  end
-
-  def self.providers
-    ["facebook", "twitter"]
   end
 
 end
