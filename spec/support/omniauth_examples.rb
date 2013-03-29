@@ -88,7 +88,7 @@ module OmniauthExamples
     }
   end
 
-  def self.test_provider
+  def self.test_oauth
     {
       provider: 'test_provider',
       uid: '100003700047553',

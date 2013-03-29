@@ -12,8 +12,6 @@ class SocialUsersController < ApplicationController
       user.update_attributes(user_id: current_user.id)
     end
     redirect_to root_path
-  rescue UserInfo::InsufficientInfoError
-    redirect_to root_path
   end
 
   def destroy
