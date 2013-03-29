@@ -1,11 +1,18 @@
+#-*- encoding: utf-8 -*-
+require 'user_info'
 module Facebook
-  class AfterCreateStrategy
-    def initialize(args)
-      @user = args[:user]
+  class User
+    def initialize(auth)
+      @auth = auth
+      @info = UserInfo.new(auth)
     end
 
-    def process(args = {})
-      create_pages
+    def main_user
+      @info
+    end
+
+    def subusers
+
     end
 
     def create_pages
