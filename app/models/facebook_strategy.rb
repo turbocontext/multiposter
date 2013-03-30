@@ -1,6 +1,6 @@
 #-*- encoding: utf-8 -*-
 require 'user_info'
-module Facebook
+module FacebookStrategy
   class User
     def initialize(auth)
       @auth = auth
@@ -12,7 +12,7 @@ module Facebook
     end
 
     def subusers
-
+      []
     end
 
     def create_pages

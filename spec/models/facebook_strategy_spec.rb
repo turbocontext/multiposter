@@ -1,10 +1,10 @@
 require "support/omniauth_examples"
 require "spec_helper"
 
-describe Facebook do
+describe FacebookStrategy do
   describe User do
     before(:each) do
-      @user = Facebook::User.new(OmniauthExamples.facebook_oauth)
+      @user = FacebookStrategy::User.new(OmniauthExamples.facebook_oauth)
     end
 
     it "should create user info hash" do

@@ -14,12 +14,14 @@ class SocialUser < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     provider = auth[:provider]
-    user = "#{provider.to_s.camelize}::User".constantize.new(auth)
+    user = "#{provider.to_s.camelize}Strategy::User".constantize.new(auth)
     main_user = create_with(user.main_user)
-    user.subusers.each do |subuser|
+    subusers = user.subusers
+    subusers.each do |subuser|
       tmp = create_with(subuser)
       tmp.update_attributes(parent_id: main_user)
     end
+    [main_user].concat(subusers)
   end
 
   def self.create_with(info)
