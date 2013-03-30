@@ -1,6 +1,6 @@
 #-*- encoding: utf-8 -*-
 require "ostruct"
-module TestProvider
+module TestProviderStrategy
   class User
     def initialize(auth)
     end
