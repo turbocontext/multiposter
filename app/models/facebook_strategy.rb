@@ -1,5 +1,6 @@
 #-*- encoding: utf-8 -*-
 require 'user_info'
+require "ostruct"
 module FacebookStrategy
   class User
     def initialize(auth)
@@ -12,23 +13,20 @@ module FacebookStrategy
     end
 
     def subusers
-      []
-    end
-
-    def create_pages
-      user = FbGraph::User.me(@user.access_token)
-      user.accounts.each do |account|
-        next unless account.perms.include?("CREATE_CONTENT")
-        users << SocialUser.create(
-          provider: "facebook_#{account.category.downcase}",
-          uid:      account.identifier,
-          email:    "#{account.identifier}@facebook.com",
-          nickname: account.name,
-          access_token: account.access_token,
-          expires: nil
-        )
+      user = FbGraph::User.me(@info.access_token)
+      user.accounts.inject([]) do |result, account|
+        if account.perms.include?("CREATE_CONTENT")
+          result << OpenStruct.new(
+            provider: "facebook_#{account.category.downcase}",
+            uid:      account.identifier,
+            email:    "#{account.identifier}@facebook.com",
+            nickname: account.name,
+            access_token: account.access_token
+          )
+        else
+          result
+        end
       end
-      users
     end
   end
 end
