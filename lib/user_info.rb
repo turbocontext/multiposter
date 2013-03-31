@@ -1,5 +1,4 @@
 #-*- encoding: utf-8 -*-
-
 class UserInfo
   class InsufficientInfoError < StandardError; end
   def initialize(auth)

@@ -1,6 +1,7 @@
-require "spec_helper"
-require "ostruct"
-require "support/omniauth_examples"
+require 'spec_helper'
+require 'ostruct'
+require 'support/omniauth_examples'
+require 'test_provider_strategy'
 
 describe SocialUser do
   before(:each) do

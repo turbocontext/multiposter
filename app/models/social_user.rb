@@ -34,13 +34,13 @@ class SocialUser < ActiveRecord::Base
   end
 
   def clone_from(social_user)
+    social_user.children.each do |user|
+      user.update_attributes(parent_id: self.id)
+    end
     attributes = social_user.attributes
     attributes.delete("id")
     attributes.delete("ancestry")
     attributes.delete("user_id")
-    social_user.children.each do |user|
-      user.update_attributes(parent_id: self.id)
-    end
     update_attributes(attributes)
   end
 
