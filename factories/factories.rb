@@ -12,6 +12,7 @@ FactoryGirl.define do
     provider "test_provider"
     access_token "access_token"
     secret_token "secret_token"
+    nickname "nickname"
     user
     email
   end

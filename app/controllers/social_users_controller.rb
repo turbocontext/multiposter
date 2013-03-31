@@ -8,8 +8,9 @@ class SocialUsersController < ApplicationController
 
   def create
     # raise request.env['omniauth.auth'].to_yaml
-    SocialUser.from_omniauth(request.env['omniauth.auth']).each do |user|
-      user.update_attributes(user_id: current_user.id)
+    @social_users = SocialUser.from_omniauth(request.env['omniauth.auth'])
+    @social_users.each do |social_user|
+      social_user.update_attributes(user_id: current_user.id)
     end
     redirect_to root_path
   end

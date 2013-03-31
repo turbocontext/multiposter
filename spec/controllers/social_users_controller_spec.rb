@@ -3,8 +3,8 @@ require "support/omniauth_examples"
 
 describe SocialUsersController do
   before(:each) do
-    user = FactoryGirl.create(:user)
-    sign_in user
+    @user = FactoryGirl.create(:user)
+    sign_in @user
   end
 
   describe "GET 'index'" do
@@ -28,19 +28,28 @@ describe SocialUsersController do
   describe "POST 'create'" do
     before(:each) do
       @oauth = OmniauthExamples.test_oauth
+      request.env['omniauth.auth'] = @oauth
     end
 
     it "should not create anything withou proper oauth hash" do
-      SocialUser.stub(:from_omniauth).and_return([])
-      expect {post :create}.not_to change(SocialUser, :count)
+      expect do
+        SocialUser.stub(:from_omniauth).and_return([])
+        post :create
+      end.not_to change {SocialUser.count}
     end
 
     it "should create user from omniauth" do
       expect do
         SocialUser.stub(:from_omniauth).and_return([FactoryGirl.create(:social_user)])
-        request.env['omniauth.auth'] = @oauth
         post :create
-      end.to change{SocialUser.count}.by(1)
+      end.to change {SocialUser.count}.by(1)
+    end
+
+    it "should assign created users to current user" do
+      SocialUser.stub(:from_omniauth).and_return([FactoryGirl.create(:social_user, user_id: nil)])
+      post :create
+      assigns(:social_users).each {|u| u.reload; u.user_id.should eq(@user.id)}
+      response.should redirect_to(root_path)
     end
   end
 
