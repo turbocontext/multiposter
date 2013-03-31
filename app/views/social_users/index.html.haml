@@ -32,6 +32,6 @@
         %td
           .toolbar
             = raw(html_button_to "",social_user_path(user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
-= link_to "Delete selected", "#", id: "magic_button", class: "button default"
-= form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "form_id"} do |f|
+= link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
+= form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
   = f.hidden_field :model_ids

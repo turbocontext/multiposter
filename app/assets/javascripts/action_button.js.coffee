@@ -1,4 +1,4 @@
-$.fn.action_button = (form_id, pick_from, trigger_count = 1) ->
+$.fn.action_button = (form_id, pick_from = 'model_ids_', trigger_count = 1) ->
   @each ->
     $(this).on 'click', ->
       a = $("input[id=#{pick_from}]:checked:visible").map (i, el) -> return $(el).val()

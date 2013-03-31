@@ -5,10 +5,8 @@
 #= require_tree .
 
 $ ->
-  form_id = '#form_id'
-  model_name = 'model_name'
-  pick_from = 'model_ids_'
-  $('#magic_button').action_button(form_id, pick_from)
+  form_id = '#mass_destroy_form'
+  $('#mass_destroy_button').action_button(form_id)
 
   $("#mark_all").click (ev) ->
     if $(this).attr("checked")
