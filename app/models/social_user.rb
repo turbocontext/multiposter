@@ -38,6 +38,9 @@ class SocialUser < ActiveRecord::Base
     attributes.delete("id")
     attributes.delete("ancestry")
     attributes.delete("user_id")
+    social_user.children.each do |user|
+      user.update_attributes(parent_id: self.id)
+    end
     update_attributes(attributes)
   end
 

@@ -91,6 +91,16 @@ describe SocialUser do
       user1.secret_token.should eq("new secret")
       user1.parent_id.should == user.id
     end
+
+    it "should assign all children records to new parent" do
+      user1 = SocialUser.create(@attr)
+      user2 = SocialUser.create(@attr)
+      user3 = SocialUser.create(@attr.merge(parent_id: user2.id))
+      user1.clone_from(user2)
+      user1.reload
+      user3.reload
+      user3.parent_id.should == user1.id
+    end
   end
 
 end
