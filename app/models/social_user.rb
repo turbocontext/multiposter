@@ -13,10 +13,10 @@ class SocialUser < ActiveRecord::Base
     provider = auth[:provider]
     user = "#{provider.to_s.camelize}Strategy::User".constantize.new(auth)
     main_user = create_with(user.main_user)
-    subusers = user.subusers
-    subusers.each do |subuser|
+    subusers = user.subusers.inject([]) do |result, subuser|
       tmp = create_with(subuser)
       tmp.update_attributes(parent_id: main_user)
+      result << tmp
     end
     [main_user].concat(subusers)
   end

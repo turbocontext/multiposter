@@ -70,6 +70,14 @@ describe SocialUser do
       SocialUser.from_omniauth(@oauth)
       SocialUser.last.parent_id.should == SocialUser.first.id
     end
+
+    it "should return array with records" do
+      users = SocialUser.from_omniauth(@oauth)
+      users.class.should == Array
+      users.each do |user|
+        user.class.should == SocialUser
+      end
+    end
   end
 
 end
