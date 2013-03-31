@@ -5,7 +5,7 @@ TemplateApp::Application.routes.draw do
 
   resources :social_users do
     collection do
-      delete :mass_destroy
+      post :mass_destroy
     end
   end
   root to: "social_users#index"
