@@ -19,16 +19,16 @@
       %th
         %input#mark_all(type="checkbox" checked="checked")
       %th Nickname
+      %th Provider
       %th AccessToken
-      %th SecretToken
       %th.actions Actions
   %tbody
     - @users.each do |user|
       %tr
         %td= check_box_tag "model_ids[]", user.id, checked: true
         %td= user.nickname
+        %td= user.provider
         %td= user.access_token
-        %td= user.secret_token
         %td
           .toolbar
             = raw(html_button_to "",social_user_path(user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
