@@ -11,5 +11,7 @@ class CreateSocialUsers < ActiveRecord::Migration
       t.integer :user_id
       t.string  :email
     end
+    add_index :social_users, :user_id
+    add_index :social_users, :uid
   end
 end

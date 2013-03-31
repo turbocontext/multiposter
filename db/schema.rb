@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(:version => 20130124143844) do
     t.string  "email"
   end
 
+  add_index "social_users", ["uid"], :name => "index_social_users_on_uid"
+  add_index "social_users", ["user_id"], :name => "index_social_users_on_user_id"
+
   create_table "user_messages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "message_id"
