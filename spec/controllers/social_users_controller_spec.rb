@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require "spec_helper"
 require "support/omniauth_examples"
 
@@ -50,6 +51,19 @@ describe SocialUsersController do
       post :create
       assigns(:social_users).each {|u| u.reload; u.user_id.should eq(@user.id)}
       response.should redirect_to(root_path)
+    end
+
+    it "should just update records if there is similar uid and user_id" do
+      expect do
+        u1 = FactoryGirl.create(:social_user, user_id: @user.id, uid: "123", access_token: "old token")
+        u2 = FactoryGirl.create(:social_user, user_id: nil, uid: "123", access_token: "new token")
+        u3 = FactoryGirl.create(:social_user, user_id: @user.id, access_token: "new token")
+        SocialUser.stub(:from_omniauth).and_return([u2, u3])
+        post :create
+        u1.reload
+        u1.access_token.should == "new token"
+        u1.user_id.should == @user.id
+      end.to change{SocialUser.count}.by(1)
     end
   end
 

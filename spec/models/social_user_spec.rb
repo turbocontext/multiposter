@@ -80,4 +80,17 @@ describe SocialUser do
     end
   end
 
+  describe "clone with" do
+    it "should clone one record from another" do
+      user = SocialUser.create(@attr)
+      user1 = SocialUser.create(@attr.merge(parent_id: user.id))
+      user2 = SocialUser.create(@attr.merge(access_token: "new token", secret_token: "new secret", parent_id: nil))
+      user1.clone_from(user2)
+      user1.reload
+      user1.access_token.should eq("new token")
+      user1.secret_token.should eq("new secret")
+      user1.parent_id.should == user.id
+    end
+  end
+
 end

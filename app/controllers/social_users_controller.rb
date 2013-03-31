@@ -10,7 +10,12 @@ class SocialUsersController < ApplicationController
     # raise request.env['omniauth.auth'].to_yaml
     @social_users = SocialUser.from_omniauth(request.env['omniauth.auth'])
     @social_users.each do |social_user|
-      social_user.update_attributes(user_id: current_user.id)
+      if user = current_user.social_users.find_by_uid(social_user.uid)
+        user.clone_from(social_user)
+        social_user.destroy
+      else
+        social_user.update_attributes(user_id: current_user.id)
+      end
     end
     redirect_to root_path
   end

@@ -33,4 +33,12 @@ class SocialUser < ActiveRecord::Base
     )
   end
 
+  def clone_from(social_user)
+    attributes = social_user.attributes
+    attributes.delete("id")
+    attributes.delete("ancestry")
+    attributes.delete("user_id")
+    update_attributes(attributes)
+  end
+
 end
