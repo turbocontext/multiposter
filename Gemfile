@@ -59,5 +59,8 @@ group :test do
   gem 'jasminerice'
   gem 'simplecov', :require => false
   gem 'rb-inotify', '~> 0.9'
+  gem 'vcr'
+  # gem 'fakeweb'
+  gem 'webmock'
 end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'

@@ -1,0 +1,120 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/oauth/access_token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials&client_id=242939665837936&client_secret=853f3e5e18ed6ee1ce24ded61689da5e
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '771205'
+      X-Fb-Debug:
+      - yOuHy6LpptMykhAbpE5kEU6bmxCmWhfmKOmZmfOapHM=
+      Date:
+      - Sun, 31 Mar 2013 07:09:46 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '56'
+    body:
+      encoding: US-ASCII
+      string: access_token=242939665837936|pAZi0nanYdcc7ou56PZxxBoOOKE
+    http_version: 
+  recorded_at: Sun, 31 Mar 2013 07:09:46 GMT
+- request:
+    method: post
+    uri: https://graph.facebook.com/242939665837936/accounts/test-users
+    body:
+      encoding: ASCII-8BIT
+      string: installed=true&permissions=read_stream&access_token=242939665837936%7CpAZi0nanYdcc7ou56PZxxBoOOKE
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Content-Type:
+      - application/json; charset=UTF-8
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '771205'
+      X-Fb-Debug:
+      - uzF2b7mMjoZUmLwP607SAxdVLbHhfuyD99djc5keF/g=
+      Date:
+      - Sun, 31 Mar 2013 07:09:56 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '359'
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":"100005604635910","access_token":"AAADc88x773ABALtZCaMrXZBuzbo4ZAeqFp3bk38BFxZAP826YCL5bINYdmZArMMrv9tb5OkWFcsj2ouXK3XRxbJ4Uh7ukUHnmkXXHrRZCS77ZAubTWzM82M","login_url":"https:\/\/www.facebook.com\/platform\/test_account_login.php?user_id=100005604635910&n=xOhqIRbh1zQnZY5","email":"uaqfqao_carrieroescu_1364713787\u0040tfbnw.net","password":"507734514"}'
+    http_version: 
+  recorded_at: Sun, 31 Mar 2013 07:09:56 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/100005604635910/accounts?access_token=AAADc88x773ABALtZCaMrXZBuzbo4ZAeqFp3bk38BFxZAP826YCL5bINYdmZArMMrv9tb5OkWFcsj2ouXK3XRxbJ4Uh7ukUHnmkXXHrRZCS77ZAubTWzM82M
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Content-Type:
+      - application/json; charset=UTF-8
+      Etag:
+      - ! '"1050253aec7b29caff644806927dabfa81406eee"'
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '771205'
+      X-Fb-Debug:
+      - ZhUgP7uwmcIVqk1gXSUoato77uOBy98AClyyPBnxWlY=
+      Date:
+      - Sun, 31 Mar 2013 07:09:57 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '11'
+    body:
+      encoding: US-ASCII
+      string: ! '{"data":[]}'
+    http_version: 
+  recorded_at: Sun, 31 Mar 2013 07:09:57 GMT
+recorded_with: VCR 2.4.0

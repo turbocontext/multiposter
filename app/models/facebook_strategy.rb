@@ -28,5 +28,6 @@ module FacebookStrategy
         end
       end
     end
+
   end
 end
