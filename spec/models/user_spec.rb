@@ -16,6 +16,11 @@ describe User do
   end
 
   describe "methods" do
-    it "should return users from given network"
+    it "should return users from given network" do
+      user = FactoryGirl.create(:user)
+      social_user = FactoryGirl.create(:social_user, provider: "test_provider", user_id: user.id)
+      user.social(:test_provider).should include(social_user)
+      user.social(:test_provider).count.should == 1
+    end
   end
 end
