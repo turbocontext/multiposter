@@ -7,3 +7,25 @@ Note: The user must access your application before you're able to get a valid "a
 
 MessageSet accepts_nested_attributes_for messages
 http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
+
+
+1.9.3p0 :009 > puts link.to_yaml
+--- !ruby/object:FbGraph::Link
+identifier: '155670801267019'
+endpoint: https://graph.facebook.com/155670801267019
+access_token: AAADc88x773ABAJaTdBUuHumvzzICTdQGUlAHXXC6fYFwHVOShzalxZBTrMnrUmJKAN92PWLgs9FBcUBwVE8ipHUbc1ISLGhWi9Gtr653y12hZBm2Am
+raw_attributes:
+  :access_token: AAADc88x773ABAJaTdBUuHumvzzICTdQGUlAHXXC6fYFwHVOShzalxZBTrMnrUmJKAN92PWLgs9FBcUBwVE8ipHUbc1ISLGhWi9Gtr653y12hZBm2Am
+  :link: http://kavigator.ru/articles/24458
+  :message: Врио главы Дагестана Рамазан Абдулатипов заявил, что выбирать руководителя
+    республики скорее всего будет региональный парламент.
+  id: '155670801267019'
+cached_collections:
+  :comments:
+name:
+link: http://kavigator.ru/articles/24458
+description:
+icon:
+picture:
+message: Врио главы Дагестана Рамазан Абдулатипов заявил, что выбирать руководителя
+  республики скорее всего будет региональный парламент.
