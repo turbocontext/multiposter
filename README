@@ -29,3 +29,89 @@ icon:
 picture:
 message: Врио главы Дагестана Рамазан Абдулатипов заявил, что выбирать руководителя
   республики скорее всего будет региональный парламент.
+
+
+1.9.3p0 :015 > puts tw.to_yaml
+--- !ruby/object:Twitter::Tweet
+attrs:
+  :user:
+    :id: 550036517
+    :profile_sidebar_border_color: C0DEED
+    :created_at: Tue Apr 10 11:41:05 +0000 2012
+    :verified: false
+    :follow_request_sent: false
+    :profile_background_tile: false
+    :listed_count: 1
+    :profile_sidebar_fill_color: DDEEF6
+    :profile_image_url: http://a0.twimg.com/profile_images/2852649389/bc4fa68cd1b18c9b707075c3bacadc38_normal.png
+    :utc_offset: 14400
+    :url: http://kavigator.ru
+    :following: false
+    :name: Новости Дагестана
+    :profile_image_url_https: https://si0.twimg.com/profile_images/2852649389/bc4fa68cd1b18c9b707075c3bacadc38_normal.png
+    :notifications: false
+    :protected: false
+    :profile_background_color: C0DEED
+    :is_translator: false
+    :default_profile_image: false
+    :location:
+    :profile_background_image_url_https: https://si0.twimg.com/images/themes/theme1/bg.png
+    :profile_background_image_url: http://a0.twimg.com/images/themes/theme1/bg.png
+    :favourites_count: 0
+    :profile_link_color: 0084B4
+    :entities:
+      :url:
+        :urls:
+        - :url: http://kavigator.ru
+          :indices:
+          - 0
+          - 19
+          :display_url:
+          :expanded_url:
+      :description:
+        :urls: []
+    :statuses_count: 719
+    :profile_use_background_image: true
+    :friends_count: 823
+    :contributors_enabled: false
+    :followers_count: 292
+    :time_zone: Abu Dhabi
+    :profile_text_color: '333333'
+    :id_str: '550036517'
+    :lang: ru
+    :default_profile: true
+    :description: ! 'Кавигатор - новостной агрегатор, собирающий материал о Дагестане
+      с Рунета. У нас последние #новости, #аналитика и #репортажи с #Дагестан''а'
+    :geo_enabled: true
+    :screen_name: KavkazNavigator
+  :geo:
+  :in_reply_to_user_id:
+  :retweet_count: 0
+  :favorited: false
+  :coordinates:
+  :in_reply_to_status_id_str:
+  :entities:
+    :user_mentions: []
+    :hashtags:
+    - :indices:
+      - 100
+      - 108
+      :text: Новости
+    - :indices:
+      - 109
+      - 118
+      :text: Дагестан
+    :urls: []
+  :in_reply_to_screen_name:
+  :id_str: '318683233304842240'
+  :place:
+  :in_reply_to_user_id_str:
+  :text: ! 'Дагестан. Национальный вопрос, московское быдло, дотации, безопасность,
+    туризм, люди, стереотипы. | #Новости #Дагестан''а'
+  :contributors:
+  :retweeted: false
+  :source: <a href="http://kavigator.ru" rel="nofollow">Testkaviagtor</a>
+  :id: 318683233304842240
+  :created_at: Mon Apr 01 11:16:18 +0000 2013
+  :in_reply_to_status_id:
+  :truncated: false
