@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124143844) do
-
-  create_table "messages", :force => true do |t|
-    t.text     "text"
-    t.integer  "social_user_id"
-    t.integer  "user_message_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
+ActiveRecord::Schema.define(:version => 20121211131348) do
 
   create_table "social_users", :force => true do |t|
     t.string  "uid"
@@ -35,13 +27,6 @@ ActiveRecord::Schema.define(:version => 20130124143844) do
 
   add_index "social_users", ["uid"], :name => "index_social_users_on_uid"
   add_index "social_users", ["user_id"], :name => "index_social_users_on_user_id"
-
-  create_table "user_messages", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "message_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

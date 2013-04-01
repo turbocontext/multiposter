@@ -35,10 +35,6 @@ describe SocialUser do
   end
 
   describe "relations" do
-    it "should have many messages" do
-      SocialUser.new.should respond_to(:messages)
-    end
-
     it "should should have ancestry" do
       SocialUser.roots.should be_true
     end
