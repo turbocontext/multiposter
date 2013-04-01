@@ -2,7 +2,7 @@
 class SocialUsersController < ApplicationController
 
   def index
-    @users = current_user.social_users
+    @social_users = current_user.social_users
     @page_header = "Учетные записи социальных сетей"
   end
 

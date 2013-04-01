@@ -44,18 +44,18 @@ def wait_a_while_for
 end
 
 When /^I authenticate with facebook$/ do
-  visit root_path
-  click_on 'google'
-  fill_in "gbqfq", with: "sandwich"
-  click_on "Sandwich"
-  # create_test_user
-  # click_on "Sign in with facebook"
-
-  # fill_in 'email', with: fb_user.email
-  # fill_in 'pass', with: fb_user.password
-  # click_on "Войти"
-  # click_on "Разрешить"
-
   # visit root_path
-  # click_on "Sign out"
+  # click_on 'google'
+  # fill_in "gbqfq", with: "sandwich"
+  # click_on "Sandwich"
+  create_test_user
+  click_on "Sign in with facebook"
+
+  fill_in 'email', with: fb_user.email
+  fill_in 'pass', with: fb_user.password
+  click_on "Войти"
+  click_on "Разрешить"
+
+  visit root_path
+  click_on "Sign out"
 end

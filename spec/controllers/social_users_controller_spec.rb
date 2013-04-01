@@ -11,7 +11,7 @@ describe SocialUsersController do
   describe "GET 'index'" do
     it "should fetch all social users and return ok" do
       get :index
-      assigns(:users).should == SocialUser.scoped
+      assigns(:social_users).should == SocialUser.scoped
       response.should be_ok
     end
   end

@@ -93,7 +93,7 @@ Given /^I am successfully signed up$/ do
 end
 
 Then /take a snapshot/ do
-  page.driver.render Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
+  page.driver.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
 end
 
 Given /^I am registered user$/ do

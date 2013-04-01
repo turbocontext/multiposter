@@ -13,8 +13,8 @@ Spork.prefork do
   require 'cucumber/rails'
 
   Capybara.default_selector = :css
-  Capybara.server_port = 57124
-  # Capybara.javascript_driver = :webkit
+  # Capybara.server_port = 57124
+  Capybara.javascript_driver = :webkit
 end
 
 Spork.each_run do
