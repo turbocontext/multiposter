@@ -17,6 +17,18 @@ FactoryGirl.define do
     email
   end
 
+  factory :message_set do
+    user
+  end
+
+  factory :message do
+    text "message text"
+    uid "123"
+    access_token "access token"
+    message_set
+    social_user
+  end
+
   sequence :email do |n|
     "example_#{n}@example.com"
   end

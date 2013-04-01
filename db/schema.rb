@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211131348) do
+ActiveRecord::Schema.define(:version => 20130401074537) do
+
+  create_table "message_sets", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "text"
+    t.string   "access_token"
+    t.string   "uid"
+    t.integer  "social_user_id"
+    t.integer  "message_set_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "social_users", :force => true do |t|
     t.string  "uid"

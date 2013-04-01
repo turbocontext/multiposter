@@ -38,6 +38,10 @@ describe SocialUser do
     it "should should have ancestry" do
       SocialUser.roots.should be_true
     end
+
+    it "should respond to messages query" do
+      SocialUser.new.should respond_to(:messages)
+    end
   end
 
   describe "create with method" do

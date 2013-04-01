@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :social_users, dependent: :destroy
+  has_many :messages, through: :social_users
+
+  has_many :message_sets
 
   def social(net)
     social_users.where(provider: net)
