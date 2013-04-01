@@ -8,5 +8,7 @@ TemplateApp::Application.routes.draw do
       post :mass_destroy
     end
   end
+
+  resources :message_sets, only: [:new]
   root to: "social_users#index"
 end
