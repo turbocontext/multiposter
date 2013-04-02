@@ -6,8 +6,8 @@ describe MessageSetsController do
     @user = FactoryGirl.create(:user)
     @user2 = FactoryGirl.create(:user)
     sign_in(@user)
-    @suser1 = FactoryGirl.create(:social_user, user_id: @user.id)
-    @suser2 = FactoryGirl.create(:social_user, user_id: @user.id)
+    @suser1 = FactoryGirl.create(:social_user, provider: "provider1", user_id: @user.id)
+    @suser2 = FactoryGirl.create(:social_user, provider: "provider2", user_id: @user.id)
     # suser3 belongs to another user!
     @suser3 = FactoryGirl.create(:social_user, user_id: @user2.id)
   end
@@ -36,6 +36,11 @@ describe MessageSetsController do
       assigns(:message_set).messages.each do |message|
         [@suser1.id, @suser2.id].should include(message.social_user_id)
       end
+    end
+
+    it "should get common types from messages" do
+      get :new, create_message: { model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',') }
+      assigns(:common_types).should include("provider1", "provider2")
     end
   end
 end
