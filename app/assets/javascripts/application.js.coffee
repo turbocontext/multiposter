@@ -18,6 +18,6 @@ $ ->
 
   ids = ['facebook_common', 'facebook_community_common', 'twitter_common']
   for id in ids
-    $('body').on 'keydown', "##{id}", (element) ->
+    $('body').on 'keyup', "##{id}", (element) ->
       name = $(element.target).attr('id').split('_common')[0]
       $(".#{name}_message textarea").val($(element.target).val())
