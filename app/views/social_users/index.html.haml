@@ -35,5 +35,5 @@
 = link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
   = f.hidden_field :model_ids
-= form_for "create_message", url: {action: :new, controller: :message_sets}, method: :get, html: {id: "create_message_form"} do |f|
+= form_for "create_message", url: {action: :new, controller: :message_sets}, html: {id: "create_message_form"} do |f|
   = f.hidden_field :model_ids
