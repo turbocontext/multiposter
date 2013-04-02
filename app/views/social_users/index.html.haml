@@ -23,15 +23,15 @@
       %th AccessToken
       %th.actions Actions
   %tbody
-    - @users.each do |user|
-      %tr
-        %td= check_box_tag "model_ids[]", user.id, checked: true
-        %td= user.nickname
-        %td= user.provider
-        %td= user.access_token
+    - @social_users.each do |social_user|
+      %tr{id: "social_user_#{social_user.id}"}
+        %td= check_box_tag "model_ids[]", social_user.id, checked: true
+        %td= social_user.nickname
+        %td= social_user.provider
+        %td= social_user.access_token
         %td
           .toolbar
-            = raw(html_button_to "",social_user_path(user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
+            = raw(html_button_to "",social_user_path(social_user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
 = link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
   = f.hidden_field :model_ids

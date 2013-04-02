@@ -14,7 +14,7 @@ describe MessageSetsController do
 
   describe "GET 'new'" do
     it "should return ok" do
-      get :new, model_ids: "1,2,3"
+      get :new, model_ids: "#{@suser1.id},#{@suser2.id}"
       response.should be_ok
     end
 
@@ -27,7 +27,7 @@ describe MessageSetsController do
 
     it "should fetch all social users from current user" do
       get :new, model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',')
-      assigns(:social_users).should == [@suser1, @suser2]
+      assigns(:social_users).should include(@suser2, @suser1)
     end
 
     it "should prebuild messages with given social users" do
