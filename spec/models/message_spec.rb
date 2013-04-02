@@ -35,16 +35,16 @@ describe Message do
       Message.create(@attr.merge(social_user_id: nil)).should_not be_valid
     end
 
-    it "should reject creating records without message_set_id" do
-      Message.create(@attr.merge(message_set_id: nil)).should_not be_valid
-    end
+    # it "should reject creating records without message_set_id" do
+    #   Message.create(@attr.merge(message_set_id: nil)).should_not be_valid
+    # end
 
-    it "should reject creating records without uid" do
-      Message.create(@attr.merge(uid: nil)).should_not be_valid
-    end
+    # it "should reject creating records without uid" do
+    #   Message.create(@attr.merge(uid: nil)).should_not be_valid
+    # end
 
-    it "should reject creating records without access_token" do
-      Message.create(@attr.merge(access_token: nil)).should_not be_valid
-    end
+    # it "should reject creating records without access_token" do
+    #   Message.create(@attr.merge(access_token: nil)).should_not be_valid
+    # end
   end
 end

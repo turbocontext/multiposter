@@ -9,4 +9,13 @@ class MessageSetsController < ApplicationController
       @message_set.messages.build(social_user_id: social_user.id)
     end
   end
+
+  def create
+    params[:message_set][:messages_attributes].each_pair do |index, attributes|
+      if social_user = current_user.social_users.find_by_id(attributes[:social_user_id])
+        social_user.messages.create(attributes)
+      end
+    end
+    @message_set = current_user.message_sets.create!
+  end
 end

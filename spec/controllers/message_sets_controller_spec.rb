@@ -43,4 +43,23 @@ describe MessageSetsController do
       assigns(:common_types).should include("provider1", "provider2")
     end
   end
+
+  describe "POST 'create'" do
+    before(:each) do
+      @attr = {
+        messages_attributes: {
+          '0' => {social_user_id: @suser1.id, text: "sand king"},
+          '1' => {social_user_id: @suser2.id, text: ''}, # invalid text
+          '2' => {social_user_id: @suser3.id, text: 'valid text, but invalid user'}
+        }
+      }
+    end
+    it "should create message set" do
+      expect {post :create, message_set: @attr}.to change {MessageSet.count}.by(1)
+    end
+
+    it "should create new messages" do
+      expect {post :create, message_set: @attr}.to change{Message.count}.by(1)
+    end
+  end
 end

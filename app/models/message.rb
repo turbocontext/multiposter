@@ -6,9 +6,9 @@ class Message < ActiveRecord::Base
   belongs_to :message_set
 
   validates :text, presence: true
-  validates :uid, presence: true
-  validates :message_set_id, presence: true
+  # validates :message_set_id, presence: true
   validates :social_user_id, presence: true
-  validates :access_token, presence: true
+  # validates :uid, presence: true
+  # validates :access_token, presence: true
 
 end
