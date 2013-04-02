@@ -1,0 +1,6 @@
+= form_for @message_set do |f|
+  = f.fields_for :messages do |fields|
+    = render 'message_fields', f: fields
+  .row
+    .span12
+      = f.submit "Create"

@@ -25,5 +25,4 @@ Then(/^messages should be created$/) do
   page.should have_content("Facebook profile message")
   page.should have_content("Facebook page message")
   page.should have_content("Twitter profile message")
-
 end
