@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 gem 'sqlite3'
-# gem 'pg'1
+gem 'pg'
 
 gem 'rails-backbone'
 gem 'ancestry'
