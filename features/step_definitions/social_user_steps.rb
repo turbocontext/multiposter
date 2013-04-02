@@ -13,9 +13,13 @@ Given(/^I create message$/) do
   within "#create_message_button" do
     click_on "Create message"
   end
-  page.driver.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
 
   fill_in "Content for all Test provider profiles", with: "Test provider profile message"
+  all('.test_provider_message textarea').each do |input|
+    fill_in(input[:id], with: "Test provider message")
+  end
+
+  # page.driver.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
   click_on "Post message"
 end
 
