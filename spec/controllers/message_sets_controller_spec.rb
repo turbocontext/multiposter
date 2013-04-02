@@ -14,24 +14,24 @@ describe MessageSetsController do
 
   describe "GET 'new'" do
     it "should return ok" do
-      get :new, model_ids: "#{@suser1.id},#{@suser2.id}"
+      get :new, create_message: {model_ids: "#{@suser1.id},#{@suser2.id}"}
       response.should be_ok
     end
 
     it "should redirect to root path if there is no social users" do
       get :new
       response.should redirect_to(root_path)
-      get :new, model_ids: "#{@suser3.id}"
+      get :new, create_message: { model_ids: "#{@suser3.id}" }
       response.should redirect_to(root_path)
     end
 
     it "should fetch all social users from current user" do
-      get :new, model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',')
+      get :new, create_message: { model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',') }
       assigns(:social_users).should include(@suser2, @suser1)
     end
 
     it "should prebuild messages with given social users" do
-      get :new, model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',')
+      get :new, create_message: { model_ids: [@suser1.id, @suser2.id, @suser3.id].join(',') }
       assigns(:message_set).messages.length.should == 2
       assigns(:message_set).messages.each do |message|
         [@suser1.id, @suser2.id].should include(message.social_user_id)

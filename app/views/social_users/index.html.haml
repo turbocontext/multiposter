@@ -8,7 +8,7 @@
 %hr
 .row
   .span32
-    %a{href: "#"}
+    %a{id: "create_message_button", href: "#"}
       %button.command-button.create_message.fg-color-white.bg-color-blue
         Create message
         %small.fg-color-white Message will be sent within marked accounts
@@ -34,4 +34,6 @@
             = raw(html_button_to "",social_user_path(social_user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
 = link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
+  = f.hidden_field :model_ids
+= form_for "create_message", url: {action: :new, controller: :message_sets}, method: :get, html: {id: "create_message_form"} do |f|
   = f.hidden_field :model_ids
