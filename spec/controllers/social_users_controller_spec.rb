@@ -9,9 +9,10 @@ describe SocialUsersController do
   end
 
   describe "GET 'index'" do
-    it "should fetch all social users and return ok" do
+    it "should fetch all social users from current user and return ok" do
+      FactoryGirl.create(:social_user, user_id: @user.id)
       get :index
-      assigns(:users).should == SocialUser.scoped
+      assigns(:social_users).should == @user.social_users
       response.should be_ok
     end
   end
@@ -53,17 +54,30 @@ describe SocialUsersController do
       response.should redirect_to(root_path)
     end
 
-    it "should just update records if there is similar uid and user_id" do
-      expect do
-        u1 = FactoryGirl.create(:social_user, user_id: @user.id, uid: "123", access_token: "old token")
-        u2 = FactoryGirl.create(:social_user, user_id: nil, uid: "123", access_token: "new token")
-        u3 = FactoryGirl.create(:social_user, user_id: @user.id, access_token: "new token")
-        SocialUser.stub(:from_omniauth).and_return([u2, u3])
+    describe "smart things are going here" do
+      before(:each) do
+        @u1 = FactoryGirl.create(:social_user, user_id: @user.id, uid: "123", access_token: "old token")
+        @u2 = FactoryGirl.create(:social_user, user_id: nil, uid: "123", access_token: "new token")
+        @u3 = FactoryGirl.create(:social_user, user_id: @user.id, access_token: "another token")
+        SocialUser.stub(:from_omniauth).and_return([@u2, @u3])
+      end
+
+      it "should just update records if there is similar uid and user_id" do
         post :create
-        u1.reload
-        u1.access_token.should == "new token"
-        u1.user_id.should == @user.id
-      end.to change{SocialUser.count}.by(1)
+        @u1.reload
+        @u1.user_id.should == @user.id
+        @u1.access_token.should == "new token"
+      end
+
+      it "should destroy last similar social user" do
+        expect do
+          @u1 = FactoryGirl.create(:social_user, user_id: @user.id, uid: "123", access_token: "old token")
+          @u2 = FactoryGirl.create(:social_user, user_id: nil, uid: "123", access_token: "new token")
+          @u3 = FactoryGirl.create(:social_user, user_id: @user.id, access_token: "another token")
+          SocialUser.stub(:from_omniauth).and_return([@u2, @u3])
+          post :create
+        end.to change{SocialUser.count}.by(1)
+      end
     end
   end
 

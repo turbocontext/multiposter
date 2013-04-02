@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   factory :social_user do
-    uid "123"
+    uid
     provider "test_provider"
     access_token "access_token"
     secret_token "secret_token"
@@ -31,5 +31,8 @@ FactoryGirl.define do
 
   sequence :email do |n|
     "example_#{n}@example.com"
+  end
+  sequence :uid do |n|
+    "uid_#{n}"
   end
 end
