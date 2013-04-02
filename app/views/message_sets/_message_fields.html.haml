@@ -1,6 +1,6 @@
 .row
   .span12
-    .input-control.textarea
+    .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
       = f.hidden_field :social_user_id
       = f.label :text, "Message for #{f.object.social_user.provider.humanize}"
-      = f.text_area :text, placeholder: "Insert message text..."
+      = f.text_area :text, placeholder: "Insert message text here..."

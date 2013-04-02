@@ -1,6 +1,15 @@
+- @common_types.each do |type|
+  .row
+    .span12
+      .input-control.textarea
+        = label_tag "#{type}_common", "Content for all #{type.humanize} profiles"
+        = text_area_tag "#{type}_common", nil, id: "#{type}_common", placeholder: "Insert message text here..."
+%hr
 = form_for @message_set do |f|
   = f.fields_for :messages do |fields|
     = render 'message_fields', f: fields
   .row
     .span12
-      = f.submit "Create"
+      %button.command-button.create_message.fg-color-white.bg-color-blue(type="submit")
+        Post message
+        %small.fg-color-white Message will be sent within marked accounts

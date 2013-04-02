@@ -13,16 +13,13 @@ Given(/^I create message$/) do
   within "#create_message_button" do
     click_on "Create message"
   end
-  fill_in "All facebook profiles", with: "Facebook profile message"
-  fill_in "All facebook pages", with: "Facebook pages message"
-  fill_in "All twitter profiles", with: "Twitter profile message"
-  click_on "Create"
-  # page.driver.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
+  page.driver.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
+
+  fill_in "Content for all Test provider profiles", with: "Test provider profile message"
+  click_on "Post message"
 end
 
 Then(/^messages should be created$/) do
   click_on "Messages"
-  page.should have_content("Facebook profile message")
-  page.should have_content("Facebook page message")
-  page.should have_content("Twitter profile message")
+  page.should have_content("Test provider profile message")
 end
