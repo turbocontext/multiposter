@@ -61,5 +61,10 @@ describe MessageSetsController do
     it "should create new messages" do
       expect {post :create, message_set: @attr}.to change{Message.count}.by(1)
     end
+
+    it "should redirect to social users path" do
+      post :create, message_set: @attr
+      response.should redirect_to(social_users_path)
+    end
   end
 end

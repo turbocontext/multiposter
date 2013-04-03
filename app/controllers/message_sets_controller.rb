@@ -17,5 +17,6 @@ class MessageSetsController < ApplicationController
       end
     end
     @message_set = current_user.message_sets.create!
+    redirect_to social_users_path
   end
 end
