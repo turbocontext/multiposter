@@ -11,4 +11,16 @@ class Message < ActiveRecord::Base
   # validates :uid, presence: true
   # validates :access_token, presence: true
 
+  before_filter :send_message
+
+  def send_message
+
+  end
+
+
+  def update_from(response)
+    uid = response.identifier || response.id
+    access_token = response.access_token
+    update_attributes(uid: uid, access_token: access_token)
+  end
 end
