@@ -16,8 +16,22 @@ $ ->
     else
       $("input[name^='model_ids']").attr("checked", false)
 
-  ids = ['facebook_common', 'facebook_community_common', 'twitter_common']
+  ids =[
+    'facebook_common_text',
+    'facebook_community_common_text',
+    'twitter_common_text'
+  ]
   for id in ids
     $('body').on 'keyup', "##{id}", (element) ->
       name = $(element.target).attr('id').split('_common')[0]
       $(".#{name}_message textarea").val($(element.target).val())
+
+  ids = [
+    'facebook_common_link',
+    'facebook_community_common_link',
+    'twitter_common_link'
+  ]
+  for id in ids
+    $('body').on 'keyup', "##{id}", (element) ->
+      name = $(element.target).attr('id').split('_common')[0]
+      $(".#{name}_message input[type=text]").val($(element.target).val())

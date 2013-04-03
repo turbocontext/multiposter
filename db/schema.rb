@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130401074537) do
 
   create_table "messages", :force => true do |t|
     t.text     "text"
+    t.text     "url"
     t.string   "access_token"
     t.string   "uid"
     t.integer  "social_user_id"

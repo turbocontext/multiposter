@@ -8,6 +8,7 @@ describe Message do
       text: "message text",
       access_token: "access token",
       uid: "123",
+      url: "link.example.com",
       social_user_id: @social_user.id,
       message_set_id: @message_set.id
     }

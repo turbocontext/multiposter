@@ -2,6 +2,7 @@ class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
       t.text :text
+      t.text :url
       t.string :access_token
       t.string :uid
       t.integer :social_user_id

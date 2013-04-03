@@ -4,3 +4,5 @@
       = f.hidden_field :social_user_id
       = f.label :text, "Message for #{f.object.social_user.provider.humanize}"
       = f.text_area :text, placeholder: "Insert message text here..."
+      = f.label :url, "Link"
+      = f.text_field :url

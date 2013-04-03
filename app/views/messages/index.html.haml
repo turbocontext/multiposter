@@ -4,16 +4,16 @@
       %span.menu-pull
       .menu-pull-bar
       %ul
-        %li.active
-          %a(href="#social_users_frame")
+        %li
+          %a{href: social_users_path}
             %i.icon-user
             Users
-        %li
-          %a{href: messages_path}
+        %li.active
+          %a(href="#messages_frame")
             %i.icon-comments-4
             Messages
       .frames#main_frames
-        .frame.active#social_users_frame
-          = render 'social_users_tab'
-        .frame#messages_frame
+        .frame#social_users_frame
           Empty
+        .frame.active#messages_frame
+          = render 'messages_tab'

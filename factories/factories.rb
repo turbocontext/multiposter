@@ -23,10 +23,15 @@ FactoryGirl.define do
 
   factory :message do
     text "message text"
+    url
     uid "123"
     access_token "access token"
     message_set
     social_user
+  end
+
+  sequence :url do |n|
+    "url#{n}.example.com"
   end
 
   sequence :email do |n|

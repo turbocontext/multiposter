@@ -1,0 +1,38 @@
+.row
+  .span32
+    %h2 Add social network account:
+.row
+  .span32
+    = shortcut_for(:facebook)
+    = shortcut_for(:twitter)
+%hr
+.row
+  .span16
+    %a{id: "create_message_button", href: "#"}
+      %button.command-button.create_message.fg-color-white.bg-color-blue
+        Create message
+        %small.fg-color-white Message will be sent within marked accounts
+%table.stripped.bordered
+  %thead
+    %tr
+      %th
+        %input#mark_all(type="checkbox" checked="checked")
+      %th Nickname
+      %th Provider
+      %th AccessToken
+      %th.actions Actions
+  %tbody
+    - @social_users.each do |social_user|
+      %tr{id: "social_user_#{social_user.id}"}
+        %td= check_box_tag "model_ids[]", social_user.id, checked: true
+        %td= social_user.nickname
+        %td= social_user.provider
+        %td= social_user.access_token
+        %td
+          .toolbar
+            = raw(html_button_to "",social_user_path(social_user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))
+= link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
+= form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
+  = f.hidden_field :model_ids
+= form_for "create_message", url: {action: :new, controller: :message_sets}, method: :get, html: {id: "create_message_form"} do |f|
+  = f.hidden_field :model_ids
