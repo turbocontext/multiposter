@@ -11,7 +11,7 @@ class Message < ActiveRecord::Base
   # validates :uid, presence: true
   # validates :access_token, presence: true
 
-  before_filter :send_message
+  after_create :send_message
 
   def send_message
 
