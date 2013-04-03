@@ -36,17 +36,17 @@ module FacebookStrategy
       @user = user
     end
 
-    def send_message(message)
+    def send(message)
       text = message.text
       link = message.url
-      user = FbGraph::User.me(user.access_token)
+      fb_user = FbGraph::User.me(user.access_token)
       if link.blank?
-        response = user.feed!(message: text)
+        response = fb_user.feed!(message: text)
       else
-        response = user.link!(message: text, link: link)
+        response = fb_user.link!(message: text, link: link)
       end
 
-      message.update_from(response)
+      message.update_from(OpenStruct.new(id: response.identifier, access_token: response.access_token))
       response
     end
   end

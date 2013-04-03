@@ -14,12 +14,16 @@ class Message < ActiveRecord::Base
   after_create :send_message
 
   def send_message
-
+    return false if Rails.env == 'test'
+    provider = social_user.provider.to_s.camelize
+    provider = "Facebook" if provider == "FacebookCommunity"
+    message = "#{provider}Strategy::#{provider}Message".constantize.new(social_user)
+    message.send(self)
   end
 
 
   def update_from(response)
-    uid = response.identifier || response.id
+    uid = response.id
     access_token = response.access_token
     update_attributes(uid: uid, access_token: access_token)
   end
