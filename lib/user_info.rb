@@ -9,7 +9,7 @@ class UserInfo
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
     @provider     = auth[:provider]
-    @expires      = auth[:credentials][:expires]
+    @expires      = auth[:credentials][:expires] || nil
   end
   attr_reader :uid, :access_token, :provider, :secret_token, :nickname, :expires
 
