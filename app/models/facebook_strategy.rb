@@ -17,7 +17,8 @@ module FacebookStrategy
       user.accounts.inject([]) do |result, account|
         if account.perms.include?("CREATE_CONTENT")
           result << OpenStruct.new(
-            provider: "facebook_#{account.category.downcase}",
+            # provider: "facebook_#{account.category.downcase}",
+            provider: "facebook",
             uid:      account.identifier,
             email:    "#{account.identifier}@facebook.com",
             nickname: account.name,
