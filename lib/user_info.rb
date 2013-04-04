@@ -9,9 +9,19 @@ class UserInfo
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
     @provider     = auth[:provider]
-    @expires      = auth[:credentials][:expires] || nil
+    @expires      = auth[:credentials][:expires]
   end
-  attr_reader :uid, :access_token, :provider, :secret_token, :nickname, :expires
+  attr_reader :uid, :access_token, :provider, :secret_token, :nickname,
+              :expires, :expires_at, :auth
+
+  def expires_at
+    if time = auth[:credentials][:expires_at]
+      @expires_at = Time.at(time.to_i)
+    else
+      @expires = false
+      @expires_at = nil
+    end
+  end
 
   def email
     if @auth[:info][:email].nil?

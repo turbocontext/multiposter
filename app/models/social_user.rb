@@ -5,7 +5,7 @@ class SocialUser < ActiveRecord::Base
   has_many :messages
   has_ancestry
   attr_accessible :email, :access_token, :secret_token, :uid, :provider,
-                  :user_id, :nickname, :expires, :parent_id
+                  :user_id, :nickname, :parent_id, :expires, :expires_at
 
   validates_presence_of :access_token, :provider, :uid
 
@@ -27,9 +27,10 @@ class SocialUser < ActiveRecord::Base
       uid:      info.uid,
       email:    info.email,
       nickname: info.nickname,
+      expires:  info.expires,
+      expires_at:   info.expires_at,
       access_token: info.access_token,
-      secret_token: info.secret_token,
-      expires:  info.expires
+      secret_token: info.secret_token
     )
   end
 

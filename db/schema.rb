@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20130401074537) do
     t.text     "url"
     t.string   "access_token"
     t.string   "uid"
+    t.string   "status"
     t.integer  "social_user_id"
     t.integer  "message_set_id"
     t.datetime "created_at",     :null => false
@@ -37,7 +38,8 @@ ActiveRecord::Schema.define(:version => 20130401074537) do
     t.string  "secret_token"
     t.string  "nickname"
     t.string  "ancestry"
-    t.date    "expires"
+    t.boolean "expires"
+    t.date    "expires_at"
     t.integer "user_id"
     t.string  "email"
   end

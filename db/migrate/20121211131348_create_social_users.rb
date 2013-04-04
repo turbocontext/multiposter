@@ -7,7 +7,8 @@ class CreateSocialUsers < ActiveRecord::Migration
       t.string  :secret_token
       t.string  :nickname
       t.string  :ancestry
-      t.date    :expires
+      t.boolean :expires
+      t.date    :expires_at
       t.integer :user_id
       t.string  :email
     end
