@@ -4,7 +4,7 @@ class UserInfo
   def initialize(auth)
     @auth = auth
     raise InsufficientInfoError unless valid?
-    @uid          = auth[:uid]
+    @uid          = auth[:uid].to_s
     @nickname     = auth[:info][:nickname] || auth[:info][:name]
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
