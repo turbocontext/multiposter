@@ -2,7 +2,7 @@
 class SocialUser < ActiveRecord::Base
 
   belongs_to :user
-  has_many :messages
+  has_many :messages, dependent: :destroy
   has_ancestry
   attr_accessible :email, :access_token, :secret_token, :uid, :provider,
                   :user_id, :nickname, :parent_id, :expires, :expires_at,
