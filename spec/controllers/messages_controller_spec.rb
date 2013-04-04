@@ -7,18 +7,15 @@ describe MessagesController do
   end
   describe "GET 'index'" do
     before(:each) do
-      @suser = FactoryGirl.create(:social_user, user_id: @user.id)
-      @mes1 = FactoryGirl.create(:message, social_user_id: @suser.id)
-      @mes2 = FactoryGirl.create(:message, social_user_id: @suser.id)
+      @message_set1 = FactoryGirl.create(:message_set, user_id: @user.id)
       @user2 = FactoryGirl.create(:user)
-      @suser2 = FactoryGirl.create(:social_user, user_id: @user2.id)
-      @mes3 = FactoryGirl.create(:message, social_user_id: @suser2.id)
+      @message_set2 = FactoryGirl.create(:message_set, user_id: @user2.id)
     end
 
     it "should fetch all messages from current user" do
       get :index
-      assigns(:messages).should include(@mes1, @mes2)
-      assigns(:messages).should_not include(@mes3)
+      assigns(:message_sets).should include(@message_set1)
+      assigns(:message_sets).should_not include(@message_set2)
     end
   end
 end

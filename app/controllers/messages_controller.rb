@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
   def index
-    @messages = current_user.messages.order("created_at DESC")
+    @message_sets = current_user.message_sets.includes(:messages).order("created_at DESC")
   end
 end
