@@ -5,7 +5,8 @@ class SocialUser < ActiveRecord::Base
   has_many :messages
   has_ancestry
   attr_accessible :email, :access_token, :secret_token, :uid, :provider,
-                  :user_id, :nickname, :parent_id, :expires, :expires_at
+                  :user_id, :nickname, :parent_id, :expires, :expires_at,
+                  :url
 
   validates_presence_of :access_token, :provider, :uid
 
@@ -25,6 +26,7 @@ class SocialUser < ActiveRecord::Base
     create(
       provider: info.provider,
       uid:      info.uid,
+      url:      info.url,
       email:    info.email,
       nickname: info.nickname,
       expires:  info.expires,

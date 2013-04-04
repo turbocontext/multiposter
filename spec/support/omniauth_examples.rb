@@ -12,9 +12,9 @@ module OmniauthExamples
         first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
-        urls: {
-          "Facebook" => 'http://www.facebook.com/official.kavigator'
-        },
+        urls: [
+          ["Facebook", 'http://www.facebook.com/official.kavigator']
+        ],
         location: 'Makhachkala',
         verified: true
       },
@@ -56,9 +56,9 @@ module OmniauthExamples
         first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
-        urls: {
-          "Facebook" => 'http://www.facebook.com/official.kavigator'
-        },
+        urls: [
+          ["Facebook", 'http://www.facebook.com/official.kavigator']
+        ],
         location: 'Makhachkala',
         verified: true
       },
@@ -100,9 +100,9 @@ module OmniauthExamples
         first_name: 'Official',
         last_name: 'Kavigator',
         image: 'http://graph.facebook.com/100003700047553/picture?type=square',
-        urls: {
-          "Facebook" => 'http://www.facebook.com/official.kavigator'
-        },
+        urls: [
+          "Facebook", 'http://www.facebook.com/official.kavigator'
+        ],
         location: 'Makhachkala',
         verified: true
       },

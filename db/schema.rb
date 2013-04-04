@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130401074537) do
     t.string  "ancestry"
     t.boolean "expires"
     t.date    "expires_at"
+    t.string  "url"
     t.integer "user_id"
     t.string  "email"
   end

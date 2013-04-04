@@ -3,17 +3,18 @@ require 'user_info'
 require "ostruct"
 module FacebookStrategy
   class User
+    attr_accessor :auth, :info
     def initialize(auth)
       @auth = auth
       @info = UserInfo.new(auth)
     end
 
     def main_user
-      @info
+      info
     end
 
     def subusers
-      user = FbGraph::User.me(@info.access_token)
+      user = FbGraph::User.me(info.access_token)
       user.accounts.inject([]) do |result, account|
         if account.perms.include?("CREATE_CONTENT")
           result << OpenStruct.new(
@@ -22,7 +23,8 @@ module FacebookStrategy
             uid:      account.identifier,
             email:    "#{account.identifier}@facebook.com",
             nickname: account.name,
-            access_token: account.access_token
+            access_token: account.access_token,
+            url: account.link
           )
         else
           result

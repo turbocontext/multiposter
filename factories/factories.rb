@@ -13,6 +13,7 @@ FactoryGirl.define do
     access_token "access_token"
     secret_token "secret_token"
     nickname "nickname"
+    url
     user
     email
   end

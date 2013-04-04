@@ -23,6 +23,14 @@ class UserInfo
     end
   end
 
+  def url
+    if auth[:info][:urls]
+      auth[:info][:urls].each do |url|
+        return url[1] if url[0] == provider.to_s.capitalize
+      end
+    end
+  end
+
   def email
     if @auth[:info][:email].nil?
       "#{@auth[:info][:nickname]}@#{@auth[:provider]}.com"
