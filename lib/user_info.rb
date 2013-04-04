@@ -5,7 +5,7 @@ class UserInfo
     @auth = auth
     raise InsufficientInfoError unless valid?
     @uid          = auth[:uid]
-    @nickname     = auth[:info][:nickname]
+    @nickname     = auth[:info][:nickname] || auth[:info][:name]
     @access_token = auth[:credentials][:token]
     @secret_token = auth[:credentials][:secret]
     @provider     = auth[:provider]
