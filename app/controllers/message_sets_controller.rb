@@ -1,4 +1,9 @@
 class MessageSetsController < ApplicationController
+
+  def index
+    @message_sets = current_user.message_sets.includes(:messages).order("created_at DESC")
+  end
+
   def new
     ids = params[:create_message][:model_ids].split(',').map(&:to_i) if params[:create_message] && params[:create_message][:model_ids]
     @social_users = current_user.social_users.find_all_by_id(ids)
