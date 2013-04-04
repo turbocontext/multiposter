@@ -67,10 +67,7 @@ describe SocialUser do
       end.to change{SocialUser.count}.by(3)
     end
 
-    it "should assign parent id to subusers" do
-      SocialUser.from_omniauth(@oauth)
-      SocialUser.last.parent_id.should == SocialUser.first.id
-    end
+    it "should assign parent id to subusers"
 
     it "should return array with records" do
       users = SocialUser.from_omniauth(@oauth)
