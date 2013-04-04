@@ -1,3 +1,6 @@
+.row
+  .span31
+    %h3 Mass edit
 - @common_types.each do |type|
   .row
     .span31
@@ -7,6 +10,9 @@
         = label_tag "#{type}_common_link"
         = text_field_tag "#{type}_common_link", nil, id: "#{type}_common_link"
 %hr
+.row
+  .span31
+    %h3 Individual edit
 = form_for @message_set do |f|
   = f.fields_for :messages do |fields|
     = render 'message_fields', f: fields
