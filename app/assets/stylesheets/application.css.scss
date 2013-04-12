@@ -35,10 +35,18 @@
 @import "open_sans";
 @import "media_styles";
 @import "my_styles";
+@import "compass/css3/transition";
+@import "my_buttons";
 
 #main_page_control ul{
   height: 32px;
 }
 #main_frames{
   margin-top: 32px;
+}
+.command-button{
+  margin: 10px 10px 10px 0px;
+}
+#custom_messages{
+  display: none;
 }

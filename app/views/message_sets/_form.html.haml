@@ -4,12 +4,12 @@
 - @common_types.each do |type|
   .row
     .span31
-      .input-control.textarea
-        = label_tag "#{type}_common_text", "Content for all #{type.humanize} profiles"
-        = text_area_tag "#{type}_common_text", nil, id: "#{type}_common_text", placeholder: "Insert message text here..."
-        = label_tag "#{type}_common_link"
-        = text_field_tag "#{type}_common_link", nil, id: "#{type}_common_link"
+      = render 'mass_edit_form', type: type
 %hr
+.row
+  .span32
+    #individual_edit.beautiful.blue.long
+      %h3 Individual edit
 #custom_messages
   .row
     .span31
@@ -17,8 +17,8 @@
   = form_for @message_set do |f|
     = f.fields_for :messages do |fields|
       = render 'message_fields', f: fields
-    .row
-      .span31
-        %button.command-button.create_message.fg-color-white.bg-color-blue(type="submit")
-          Post message
-          %small.fg-color-white Message will be sent within marked accounts
+.row
+  .span31
+    %button.command-button.create_message.fg-color-white.bg-color-blue(type="submit")
+      Post message
+      %small.fg-color-white Message will be sent within marked accounts

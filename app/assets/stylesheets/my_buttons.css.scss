@@ -1,0 +1,46 @@
+.beautiful{
+  @include box-sizing(border-box);
+  color: white;
+  font-weight: 300;
+  display: block;
+  float: left;
+  margin-right: 20px;
+  &.blue{
+    color: black;
+    border: 2px solid rgba(11, 144, 196, 0.1);
+    background: none repeat scroll 0 0 rgba(11, 144, 196, 0.3);
+    &:hover{
+      @include transition(background-color 200ms linear);
+      background: none repeat scroll 0 0 #00ADEF;
+      border: 2px solid #00ADEF;
+      color: white;
+    }
+    &:active{
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: black;
+    }
+  }
+  &.red{
+    border: 2px solid #ED5E2F;
+    &:hover{
+      background: none repeat scroll 0 0 #FD6E3F;
+    }
+    &:active{
+      border: 2px solid white;
+      color: black;
+    }
+  }
+  background: none repeat scroll 0 0 #ED5E2F;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  // width: 110px;
+  &:hover{
+    text-decoration: none;
+    color: white;
+  }
+  &.long{
+    width: 100%;
+  }
+}
