@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require underscore
 #= require action_button
 #= require_tree .
 

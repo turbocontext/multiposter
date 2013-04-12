@@ -3,9 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'pg'
 
-gem 'rails-backbone'
 gem 'ancestry'
-gem 'haml_coffee_assets'
 
 gem 'thin'
 gem 'jquery-rails'
@@ -21,8 +19,9 @@ gem 'omniauth-yandex'
 gem 'omniauth-vkontakte'
 
 gem 'fb_graph'
-gem 'hirb'
 gem 'twitter'
+
+gem 'hirb'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
