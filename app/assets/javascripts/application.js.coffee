@@ -21,12 +21,12 @@ $ ->
     'vkontakte_common'
   ]
   for id in ids
-    $('body').on 'keyup', "##{id}_text", (element) ->
+    $('body').on 'keyup input paste', "##{id}_text", (element) ->
       name = get_name(element.target)
       $("#{name} textarea").val($(element.target).val())
 
   for id in ids
-    $('body').on 'keyup', "##{id}_link", (element) ->
+    $('body').on 'keyup input paste', "##{id}_link", (element) ->
       name = get_name(element.target)
       $("#{name} input[type=text]").val($(element.target).val())
 
