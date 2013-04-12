@@ -63,3 +63,4 @@ group :test do
   gem 'webmock'
 end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
+gem 'compass-rails'
