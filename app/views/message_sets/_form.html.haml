@@ -19,6 +19,7 @@
       = render 'message_fields', f: fields
 .row
   .span31
-    %button.command-button.create_message.fg-color-white.bg-color-blue(type="submit")
-      Post message
-      %small.fg-color-white Message will be sent within marked accounts
+    %a{id: "post_message_button", href: "#"}
+      %button.command-button.create_message.fg-color-white.bg-color-blue
+        Post message
+        %small.fg-color-white Message will be sent within marked accounts

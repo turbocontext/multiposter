@@ -19,8 +19,9 @@ Given(/^I create message$/) do
   all('.test_provider_message textarea').each do |input|
     fill_in(input[:id], with: "Test provider profile message")
   end
-
-  click_on "Post message"
+  within "#post_message_button" do
+    click_on "Post message"
+  end
 end
 
 Then(/^messages should be created$/) do

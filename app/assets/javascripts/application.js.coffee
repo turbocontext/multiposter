@@ -35,3 +35,6 @@ $ ->
 
   $('body').on 'click', '#individual_edit', (ev) ->
     $("#custom_messages").slideToggle()
+
+  $('body').on 'click', '#post_message_button', (element) ->
+    $('#new_message_set').submit()
