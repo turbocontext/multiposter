@@ -1,0 +1,11 @@
+%h1
+  Vkontakte is shit
+= link_to "Vkontakte blank.html", VkontakteApi.authorization_url(type: :client, scope: [:wall, :offline]), target: "_blank"
+
+.row
+  .span31
+    = form_for @social_user do |f|
+      .input-control.text
+        = text_field_tag 'auth_string'
+        = hidden_field_tag 'provider', 'vkontakte'
+      = f.submit "Create Vkontakte user"

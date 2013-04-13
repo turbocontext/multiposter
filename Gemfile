@@ -64,3 +64,4 @@ group :test do
 end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
 gem 'compass-rails'
+gem 'vkontakte_api', '~> 1.1'

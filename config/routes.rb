@@ -6,6 +6,7 @@ TemplateApp::Application.routes.draw do
   resources :social_users do
     collection do
       post :mass_destroy
+      get :vkontakte
     end
   end
 

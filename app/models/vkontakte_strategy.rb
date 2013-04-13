@@ -2,11 +2,35 @@
 require 'user_info'
 require "ostruct"
 module VkontakteStrategy
+  def self.parse_info(auth_string)
+    uri = URI(auth_string)
+    hash = Rack::Utils.parse_query(uri.fragment) if uri.fragment
+    if hash && hash['access_token'] && hash['user_id']
+      vk = VkontakteApi::Client.new(hash['access_token'])
+      user = vk.users.get(uid: hash['user_id']).first
+      nickname = user.first_name + ' ' + user.last_name
+      return OpenStruct.new({
+        provider: 'vkontakte',
+        uid: hash['user_id'],
+        url: "http://vk.com/id#{hash['user_id']}",
+        email: "#{hash['user_id']}@vk.com",
+        nickname: nickname,
+        access_token: hash['access_token']
+      })
+    else
+      raise "Error"
+    end
+  end
+
   class User
     attr_accessor :auth, :info
     def initialize(auth)
       @auth = auth
-      @info = UserInfo.new(auth)
+      if auth[:auth_string]
+        @info = VkontakteStrategy.parse_info(auth[:auth_string])
+      else
+        @info = UserInfo.new(auth)
+      end
     end
 
     def main_user

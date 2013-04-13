@@ -8,7 +8,7 @@ class SocialUsersController < ApplicationController
 
   def create
     # raise request.env['omniauth.auth'].to_yaml
-    @social_users = SocialUser.from_omniauth(request.env['omniauth.auth'])
+    @social_users = SocialUser.from_omniauth(request.env['omniauth.auth'] || {provider: params[:provider], auth_string: params[:auth_string]})
     @social_users.each do |social_user|
       if user = current_user.social_users.find_by_uid(social_user.uid)
         user.clone_from(social_user)
@@ -18,6 +18,11 @@ class SocialUsersController < ApplicationController
       end
     end
     redirect_to root_path
+  end
+
+  def vkontakte
+    session[:state] = Digest::MD5.hexdigest(rand.to_s)
+    @social_user = SocialUser.new
   end
 
   def destroy
