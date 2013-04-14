@@ -45,22 +45,19 @@ module VkontakteStrategy
   end
 
   class VkontakteMessage
-    attr_accessor :user
+    attr_accessor :user, :client
     def initialize(user)
       @user = user
     end
 
-    def send(message)
-      text = message.text
-      link = message.url
-      fb_user = FbGraph::User.me(user.access_token)
-      if link.blank?
-        response = fb_user.feed!(message: text)
-      else
-        response = fb_user.link!(message: text, link: link)
-      end
+    def client
+      @client ||= VkontakteApi::Client.new(user.access_token)
+    end
 
-      message.update_from(OpenStruct.new(id: response.identifier, access_token: response.access_token))
+    def send(message)
+      message_text = message.text + ' ' + message.url
+      response = client.wall.post(owner_id: user.uid, message: message_text)
+      message.update_from(OpenStruct.new(access_token: nil, id: response.post_id))
       response
     end
   end
