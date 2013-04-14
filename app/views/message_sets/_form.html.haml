@@ -11,9 +11,6 @@
     #individual_edit.beautiful.blue.long
       %h3 Individual edit
 #custom_messages
-  .row
-    .span31
-      %h3 Individual edit
   = form_for @message_set do |f|
     = f.fields_for :messages do |fields|
       = render 'message_fields', f: fields
