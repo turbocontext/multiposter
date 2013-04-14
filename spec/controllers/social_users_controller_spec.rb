@@ -47,6 +47,13 @@ describe SocialUsersController do
       end.to change {SocialUser.count}.by(1)
     end
 
+    it "should create user from auth string either" do
+      expect do
+        SocialUser.stub(:from_omniauth).and_return([FactoryGirl.create(:social_user)])
+        post :create, social_user: {provider: 'test_provider', auth_string: "auth_string"}
+      end.to change {SocialUser.count}.by(1)
+    end
+
     it "should assign created users to current user" do
       SocialUser.stub(:from_omniauth).and_return([FactoryGirl.create(:social_user, user_id: nil)])
       post :create
@@ -54,7 +61,7 @@ describe SocialUsersController do
       response.should redirect_to(root_path)
     end
 
-    describe "smart things are going here" do
+    describe "smart things are going on here" do
       before(:each) do
         @u1 = FactoryGirl.create(:social_user, user_id: @user.id, uid: "123", access_token: "old token")
         @u2 = FactoryGirl.create(:social_user, user_id: nil, uid: "123", access_token: "new token")

@@ -22,5 +22,5 @@ Gemfile.lock
 webrat.log
 coverage
 .bin/*.*
-config/database.yml
-config/environment_variables.rb
+/config/database.yml
+/config/environment_variables.rb

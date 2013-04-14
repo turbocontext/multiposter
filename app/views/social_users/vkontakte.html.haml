@@ -6,6 +6,6 @@
   .span31
     = form_for @social_user do |f|
       .input-control.text
-        = text_field_tag 'auth_string'
-        = hidden_field_tag 'provider', 'vkontakte'
+        = f.text_field :auth_string
+        = f.hidden_field :provider, value: 'vkontakte'
       = f.submit "Create Vkontakte user"

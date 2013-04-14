@@ -8,6 +8,8 @@ class SocialUser < ActiveRecord::Base
                   :user_id, :nickname, :parent_id, :expires, :expires_at,
                   :url
 
+  attr_accessor :auth_string
+
   validates_presence_of :access_token, :provider, :uid
 
   def self.from_omniauth(auth)
