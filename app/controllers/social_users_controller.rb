@@ -3,7 +3,6 @@ class SocialUsersController < ApplicationController
 
   def index
     @social_users = current_user.social_users
-    @page_header = "Учетные записи социальных сетей"
   end
 
   def create
