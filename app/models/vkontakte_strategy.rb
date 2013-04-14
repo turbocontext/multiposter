@@ -2,6 +2,7 @@
 require 'user_info'
 require "ostruct"
 module VkontakteStrategy
+  DEFAULT_TOKEN = 'vk_token'
   class User
     attr_accessor :auth, :info
     def initialize(auth)
@@ -18,7 +19,20 @@ module VkontakteStrategy
     end
 
     def subusers
-      []
+      client = VkontakteApi::Client.new(info.access_token)
+      client.groups.get(extended: true, filter: "admin").inject([]) do |result, group|
+        if group.class != Fixnum
+          result << OpenStruct.new({
+            provider: 'vkontakte',
+            uid: "-#{group.gid}",
+            url: "http://vk.com/club#{group.gid}",
+            email: "#{group.gid}@vk.com",
+            nickname: group.name,
+            access_token: VkontakteStrategy::DEFAULT_TOKEN
+          })
+        end
+        result
+      end
     end
 
     private
@@ -50,8 +64,16 @@ module VkontakteStrategy
       @user = user
     end
 
+    def access_token
+      if user.access_token == VkontakteStrategy::DEFAULT_TOKEN
+        access_token = user.parent.access_token
+      else
+        access_token = user.access_token
+      end
+    end
+
     def client
-      @client ||= VkontakteApi::Client.new(user.access_token)
+      @client ||= VkontakteApi::Client.new(access_token)
     end
 
     def send(message)

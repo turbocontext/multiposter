@@ -25,7 +25,7 @@ class SocialUser < ActiveRecord::Base
   end
 
   def self.create_with(info)
-    create(
+    create!(
       provider: info.provider,
       uid:      info.uid,
       url:      info.url,
