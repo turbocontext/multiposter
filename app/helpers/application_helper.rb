@@ -1,8 +1,9 @@
 module ApplicationHelper
 
-  def shortcut_for(net, name = nil)
+  def shortcut_for(net, href=nil, name = nil)
     name ||= net.to_s.capitalize
-    raw %Q{<a class="shortcut" href="/auth/#{net}">
+    link = href || "/auth/#{net}"
+    raw %Q{<a class="shortcut" href="#{link}">
           <span class="icon">
             <i class="icon-#{net}"></i>
           </span>
