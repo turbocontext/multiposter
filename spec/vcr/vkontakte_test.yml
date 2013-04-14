@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx/1.2.4
       Date:
-      - Sat, 13 Apr 2013 13:26:34 GMT
+      - Sun, 14 Apr 2013 07:16:50 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -33,9 +33,9 @@ http_interactions:
       Vary:
       - Host
       X-Powered-By:
-      - PHP/5.3.3-7+squeeze3
+      - PHP/5.3.3-7+squeeze14
       Set-Cookie:
-      - remixlang=0; expires=Fri, 18-Apr-2014 00:12:21 GMT; path=/; domain=.vk.com
+      - remixlang=0; expires=Wed, 23-Apr-2014 10:32:03 GMT; path=/; domain=.vk.com
       Pragma:
       - no-cache
       Cache-Control:
@@ -44,5 +44,50 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"response":[{"uid":190495550,"first_name":"Kavigator","last_name":"Dagestan-News"}]}'
     http_version: 
-  recorded_at: Sat, 13 Apr 2013 13:26:34 GMT
+  recorded_at: Sun, 14 Apr 2013 07:16:50 GMT
+- request:
+    method: post
+    uri: https://api.vk.com/method/users.get?access_token=bc128c11f4bab78f9a0f1ba84b0a2d6dee58b6bb30545d8c413c549896223f8e40c24d72f9ce5e3dd9604
+    body:
+      encoding: US-ASCII
+      string: uid=190495550
+    headers:
+      User-Agent:
+      - Faraday v0.8.7
+      Authorization:
+      - Token token="bc128c11f4bab78f9a0f1ba84b0a2d6dee58b6bb30545d8c413c549896223f8e40c24d72f9ce5e3dd9604"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.4
+      Date:
+      - Sun, 14 Apr 2013 07:16:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '85'
+      Connection:
+      - keep-alive
+      Vary:
+      - Host
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze7
+      Set-Cookie:
+      - remixlang=0; expires=Sat, 19-Apr-2014 13:25:16 GMT; path=/; domain=.vk.com
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+    body:
+      encoding: US-ASCII
+      string: ! '{"response":[{"uid":190495550,"first_name":"Kavigator","last_name":"Dagestan-News"}]}'
+    http_version: 
+  recorded_at: Sun, 14 Apr 2013 07:16:50 GMT
 recorded_with: VCR 2.4.0
