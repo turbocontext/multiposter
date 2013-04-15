@@ -1,7 +1,7 @@
 class MessageSetsController < ApplicationController
 
   def index
-    @message_sets = current_user.message_sets.includes(:messages).order("created_at DESC")
+    @message_sets = current_user.message_sets.includes(:messages).order("created_at DESC").page(params[:page]).per_page(20)
   end
 
   def new
