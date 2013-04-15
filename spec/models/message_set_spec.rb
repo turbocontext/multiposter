@@ -23,5 +23,11 @@ describe MessageSet do
     it "should respond to messages method" do
       MessageSet.new.should respond_to(:messages)
     end
+
+    it "should destroy all corresponding messages" do
+      ms = MessageSet.create(@attr)
+      FactoryGirl.create(:message, message_set_id: ms.id)
+      expect {ms.destroy}.to change{Message.count}.by(-1)
+    end
   end
 end
