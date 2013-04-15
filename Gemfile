@@ -23,6 +23,7 @@ gem 'fb_graph'
 gem 'twitter'
 
 gem 'hirb'
+gem 'haml-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -30,7 +31,6 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.1.0.0'
 
   gem 'therubyracer', '=0.10.2'
-  gem 'haml-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
