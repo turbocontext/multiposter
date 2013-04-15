@@ -65,3 +65,8 @@ end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
 gem 'compass-rails'
 gem 'vkontakte_api', '~> 1.1'
+
+# deployment
+gem 'capistrano'
+gem 'rvm-capistrano' #, git: 'https://github.com/wayneeseguin/rvm-capistrano'
+gem 'unicorn'
