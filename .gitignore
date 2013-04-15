@@ -18,7 +18,6 @@
 log/*.log
 tmp/
 .idea/*.*
-Gemfile.lock
 webrat.log
 coverage
 .bin/*.*
