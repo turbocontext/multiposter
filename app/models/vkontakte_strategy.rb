@@ -82,6 +82,10 @@ module VkontakteStrategy
       message.update_from(OpenStruct.new(access_token: nil, id: response.post_id))
       response
     end
+
+    def delete(message)
+      client.wall.delete(post_id: message.uid)
+    end
   end
 
 end

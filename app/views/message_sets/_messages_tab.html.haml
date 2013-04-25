@@ -1,10 +1,13 @@
 - @message_sets.each do |message_set|
   - message_set.messages.each do |message|
-    .row
-      .span31
-        = message.text
-    .row
-      .span12
-        = message.social_user.nickname
+    %div{id: "message_#{message.id}"}
+      .row
+        .span31
+          = message.text
+      .row
+        .span12
+          = message.social_user.nickname
+        .span12
+          = link_to "Delete", message_path(message), method: :delete, class: "button default"
   %hr
 = will_paginate @message_sets

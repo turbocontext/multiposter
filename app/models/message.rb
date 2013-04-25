@@ -16,11 +16,16 @@ class Message < ActiveRecord::Base
   def send_message
     return false if Rails.env == 'test'
     provider = social_user.provider.to_s.camelize
-    provider = "Facebook" if provider == "FacebookCommunity"
     message = "#{provider}Strategy::#{provider}Message".constantize.new(social_user)
     message.send(self)
   end
 
+  def delete_message
+    return false if Rails.env == 'test'
+    provider = social_user.provider.to_s.camelize
+    message = "#{provider}Strategy::#{provider}Message".constantize.new(social_user)
+    message.delete(self)
+  end
 
   def update_from(response)
     uid = response.id

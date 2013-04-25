@@ -52,6 +52,11 @@ module FacebookStrategy
       message.update_from(OpenStruct.new(id: response.identifier, access_token: response.access_token))
       response
     end
+
+    def delete(message)
+      message = FbGraph::Post.new(message.uid)
+      message.destroy(access_token: message.access_token)
+    end
   end
 
 end

@@ -33,5 +33,9 @@ module TwitterStrategy
       message.update_from(OpenStruct.new(access_token: nil, id: response.id))
       response
     end
+
+    def delete(message)
+      client.tweet_destroy(message.uid)
+    end
   end
 end
