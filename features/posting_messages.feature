@@ -10,6 +10,5 @@ Feature: posting messages from social users
   @javascript
   Scenario: creating message
     Given I am on the social users page
-    Then take a snapshot
     And I create message
     Then messages should be created
