@@ -16,6 +16,14 @@ describe MessagesController do
       expect {delete :destroy, id: @message.id}.to change {Message.count}.by(-1)
     end
 
+    it "should destroy message set if all messages from it are deleted" do
+      @message1 = FactoryGirl.create(:message, message_set: @message_set)
+      expect do
+        delete :destroy, id: @message.id
+        delete :destroy, id: @message1.id
+      end.to change {MessageSet.count}.by(-1)
+    end
+
     it "should redirect to root path if there is no http refferer" do
       delete :destroy, id: @message.id
       request.should redirect_to(root_path)
