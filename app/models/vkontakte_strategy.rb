@@ -77,8 +77,8 @@ module VkontakteStrategy
     end
 
     def send(message)
-      message_text = message.text + ' ' + message.url
-      response = client.wall.post(owner_id: user.uid, message: message_text)
+      message_text = message.text
+      response = client.wall.post(owner_id: user.uid, message: message_text, link: message.url)
       message.update_from(OpenStruct.new(access_token: nil, id: response.post_id))
       response
     end
