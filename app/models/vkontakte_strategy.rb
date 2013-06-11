@@ -65,7 +65,7 @@ module VkontakteStrategy
     end
 
     def access_token
-      if user.access_token == VkontakteStrategy::DEFAULT_TOKEN
+      if user.access_token.include?("-")
         access_token = user.parent.access_token
       else
         access_token = user.access_token
@@ -84,7 +84,7 @@ module VkontakteStrategy
     end
 
     def delete(message)
-      client.wall.delete(post_id: message.uid)
+      client.wall.delete(owner_id: user.uid, post_id: message.uid)
     end
   end
 
