@@ -65,7 +65,7 @@ module VkontakteStrategy
     end
 
     def access_token
-      if user.access_token.include?("-")
+      if user.uid.include?("-")
         access_token = user.parent.access_token
       else
         access_token = user.access_token
