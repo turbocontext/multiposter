@@ -88,6 +88,33 @@ describe SocialUsersController do
     end
   end
 
+  describe "PUT 'update'" do
+    let(:social_user){FactoryGirl.create(:social_user)}
+    let(:attributes){ {checked: false } }
+
+    before(:each) do
+      put :update, id: social_user.id, social_user: attributes
+    end
+
+    it "should redirect to social_users path" do
+      response.should redirect_to(social_users_path)
+    end
+
+    it "should render nothing in case of json response" do
+      put :update, id: social_user.id, social_user: attributes, format: :json
+      response.body.should be_blank
+    end
+
+    it "should fetch appropriate user" do
+      assigns(:social_user).should == social_user
+    end
+
+    it "should update attributes on user" do
+      social_user.reload
+      social_user.checked.should be_false
+    end
+  end
+
   describe "DELETE 'mass_destroy'" do
     it "should delete given social users" do
       user1 = FactoryGirl.create(:social_user)

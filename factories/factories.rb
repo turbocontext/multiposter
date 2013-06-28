@@ -15,6 +15,7 @@ FactoryGirl.define do
     nickname "nickname"
     url
     user
+    checked true
     email
   end
 

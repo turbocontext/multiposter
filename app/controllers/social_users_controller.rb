@@ -1,8 +1,18 @@
 # -*- encoding: utf-8 -*-
 class SocialUsersController < ApplicationController
 
+  before_filter :find_social_user, only: [:update, :destroy]
+
   def index
     @social_users = current_user.social_users
+  end
+
+  def update
+    @social_user.update_attributes(params[:social_user])
+    respond_to do |format|
+      format.html { redirect_to social_users_path }
+      format.json { render nothing: true }
+    end
   end
 
   def create
@@ -26,8 +36,7 @@ class SocialUsersController < ApplicationController
   end
 
   def destroy
-    user = SocialUser.find(params[:id])
-    user.destroy
+    @social_user.destroy
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -41,5 +50,11 @@ class SocialUsersController < ApplicationController
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
+  end
+
+private
+
+  def find_social_user
+    @social_user = SocialUser.find(params[:id])
   end
 end
