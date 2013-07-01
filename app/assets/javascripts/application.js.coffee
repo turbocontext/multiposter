@@ -38,3 +38,13 @@ $ ->
 
   $('body').on 'click', '#post_message_button', (element) ->
     $('#new_message_set').submit()
+
+  $('body').on 'change', '#model_ids_', (ev) ->
+    user_id = $(ev.target).val()
+    checked = $(ev.target).is(':checked')
+    url = "/social_users/#{user_id}"
+    $.ajax
+      url: url
+      dataType: 'json'
+      type: 'PUT'
+      data: "social_user[checked]=#{checked}"

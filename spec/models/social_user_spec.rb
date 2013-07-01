@@ -12,7 +12,8 @@ describe SocialUser do
       secret_token: "secret",
       user_id: "12",
       email: "email@email.com",
-      nickname: "ddd"
+      nickname: "ddd",
+      checked: true
     }
   end
 

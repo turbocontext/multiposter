@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401074537) do
+ActiveRecord::Schema.define(:version => 20130628172745) do
 
   create_table "message_sets", :force => true do |t|
     t.integer  "user_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130401074537) do
     t.string  "url"
     t.integer "user_id"
     t.string  "email"
+    t.boolean "checked",      :default => true
   end
 
   add_index "social_users", ["uid"], :name => "index_social_users_on_uid"
