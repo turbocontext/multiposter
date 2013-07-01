@@ -5,9 +5,11 @@
         .span31
           = message.text
       .row
-        .span12
+        .span10
           = message.social_user.nickname
-        .span12
+        .span10
+          = message.social_user.provider.humanize
+        .span10
           = link_to "Delete", message_path(message), method: :delete, class: "button default"
   %hr
 = will_paginate @message_sets
