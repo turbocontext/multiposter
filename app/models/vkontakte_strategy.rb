@@ -76,9 +76,13 @@ module VkontakteStrategy
       @client ||= VkontakteApi::Client.new(access_token)
     end
 
-    def send(message)
-      message_text = message.text
-      response = client.wall.post(owner_id: user.uid, message: message_text, attachments: message.url)
+    def send(message, options = {prefered_format: :full})
+      if options[:prefered_format] == :full
+        text = message.text
+      else
+        text = message.short_text
+      end
+      response = client.wall.post(owner_id: user.uid, message: text, attachments: message.url)
       message.update_from(OpenStruct.new(access_token: nil, id: response.post_id))
       response
     end

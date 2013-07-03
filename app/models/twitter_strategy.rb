@@ -28,8 +28,13 @@ module TwitterStrategy
       @client ||= Twitter::Client.new(oauth_token: user.access_token, oauth_token_secret: user.secret_token, consumer_key: ENV['twitter_id'], consumer_secret: ENV['twitter_secret'])
     end
 
-    def send(message)
-      response = client.update(message.text + ' ' + message.url)
+    def send(message, options = {prefered_format: :short})
+      if options[:prefered_format] == :full
+        text = message.text
+      else
+        text = message.short_text
+      end
+      response = client.update(text + ' ' + message.url)
       message.update_from(OpenStruct.new(access_token: nil, id: response.id))
       response
     end

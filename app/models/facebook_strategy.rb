@@ -39,8 +39,12 @@ module FacebookStrategy
       @user = user
     end
 
-    def send(message)
-      text = message.text
+    def send(message, options = {prefered_format: :full})
+      if options[:prefered_format] == :full
+        text = message.text
+      else
+        text = message.short_text
+      end
       link = message.url
       fb_user = FbGraph::User.me(user.access_token)
       if link.blank?
