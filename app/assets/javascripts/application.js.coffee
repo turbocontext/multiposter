@@ -20,13 +20,15 @@ $ ->
     'google_oauth2',
     'vkontakte'
   ]
-  for id in ids
-    $('body').on 'keyup input paste', "##{id}_common_text", (element) ->
-      name = get_name(element.target)
-      $("#{name} textarea").val($(element.target).val())
+  $('body').on 'keyup input paste', "#common_text", (element) ->
+    for id in ids
+      name = "." + id + "_message"
+      $(name + ' textarea[name$=\\[text\\]]').val($(element.target).val())
 
-  get_name = (element) ->
-    "." + $(element).attr('id').split('_common')[0] + "_message"
+  $('body').on 'keyup input paste', "#common_short_text", (element) ->
+    for id in ids
+      name = "." + id + "_message"
+      $(name + ' textarea[name$=\\[short_text\\]]').val($(element.target).val())
 
   $('body').on 'keyup input paste', "#common_link", (element) ->
     for id in ids

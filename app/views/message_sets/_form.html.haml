@@ -1,15 +1,9 @@
 .row
   .span31
     %h3 Mass edit
-- @common_types.each do |type|
-  .row
-    .span31
-      = render 'mass_edit_form', type: type
 .row
   .span31
-    .input-control.textarea
-      = label_tag "common_link", "Common link"
-      = text_field_tag "common_link", nil, id: "common_link"
+    = render 'mass_edit_form'
 
 %hr
 .row

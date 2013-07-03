@@ -6,6 +6,7 @@ describe Message do
     @message_set = FactoryGirl.create(:message_set)
     @attr = {
       text: "message text",
+      short_text: "short message text",
       access_token: "access token",
       uid: "123",
       url: "link.example.com",

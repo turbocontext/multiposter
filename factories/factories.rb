@@ -25,6 +25,7 @@ FactoryGirl.define do
 
   factory :message do
     text "message text"
+    short_text "short_text text"
     url
     uid "123"
     access_token "access token"

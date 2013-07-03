@@ -1,3 +1,9 @@
 .input-control.textarea
-  = label_tag "#{type}_common_text", "Content for all #{type.humanize} profiles"
-  = text_area_tag "#{type}_common_text", nil, id: "#{type}_common_text", placeholder: "Insert message text here..."
+  = label_tag "common_short_text", "Common short text"
+  = text_area_tag "common_short_text", nil, id: "common_short_text", placeholder: "Insert short message here..."
+.input-control.textarea
+  = label_tag "common_text", "Common text"
+  = text_area_tag "common_text", nil, id: "common_text", placeholder: "Insert message text here..."
+.input-control.textarea
+  = label_tag "common_link", "Common link"
+  = text_field_tag "common_link", nil, id: "common_link"

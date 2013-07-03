@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   attr_accessible :access_token, :message_set_id, :url, :uid,
-                  :social_user_id, :text, :status
+                  :social_user_id, :text, :status, :short_text
 
   belongs_to :social_user
   belongs_to :message_set

@@ -2,7 +2,9 @@
   .span31
     .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
       = f.hidden_field :social_user_id
+      = f.label :short_text, "Short message #{f.object.social_user.nickname} (#{f.object.social_user.provider.humanize})"
+      = f.text_area :short_text
       = f.label :text, "Message for #{f.object.social_user.nickname} (#{f.object.social_user.provider.humanize})"
-      = f.text_area :text, placeholder: "Insert message text here..."
+      = f.text_area :text
       = f.label :url, "Link"
       = f.text_field :url
