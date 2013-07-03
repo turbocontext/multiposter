@@ -58,8 +58,8 @@ module FacebookStrategy
     end
 
     def delete(message)
-      message = FbGraph::Post.new(message.uid)
-      message.destroy(access_token: message.access_token)
+      mes = FbGraph::Post.new(message.uid)
+      mes.destroy(access_token: message.access_token)
     end
   end
 
