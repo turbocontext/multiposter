@@ -1,3 +1,6 @@
+.row
+  .span32
+    %h2 Manage posted messages
 - @message_sets.each do |message_set|
   - message_set.messages.each do |message|
     %div{id: "message_#{message.id}"}
