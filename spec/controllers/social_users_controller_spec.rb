@@ -58,7 +58,7 @@ describe SocialUsersController do
       SocialUser.stub(:from_omniauth).and_return([FactoryGirl.create(:social_user, user_id: nil)])
       post :create
       assigns(:social_users).each {|u| u.reload; u.user_id.should eq(@user.id)}
-      response.should redirect_to(root_path)
+      response.should redirect_to(social_users_path)
     end
 
     describe "smart things are going on here" do
