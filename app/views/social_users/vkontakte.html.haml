@@ -1,18 +1,26 @@
 .row
-  .span31
-    %h2 Vkontakte profile
-    = link_to "Vkontakte blank.html", VkontakteApi.authorization_url(type: :client, scope: [:wall, :offline]), target: "_blank"
-.row
-  .span31
-    %blockquote
-      %p
-        To add vkontakte profile, you should allow applicaton to access your profile
-        and insert content of address bar of browser in the field below.
-.row
-  .span31
-    = form_for @social_user do |f|
-      .input-control.text
-        = f.label :auth_string, "Input address string from the link above"
-        = f.text_field :auth_string
-        = f.hidden_field :provider, value: 'vkontakte'
-      = f.submit "Create Vkontakte user"
+  .span32
+    .page-control#main_page_control(data-role="page-control")
+      %span.menu-pull
+      .menu-pull-bar
+      = render 'menu_list'
+      .frames#main_frames
+        .frame.active#social_users_frame
+          .row
+            .span31
+              %h2 Vkontakte profile
+              = link_to "Vkontakte blank.html", VkontakteApi.authorization_url(type: :client, scope: [:wall, :offline]), target: "_blank"
+          .row
+            .span31
+              %blockquote
+                %p
+                  To add vkontakte profile, you should allow applicaton to access your profile
+                  and insert content of address bar of browser in the field below.
+          .row
+            .span31
+              = form_for @social_user do |f|
+                .input-control.text
+                  = f.label :auth_string, "Input address string from the link above"
+                  = f.text_field :auth_string
+                  = f.hidden_field :provider, value: 'vkontakte'
+                = f.submit "Create Vkontakte user"

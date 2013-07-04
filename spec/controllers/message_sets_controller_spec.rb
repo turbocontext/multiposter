@@ -33,6 +33,7 @@ describe MessageSetsController do
     end
 
     it "should redirect to root path if there is no social users" do
+      SocialUser.scoped.each {|u| u.update_attributes(checked: false)}
       get :new
       response.should redirect_to(root_path)
       get :new, create_message: { model_ids: "#{@suser3.id}" }

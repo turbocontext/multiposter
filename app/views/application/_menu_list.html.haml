@@ -1,0 +1,13 @@
+%ul
+  %li{class: ("active" if params[:controller] == 'message_sets' && params[:action] == 'new')}
+    %a{href: new_message_set_path}
+      %i.icon-user
+      New message
+  %li{class: ("active" if params[:controller] == 'social_users')}
+    %a{href: social_users_path}
+      %i.icon-user
+      Users
+  %li{class: ("active" if params[:controller] == 'message_sets' && params[:action] == 'index')}
+    %a{href: message_sets_path}
+      %i.icon-comments-4
+      Message log

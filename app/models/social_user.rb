@@ -12,6 +12,8 @@ class SocialUser < ActiveRecord::Base
 
   validates_presence_of :access_token, :provider, :uid
 
+  scope :checked, -> { where(checked: true)}
+
   def self.from_omniauth(auth)
     provider = auth[:provider]
     user = "#{provider.to_s.camelize}Strategy::User".constantize.new(auth)

@@ -1,2 +1,9 @@
-%h2 New message
-= render 'form'
+.row
+  .span32
+    .page-control#main_page_control(data-role="page-control")
+      %span.menu-pull
+      .menu-pull-bar
+      = render 'menu_list'
+      .frames#main_frames
+        .frame.active#new_message_frame
+          = render 'form'

@@ -13,5 +13,6 @@ TemplateApp::Application.routes.draw do
   # post '/message_sets/new'
   resources :message_sets
   resources :messages
-  root to: "social_users#index"
+  # root to: "social_users#index"
+  root to: "message_sets#new"
 end
