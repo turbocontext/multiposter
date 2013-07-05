@@ -5,6 +5,7 @@ gem 'pg'
 
 gem 'will_paginate'
 gem 'ancestry'
+gem 'rabl'
 
 gem 'thin'
 gem 'jquery-rails'
@@ -21,6 +22,7 @@ gem 'omniauth-vkontakte'
 
 gem 'fb_graph'
 gem 'twitter'
+gem 'vkontakte_api', '~> 1.1'
 
 gem 'hirb'
 gem 'haml-rails'
@@ -64,7 +66,6 @@ group :test do
 end
 gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
 gem 'compass-rails'
-gem 'vkontakte_api', '~> 1.1'
 
 # deployment
 gem 'capistrano'

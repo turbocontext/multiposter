@@ -14,4 +14,11 @@ TemplateApp::Application.routes.draw do
   resources :message_sets
   resources :messages
   root to: "social_users#index"
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      resources :message_sets, only: :create
+      resources :messages, only: :destroy
+    end
+  end
 end
