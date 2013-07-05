@@ -22,5 +22,10 @@ describe User do
       user.social(:test_provider).should include(social_user)
       user.social(:test_provider).count.should == 1
     end
+
+    it "should create user's api key right after registration" do
+      user = User.create(email: "mail@example.org", password: "password")
+      user.api_key.length.should eq(32)
+    end
   end
 end
