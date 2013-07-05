@@ -39,8 +39,13 @@
 @import "my_buttons";
 @import "fontello-embedded";
 
-#main_page_control ul{
-  height: 32px;
+.page-control{
+  ul{
+    height: 32px;
+  }
+  ul li{
+    height: 33px;
+  }
 }
 #main_frames{
   margin-top: 32px;
