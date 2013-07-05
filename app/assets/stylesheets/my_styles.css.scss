@@ -16,7 +16,7 @@ th.actions{ width: 70px;}
 
 table{
 
-  tr th:first-child, tr td:first-child{
+  tr th:first-child.checkbox, tr td:first-child.checkbox{
     @extend .center;
     width: 35px;
   }

@@ -13,6 +13,7 @@ TemplateApp::Application.routes.draw do
   # post '/message_sets/new'
   resources :message_sets
   resources :messages
+  resources :users
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do

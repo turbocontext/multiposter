@@ -16,7 +16,7 @@
 %table.stripped.bordered
   %thead
     %tr
-      %th
+      %th.checkbox
         %input#mark_all(type="checkbox" checked="checked")
       %th Nickname
       %th Provider
@@ -25,7 +25,7 @@
   %tbody
     - @social_users.each do |social_user|
       %tr{id: "social_user_#{social_user.id}"}
-        %td= check_box_tag "model_ids[]", social_user.id, social_user.checked
+        %td.checkbox= check_box_tag "model_ids[]", social_user.id, social_user.checked
         %td= link_to social_user.nickname, social_user.url, target: :blank
         %td= social_user.provider
         %td= social_user.expires_at

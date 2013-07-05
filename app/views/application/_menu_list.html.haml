@@ -11,3 +11,6 @@
     %a{href: message_sets_path}
       %i.icon-comments-4
       Message log
+  %li.place-right{class: ("active" if params[:controller] == 'users')}
+    %a{href: user_path(current_user)}
+      %i.icon-cog
