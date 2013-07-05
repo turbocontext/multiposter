@@ -30,7 +30,8 @@ module TwitterStrategy
 
     def send(message)
       text = text_from(message)
-      response = client.update(text + ' ' + message.url)
+      url = message.url || ''
+      response = client.update(text + ' ' + url)
       message.update_from(OpenStruct.new(access_token: nil, id: response.id))
       response
     end
