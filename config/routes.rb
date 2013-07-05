@@ -13,7 +13,6 @@ TemplateApp::Application.routes.draw do
   # post '/message_sets/new'
   resources :message_sets
   resources :messages
-  root to: "social_users#index"
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
@@ -21,4 +20,7 @@ TemplateApp::Application.routes.draw do
       resources :messages, only: :destroy
     end
   end
+
+  # root to: "social_users#index"
+  root to: "message_sets#new"
 end

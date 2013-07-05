@@ -27,7 +27,7 @@ class SocialUsersController < ApplicationController
         social_user.update_attributes(user_id: current_user.id)
       end
     end
-    redirect_to root_path
+    redirect_to social_users_path
   end
 
   def vkontakte

@@ -5,9 +5,8 @@ class MessageSetsController < ApplicationController
   end
 
   def new
-    ids = params[:create_message][:model_ids].split(',').map(&:to_i) if params[:create_message] && params[:create_message][:model_ids]
-    @social_users = current_user.social_users.find_all_by_id(ids)
-    redirect_to root_path if @social_users.length == 0
+    @social_users = current_user.social_users.checked
+    redirect_to social_users_path if @social_users.count.zero?
     @common_types = @social_users.map(&:provider).uniq
     @message_set = MessageSet.new
     @social_users.each do |social_user|
@@ -22,6 +21,6 @@ class MessageSetsController < ApplicationController
         social_user.messages.create(attributes.merge(message_set_id: @message_set.id))
       end
     end
-    redirect_to social_users_path
+    redirect_to new_message_set_path
   end
 end

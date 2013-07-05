@@ -3,17 +3,7 @@
     .page-control#main_page_control(data-role="page-control")
       %span.menu-pull
       .menu-pull-bar
-      %ul
-        %li
-          %a{href: social_users_path}
-            %i.icon-user
-            Users
-        %li.active
-          %a{href: message_sets_path}
-            %i.icon-comments-4
-            Messages
+      = render 'menu_list'
       .frames#main_frames
-        .frame#social_users_frame
-          Empty
         .frame.active#messages_frame
           = render 'messages_tab'

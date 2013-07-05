@@ -57,6 +57,15 @@ describe SocialUser do
     end
   end
 
+  describe "scopes" do
+    it "should have checked scope" do
+      user1 = SocialUser.create(@attr)
+      user2 = SocialUser.create(@attr.merge(checked: false))
+      SocialUser.checked.should include(user1)
+      SocialUser.checked.should_not include(user2)
+    end
+  end
+
   describe "from_omniauth" do
     before(:each) do
       @oauth = OmniauthExamples.test_oauth

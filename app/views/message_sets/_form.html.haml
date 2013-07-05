@@ -1,4 +1,7 @@
 .row
+  .span32
+    %h2 New message
+.row
   .span31
     %h3 Mass edit
 .row
@@ -7,9 +10,10 @@
 
 %hr
 .row
-  .span32
+  .span31.slider_button
     #individual_edit.beautiful.blue.long
       %h3 Individual edit
+
 #custom_messages
   = form_for @message_set do |f|
     = f.fields_for :messages do |fields|
