@@ -21,4 +21,20 @@ describe FacebookStrategy do
       end
     end
   end
+
+  describe Message do
+    let(:message) { FacebookStrategy::FacebookMessage.new(FactoryGirl.create(:social_user)) }
+
+    it "should take short text if text is nil or zero length" do
+      mess = OpenStruct.new(text: '', short_text: 'short')
+      message.text_from(mess).should == 'short'
+      mess = OpenStruct.new(text: nil, short_text: 'short')
+      message.text_from(mess).should == 'short'
+    end
+
+    it "should take long text if there is one" do
+      mess = OpenStruct.new(text: 'long', short_text: 'short')
+      message.text_from(mess).should == 'long'
+    end
+  end
 end

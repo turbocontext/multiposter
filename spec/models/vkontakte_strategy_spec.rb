@@ -14,4 +14,6 @@ describe VkontakteStrategy do
       info.nickname.should == 'Kavigator Dagestan-News'
     end
   end
+
+  it "test text creation"
 end

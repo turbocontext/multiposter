@@ -39,12 +39,8 @@ module FacebookStrategy
       @user = user
     end
 
-    def send(message, options = {prefered_format: :full})
-      if options[:prefered_format] == :full
-        text = message.text
-      else
-        text = message.short_text
-      end
+    def send(message)
+      text = text_from(message)
       link = message.url
       fb_user = FbGraph::User.me(user.access_token)
       if link.blank?
@@ -55,6 +51,10 @@ module FacebookStrategy
 
       message.update_from(OpenStruct.new(id: response.identifier, access_token: response.access_token))
       response
+    end
+
+    def text_from(message)
+      message.text && message.text.length > 0 ? message.text : message.short_text
     end
 
     def delete(message)
