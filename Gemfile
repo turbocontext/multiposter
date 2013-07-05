@@ -5,7 +5,6 @@ gem 'pg'
 
 gem 'will_paginate'
 gem 'ancestry'
-gem 'rabl'
 
 gem 'thin'
 gem 'jquery-rails'
