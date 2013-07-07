@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705063658) do
+ActiveRecord::Schema.define(:version => 20130707075445) do
 
   create_table "message_sets", :force => true do |t|
     t.integer  "user_id"
@@ -33,18 +33,20 @@ ActiveRecord::Schema.define(:version => 20130705063658) do
   end
 
   create_table "social_users", :force => true do |t|
-    t.string  "uid"
-    t.string  "provider"
-    t.string  "access_token"
-    t.string  "secret_token"
-    t.string  "nickname"
-    t.string  "ancestry"
-    t.boolean "expires"
-    t.date    "expires_at"
-    t.string  "url"
-    t.integer "user_id"
-    t.string  "email"
-    t.boolean "checked",      :default => true
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "access_token"
+    t.string   "secret_token"
+    t.string   "nickname"
+    t.string   "ancestry"
+    t.boolean  "expires"
+    t.date     "expires_at"
+    t.string   "url"
+    t.integer  "user_id"
+    t.string   "email"
+    t.boolean  "checked",      :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "social_users", ["uid"], :name => "index_social_users_on_uid"

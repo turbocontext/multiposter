@@ -4,7 +4,7 @@ class SocialUsersController < ApplicationController
   before_filter :find_social_user, only: [:update, :destroy]
 
   def index
-    @social_users = current_user.social_users
+    @social_users = current_user.social_users.order("social_users.created_at DESC")
   end
 
   def update

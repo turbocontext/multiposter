@@ -10,9 +10,9 @@ describe SocialUsersController do
 
   describe "GET 'index'" do
     it "should fetch all social users from current user and return ok" do
-      FactoryGirl.create(:social_user, user_id: @user.id)
+      social_user = FactoryGirl.create(:social_user, user_id: @user.id)
       get :index
-      assigns(:social_users).should == @user.social_users
+      assigns(:social_users).should include(social_user)
       response.should be_ok
     end
   end

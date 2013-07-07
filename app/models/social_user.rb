@@ -6,7 +6,7 @@ class SocialUser < ActiveRecord::Base
   has_ancestry
   attr_accessible :email, :access_token, :secret_token, :uid, :provider,
                   :user_id, :nickname, :parent_id, :expires, :expires_at,
-                  :url, :checked
+                  :url, :checked, :created_at, :updated_at
 
   attr_accessor :auth_string
 
