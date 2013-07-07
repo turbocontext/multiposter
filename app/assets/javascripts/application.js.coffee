@@ -12,6 +12,7 @@ $ ->
       $("input[name^='model_ids']").attr("checked", true)
     else
       $("input[name^='model_ids']").attr("checked", false)
+    $("input[name^='model_ids']").trigger("change")
 
   ids =[
     'facebook',
