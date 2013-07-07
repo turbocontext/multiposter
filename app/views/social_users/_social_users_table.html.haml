@@ -1,0 +1,19 @@
+%table.stripped.bordered
+  %thead
+    %tr
+      %th.checkbox
+        %input#mark_all(type="checkbox" checked="checked")
+      %th Nickname
+      %th Provider
+      %th Expires
+      %th.actions Actions
+  %tbody
+    - social_users.each do |social_user|
+      %tr{id: "social_user_#{social_user.id}"}
+        %td.checkbox= check_box_tag "model_ids[]", social_user.id, social_user.checked
+        %td= link_to social_user.nickname, social_user.url, target: :blank
+        %td= social_user.provider
+        %td= social_user.expires_at
+        %td
+          .toolbar
+            = raw(html_button_to "",social_user_path(social_user), {class: "big", method: :delete}, content_tag(:i, "", class: "icon-remove"))

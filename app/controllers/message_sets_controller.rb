@@ -6,7 +6,10 @@ class MessageSetsController < ApplicationController
 
   def new
     @social_users = current_user.social_users.checked
-    redirect_to social_users_path if @social_users.count.zero?
+    if @social_users.count.zero?
+      flash[:info] = "No social network account selected, check some or add them if there is none."
+      redirect_to social_users_path
+    end
     @common_types = @social_users.map(&:provider).uniq
     @message_set = MessageSet.new
     @social_users.each do |social_user|

@@ -1,9 +1,21 @@
+= render 'action_name', name: "Add social network account:"
+
 .row
   .span32
-    .page-control#main_page_control(data-role="page-control")
-      %span.menu-pull
-      .menu-pull-bar
-      = render 'menu_list'
-      .frames#main_frames
-        .frame.active#social_users_frame
-          = render 'social_users_tab'
+    = shortcut_for(:facebook)
+    = shortcut_for(:twitter)
+    = shortcut_for(:vkontakte, vkontakte_social_users_path)
+%hr
+.row
+  .span16
+    %a{id: "create_message_button", href: "#"}
+      %button.command-button.create_message.fg-color-white.bg-color-blue
+        Create message
+        %small.fg-color-white Message will be sent within marked accounts
+
+= render 'social_users_table', social_users: @social_users
+= link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
+= form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
+  = f.hidden_field :model_ids
+= form_for "create_message", url: {action: :new, controller: :message_sets}, method: :get, html: {id: "create_message_form"} do |f|
+  = f.hidden_field :model_ids

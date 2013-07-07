@@ -1,9 +1,8 @@
-.row
-  .span32
-    .page-control#main_page_control(data-role="page-control")
-      %span.menu-pull
-      .menu-pull-bar
-      = render 'menu_list'
-      .frames#main_frames
-        .frame.active#social_users_frame
-          = render 'user_tab'
+= render 'action_name', name: "Account info"
+
+%table.stripped.bordered
+  %thead
+  %tbody
+    %tr
+      %td Api key
+      %td= current_user.api_key
