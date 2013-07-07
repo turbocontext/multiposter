@@ -6,7 +6,13 @@
     %div{id: "message_#{message.id}"}
       .row
         .span31
-          = message.text
+          %p= message.short_text
+      .row
+        .span31
+          %p= message.text
+      .row
+        .span31
+          = link_to(message.url, message.url) if message.url
       .row
         .span10
           = message.social_user.nickname
