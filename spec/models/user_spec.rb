@@ -27,5 +27,12 @@ describe User do
       user = User.create(email: "mail@example.org", password: "password")
       user.api_key.length.should eq(32)
     end
+
+    it "should have language string hstore field" do
+      user = User.create(email: "mail@example.org", password: "password")
+      user.language = "en"
+      user.save
+      user.language.should == "en"
+    end
   end
 end
