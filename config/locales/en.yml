@@ -2,4 +2,53 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  users:
+    api_key: "API key"
+    account_info: "Account info"
+  social_users:
+    nickname: "Nickname"
+    provider: "Provider"
+    expires:  "Expires"
+    add_account: "Add social network account:"
+  message_sets:
+    create_message_set: "Create message"
+    create_message_set_notice: "Message will be sent within marked accounts"
+    mass_edit: "Mass edit"
+    individual_edit: "Individual edit"
+    post_message: "Post message"
+    post_message_notice: "Message will be sent within marked accounts"
+    common_short_text: "Common short text"
+    common_text: "Common text"
+    common_link: "Common link"
+    short_message_for: "Short message for %{social_user} (%{provider})"
+    message_for: "Message for %{social_user} (%{provider})"
+    link_for: "Link for %{social_user} (%{provider})"
+    action_names:
+      new: "Create message"
+      index: "Manage posted messages"
+  providers:
+    vkontakte:
+      name: "Vkontakte"
+      instruction: "To add vkontakte profile, you should allow applicaton to access your profile and insert content of address bar of browser in the field below."
+      insert_link: "Input address string from the link above"
+      action_names:
+        new: "Vkontakte profile"
+      create_user: "Create Vkontakte user"
+    facebook:
+      name: "Facebook"
+    twitter:
+      name: "Twitter"
+  main_menu:
+    new_message: "New message"
+    message_log: "Message log"
+    users: "Users"
+  common:
+    tables:
+      actions: "Actions"
+    delete_selected: "Delete selected"
+    actions:
+      delete: "Delete"
+    sign_in:  "Sign in"
+    sign_out: "Sign out"
+    sign_up:  "Register"
+    header: "Multiposter"

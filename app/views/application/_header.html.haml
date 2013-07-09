@@ -2,7 +2,7 @@
   .span15
     %a{href: root_path}
       %h2.fg-color-blue.logo
-        Multiposter
+        = t('common.header')
         %i.icon-comments-4
   - if signed_in?
     .span12
@@ -13,12 +13,18 @@
     .span4
       %a{href: destroy_user_session_path, "data-method"=> "delete", rel: "nofollow"}
         %h3.fg-color-blue.sign_out.to_right
-          Sign out
+          = t('common.sign_out')
           %i.icon-exit
   - else
-    .span12
+    .span6
+      = "&nbsp;".html_safe
+    .span6
+      %a{href: new_user_registration_path}
+        %h3.fg-color-blue.sign_in
+          = t('common.sign_up')
+          %i.icon-file
     .span4
       %a{href: new_user_session_path}
         %h3.fg-color-blue.sign_in
-          Sign in
+          = t('common.sign_in')
           %i.icon-enter

@@ -1,9 +1,9 @@
 .input-control.textarea
-  = label_tag "common_short_text", "Common short text"
+  = label_tag "common_short_text", t('message_sets.common_short_text')
   = text_area_tag "common_short_text", nil, id: "common_short_text", placeholder: "Insert short message here..."
 .input-control.textarea
-  = label_tag "common_text", "Common text"
+  = label_tag "common_text", t('message_sets.common_text')
   = text_area_tag "common_text", nil, id: "common_text", placeholder: "Insert message text here..."
 .input-control.textarea
-  = label_tag "common_link", "Common link"
+  = label_tag "common_link", t('message_sets.common_link')
   = text_field_tag "common_link", nil, id: "common_link"

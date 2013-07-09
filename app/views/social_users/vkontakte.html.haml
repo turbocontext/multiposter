@@ -1,18 +1,16 @@
+= render 'action_name', name: t('providers.vkontakte.action_names.new')
+
 .row
   .span31
-    %h2 Vkontakte profile
     = link_to "Vkontakte blank.html", VkontakteApi.authorization_url(type: :client, scope: [:wall, :offline]), target: "_blank"
-.row
-  .span31
     %blockquote
       %p
-        To add vkontakte profile, you should allow applicaton to access your profile
-        and insert content of address bar of browser in the field below.
+        = t('providers.vkontakte.instruction')
 .row
   .span31
     = form_for @social_user do |f|
       .input-control.text
-        = f.label :auth_string, "Input address string from the link above"
+        = f.label :auth_string, t('providers.vkontakte.insert_link')
         = f.text_field :auth_string
         = f.hidden_field :provider, value: 'vkontakte'
-      = f.submit "Create Vkontakte user"
+      = f.submit t('providers.vkontakte.create_user')

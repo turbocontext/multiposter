@@ -3,10 +3,10 @@
     %tr
       %th.checkbox
         %input#mark_all(type="checkbox" checked="checked")
-      %th Nickname
-      %th Provider
-      %th Expires
-      %th.actions Actions
+      %th= t('social_users.nickname')
+      %th= t('social_users.provider')
+      %th= t('social_users.expires')
+      %th.actions= t('common.tables.actions')
   %tbody
     - social_users.each do |social_user|
       %tr{id: "social_user_#{social_user.id}"}

@@ -1,0 +1,51 @@
+ru:
+  users:
+    api_key: "Ключ API"
+    account_info: "Информация об учетной записи"
+  social_users:
+    nickname: "Ник"
+    provider: "Соц. сеть"
+    expires:  "Истекает"
+    add_account: "Добавить учетную запись из социальной сети:"
+  message_sets:
+    create_message_set: "Создать сообщение"
+    create_message_set_notice: "Для отмеченных учетных записей"
+    mass_edit: "Групповое изменение"
+    individual_edit: "Частное изменение"
+    post_message: "Отправить сообщение"
+    post_message_notice: "Для отмеченных учетных записей"
+    common_short_text: "Общее короткое сообщение"
+    common_text: "Общее длинное сообщение"
+    common_link: "Общая ссылка"
+    short_message_for: "Короткое сообщение для %{social_user} (%{provider})"
+    message_for: "Сообщение для %{social_user} (%{provider})"
+    link_for: "Ссылка для %{social_user} (%{provider})"
+    action_names:
+      new: "Создание сообщения"
+      index: "Управление созданными сообщениями"
+  providers:
+    vkontakte:
+      name: "Vkontakte"
+      instruction: "Чтобы добавить учетную запись ВКонтакте, нужно перейти по ссылке ниже, разрешить доступ приложению, скопировать адресную строку и вставить в поле ввода ниже"
+      insert_link: "Вставьте содержимое адресной строки сюда"
+      action_names:
+        new: "Добавление учетной записи ВКонтакте"
+      create_user: "Создать пользователя ВКонтакте"
+    facebook:
+      name: "Facebook"
+    twitter:
+      name: "Twitter"
+  main_menu:
+    new_message: "Создать сообщение"
+    message_log: "Журнал сообщений"
+    users: "Учетные записи"
+  common:
+    tables:
+      actions: "Действия"
+    delete_selected: "Удалить отмеченные"
+    actions:
+      delete: "Удалить"
+    sign_in:  "Войти"
+    sign_out: "Выйти"
+    sign_up: "Регистрация"
+    header: "Multiposter"

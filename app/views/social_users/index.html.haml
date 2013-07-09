@@ -1,4 +1,4 @@
-= render 'action_name', name: "Add social network account:"
+= render 'action_name', name: t('social_users.add_account')
 
 .row
   .span32
@@ -10,11 +10,11 @@
   .span16
     %a{id: "create_message_button", href: "#"}
       %button.command-button.create_message.fg-color-white.bg-color-blue
-        Create message
-        %small.fg-color-white Message will be sent within marked accounts
+        = t('message_sets.create_message_set')
+        %small.fg-color-white= t('message_sets.create_message_set_notice')
 
 = render 'social_users_table', social_users: @social_users
-= link_to "Delete selected", "#", id: "mass_destroy_button", class: "button default"
+= link_to t('common.delete_selected'), "#", id: "mass_destroy_button", class: "button default"
 = form_for "mass_destroy", url: {action: :mass_destroy, controller: :social_users}, html: {id: "mass_destroy_form"} do |f|
   = f.hidden_field :model_ids
 = form_for "create_message", url: {action: :new, controller: :message_sets}, method: :get, html: {id: "create_message_form"} do |f|

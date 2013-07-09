@@ -1,8 +1,8 @@
-= render 'action_name', name: "New message"
+= render 'action_name', name: t('message_sets.action_names.new')
 
 .row
   .span31
-    %h3 Mass edit
+    %h3= t('message_sets.mass_edit')
 .row
   .span31
     = render 'mass_edit_form'
@@ -11,7 +11,7 @@
 .row
   .span31.slider_button
     #individual_edit.beautiful.blue.long
-      %h3 Individual edit
+      %h3= t('message_sets.individual_edit')
 
 #custom_messages
   = form_for @message_set do |f|
@@ -21,5 +21,5 @@
   .span31
     %a{id: "post_message_button", href: "#"}
       %button.command-button.create_message.fg-color-white.bg-color-blue
-        Post message
-        %small.fg-color-white Message will be sent within marked accounts
+        = t('message_sets.post_message')
+        %small.fg-color-white= t('message_sets.post_message_notice')

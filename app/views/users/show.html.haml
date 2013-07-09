@@ -1,8 +1,8 @@
-= render 'action_name', name: "Account info"
+= render 'action_name', name: t('users.account_info')
 
 %table.stripped.bordered
   %thead
   %tbody
     %tr
-      %td Api key
+      %td= t 'users.api_key'
       %td= current_user.api_key

@@ -3,12 +3,12 @@
     .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
       = f.hidden_field :social_user_id
     .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
-      = f.label :short_text, "Short message #{f.object.social_user.nickname} (#{f.object.social_user.provider.humanize})"
+      = f.label :short_text, t('message_sets.short_message_for', social_user: f.object.social_user.nickname, provider: f.object.social_user.provider.humanize)
       = f.text_area :short_text
     .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
-      = f.label :text, "Message for #{f.object.social_user.nickname} (#{f.object.social_user.provider.humanize})"
+      = f.label :text, t('message_sets.message_for', social_user: f.object.social_user.nickname, provider: f.object.social_user.provider.humanize)
       = f.text_area :text
     .input-control.textarea{class: "#{f.object.social_user.provider}_message"}
-      = f.label :url, "Link"
+      = f.label :url, t('message_sets.link_for', social_user: f.object.social_user.nickname, provider: f.object.social_user.provider.humanize)
       = f.text_field :url
     %hr

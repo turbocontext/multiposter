@@ -3,15 +3,15 @@
     %li{class: ("active" if params[:controller] == 'message_sets' && params[:action] == 'new')}
       %a{href: new_message_set_path}
         %i.icon-comments-3
-        New message
+        = t('main_menu.new_message')
     %li{class: ("active" if params[:controller] == 'social_users')}
       %a{href: social_users_path}
         %i.icon-user
-        Users
+        = t('main_menu.users')
     %li{class: ("active" if params[:controller] == 'message_sets' && params[:action] == 'index')}
       %a{href: message_sets_path}
         %i.icon-comments-4
-        Message log
+        = t('main_menu.message_log')
     %li.place-right{class: ("active" if params[:controller] == 'users')}
       %a{href: user_path(current_user)}
         %i.icon-cog

@@ -1,4 +1,4 @@
-= render 'action_name', name: "Manage posted messages"
+= render 'action_name', name: t('message_sets.action_names.index')
 
 - @message_sets.each do |message_set|
   - message_set.messages.each do |message|
@@ -18,6 +18,6 @@
         .span10
           = message.social_user.provider.humanize
         .span10
-          = link_to "Delete", message_path(message), method: :delete, class: "button default"
+          = link_to t('common.actions.delete'), message_path(message), method: :delete, class: "button default"
   %hr
 = will_paginate @message_sets
