@@ -1,4 +1,11 @@
+# --- encoding: utf-8 ---
+require "hstore_methods"
 class User < ActiveRecord::Base
+  # Hstore setup
+  include HstoreMethods
+  serialize :settings, ActiveRecord::Coders::Hstore
+  define_string(:language)
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

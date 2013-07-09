@@ -1,8 +1,13 @@
 = render 'action_name', name: t('users.account_info')
 
-%table.stripped.bordered
-  %thead
-  %tbody
-    %tr
-      %td= t 'users.api_key'
-      %td= current_user.api_key
+= form_for @user do |f|
+  %table.stripped.bordered
+    %thead
+    %tbody
+      %tr
+        %td= t 'users.api_key'
+        %td= current_user.api_key
+      %tr
+        %td= t 'common.language'
+        %td= f.select :language, options_for_select([["English", "en"], ["Русский", "ru"]], f.object.language)
+  = f.submit t('common.save')
