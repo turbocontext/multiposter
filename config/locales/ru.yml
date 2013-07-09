@@ -7,6 +7,7 @@ ru:
     provider: "Соц. сеть"
     expires:  "Истекает"
     add_account: "Добавить учетную запись из социальной сети:"
+    no_users_notice: "Вы не добавили ни одной записи. Используйте кнопки выше, чтобы сделать это."
   message_sets:
     create_message_set: "Создать сообщение"
     create_message_set_notice: "Для отмеченных учетных записей"

@@ -10,6 +10,7 @@ en:
     provider: "Provider"
     expires:  "Expires"
     add_account: "Add social network account:"
+    no_users_notice: "There are no social network accounts. User buttons above to add some."
   message_sets:
     create_message_set: "Create message"
     create_message_set_notice: "Message will be sent within marked accounts"
