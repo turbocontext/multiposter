@@ -12,6 +12,9 @@ class CreateSocialUsers < ActiveRecord::Migration
       t.string  :url
       t.integer :user_id
       t.string  :email
+      t.boolean :checked, default: true, nil: false
+
+      t.timestamps
     end
     add_index :social_users, :user_id
     add_index :social_users, :uid

@@ -1,6 +1,7 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
+      t.text :short_text
       t.text :text
       t.text :url
       t.string :access_token
