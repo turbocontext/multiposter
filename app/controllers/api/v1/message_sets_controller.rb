@@ -7,7 +7,8 @@ module Api
       def create
         @message_set = @user.message_sets.create!
         @user.social_users.checked.each do |social_user|
-          social_user.messages.create(params[:message].merge(message_set_id: @message_set.id))
+          message = social_user.messages.create(params[:message].merge(message_set_id: @message_set.id))
+          message.send_message
         end
         render nothing: true
       end

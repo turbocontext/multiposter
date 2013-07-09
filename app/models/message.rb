@@ -11,8 +11,6 @@ class Message < ActiveRecord::Base
   # validates :uid, presence: true
   # validates :access_token, presence: true
 
-  after_create :send_message
-
   def send_message
     return false if Rails.env == 'test'
     provider = social_user.provider.to_s.camelize

@@ -21,7 +21,8 @@ class MessageSetsController < ApplicationController
     @message_set = current_user.message_sets.create!
     params[:message_set][:messages_attributes].each_pair do |index, attributes|
       if social_user = current_user.social_users.find_by_id(attributes[:social_user_id])
-        social_user.messages.create(attributes.merge(message_set_id: @message_set.id))
+        message = social_user.messages.create(attributes.merge(message_set_id: @message_set.id))
+        message.send_message
       end
     end
     redirect_to new_message_set_path
