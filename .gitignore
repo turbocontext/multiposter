@@ -25,3 +25,4 @@ coverage
 /config/environment_variables.rb
 config/recipes/templates/private/*.*
 public/sitemap*
+.rvmrc
