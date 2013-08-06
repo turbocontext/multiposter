@@ -19,7 +19,8 @@ $ ->
     'facebook_community',
     'twitter',
     'google_oauth2',
-    'vkontakte'
+    'vkontakte',
+    'livejournal'
   ]
   $('body').on 'keyup input paste', "#common_text", (element) ->
     for id in ids

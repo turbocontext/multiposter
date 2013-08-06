@@ -8,6 +8,7 @@ TemplateApp::Application.routes.draw do
       collection do
         post :mass_destroy
         get :vkontakte
+        get :livejournal
       end
     end
 

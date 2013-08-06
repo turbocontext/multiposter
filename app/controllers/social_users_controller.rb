@@ -35,6 +35,10 @@ class SocialUsersController < ApplicationController
     @social_user = SocialUser.new
   end
 
+  def livejournal
+    @social_user = SocialUser.new
+  end
+
   def destroy
     @social_user.destroy
     redirect_to :back

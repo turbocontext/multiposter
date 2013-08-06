@@ -5,8 +5,9 @@
     = shortcut_for(:facebook)
     = shortcut_for(:twitter)
     = shortcut_for(:vkontakte, vkontakte_social_users_path)
+    = shortcut_for(:livejournal, livejournal_social_users_path)
 %hr
-- if @social_users.checked.count > 0
+- if @social_users.count > 0
   .row
     .span16
       %a{id: "create_message_button", href: "#"}

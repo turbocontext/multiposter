@@ -23,6 +23,7 @@ gem 'omniauth-vkontakte'
 gem 'fb_graph'
 gem 'twitter'
 gem 'vkontakte_api', '~> 1.1'
+gem 'livejournal'
 
 gem 'hirb'
 gem 'haml-rails'

@@ -1,0 +1,13 @@
+= render 'action_name', name: t('providers.livejournal.action_names.new')
+
+.row
+  .span31
+    = form_for @social_user do |f|
+      = f.hidden_field :provider, value: 'livejournal'
+      .input-control.text
+        = f.label :uid, t('providers.livejournal.username')
+        = f.text_field :uid
+      .input-control.text
+        = f.label :access_token, t('providers.livejournal.password')
+        = f.text_field :access_token
+      = f.submit t('providers.livejournal.create_user')

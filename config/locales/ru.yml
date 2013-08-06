@@ -25,6 +25,12 @@ ru:
       new: "Создание сообщения"
       index: "Управление созданными сообщениями"
   providers:
+    livejournal:
+      username: "Username"
+      password: "Passsword"
+      create_user: "Create LiveJournal user"
+      action_names:
+        new: "LiveJournal profile"
     vkontakte:
       name: "Vkontakte"
       instruction: "Чтобы добавить учетную запись ВКонтакте, нужно перейти по ссылке ниже, разрешить доступ приложению, скопировать адресную строку и вставить в поле ввода ниже"

@@ -28,6 +28,12 @@ en:
       new: "Create message"
       index: "Manage posted messages"
   providers:
+    livejournal:
+      username: "Username"
+      password: "Passsword"
+      create_user: "Create LiveJournal user"
+      action_names:
+        new: "LiveJournal profile"
     vkontakte:
       name: "Vkontakte"
       instruction: "To add vkontakte profile, you should allow applicaton to access your profile and insert content of address bar of browser in the field below."
