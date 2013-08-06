@@ -1,7 +1,6 @@
 #-*- encoding: utf-8 -*-
 require 'user_info'
 require "ostruct"
-require 'livejournal'
 module LivejournalStrategy
   class User
     attr_accessor :auth, :info
