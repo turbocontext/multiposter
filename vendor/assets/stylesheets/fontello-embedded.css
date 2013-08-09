@@ -22,7 +22,7 @@
 [class^="icon-vkontakte"]:before,
 [class*=" icon-vkontakte"]:before {
   font-family: 'fontello';
-  line-height: 27px;
+  /*line-height: 27px;*/
 /*  font-style: normal;
   font-weight: normal;
   speak: none;
