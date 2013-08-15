@@ -34,6 +34,13 @@ en:
       create_user: "Create LiveJournal user"
       action_names:
         new: "LiveJournal profile"
+    google_plus:
+      email: "Email"
+      password: "Passsword"
+      page_id: "Page id"
+      create_user: "Create Google+ user"
+      action_names:
+        new: "Google+ profile"
     vkontakte:
       name: "Vkontakte"
       instruction: "To add vkontakte profile, you should allow applicaton to access your profile and insert content of address bar of browser in the field below."

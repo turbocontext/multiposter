@@ -1,0 +1,16 @@
+= render 'action_name', name: t('providers.google_plus.action_names.new')
+
+.row
+  .span31
+    = form_for @social_user do |f|
+      = f.hidden_field :provider, value: 'google_plus'
+      .input-control.text
+        = f.label :email, t('providers.google_plus.email')
+        = f.text_field :email
+      .input-control.text
+        = f.label :access_token, t('providers.google_plus.password')
+        = f.text_field :access_token
+      .input-control.text
+        = f.label :uid, t('providers.google_plus.page_id')
+        = f.text_field :uid
+      = f.submit t('providers.google_plus.create_user')

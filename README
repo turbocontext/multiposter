@@ -1,117 +1,177 @@
-нужно заставить человека войти во все аккуанты, откуда он хочет постить, попутно сохраняя access_tokens
+<?php
+class SocialAutoPoster_Googleplus extends SocialAutoPoster_Abstract{
 
-https://developers.facebook.com/roadmap/offline-access-removal/
-Once the migration is enabled, if the access_token is generated from a server-side OAuth call, the resulting access_token will have the longer expiration time by default. If the call is made while there is still a valid long-lived user access_token for that user, the returned user access_token from this second call may be the same or may have changed, but in either case the expiration time will be set to a long expiration time.
-Note: The user must access your application before you're able to get a valid "authorization Code" to be able to make the server-side OAuth call again. Apps will not be able to setup a background/cron job that tries to automatically extend the expiration time, because the "authorization code" is short-lived and will have expired.
+    protected $_defaultOptions = array(
+         'page_id' => ''
+        ,'email' => ''
+        ,'pass' => ''
+        ,'uagent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
+        ,'login_url' => 'https://accounts.google.com/ServiceLogin'
+        ,'logout_url' => 'https://www.google.com/m/logout'
+        ,'post_page' => 'https://plus.google.com/b/$PAGE_ID/$PAGE_ID/posts'
+        ,'post_url' => 'https://plus.google.com/b/$PAGE_ID/_/sharebox/post'
+        ,'auth_email_field' => 'Email'
+        ,'auth_pass_field' => 'Passwd'
+    );
 
+    protected $_cookies = array();
+    protected $_begin = false;
+    protected $_at = null;
 
-MessageSet accepts_nested_attributes_for messages
-http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
+    protected function _setCookies($response = array()){
+        if(count($response['cookies'])){
+            $this->_cookies = array_merge($this->_cookies,$response['cookies']);
+        }
+    }
 
+    protected function _getCookies(){
+        $cookies = "";
+        foreach($this->_cookies as $key => $value){
+            $cookies .= $key."=".$value."; ";
+        }
+        return $cookies;
+    }
 
-1.9.3p0 :009 > puts link.to_yaml
---- !ruby/object:FbGraph::Link
-identifier: '155670801267019'
-endpoint: https://graph.facebook.com/155670801267019
-access_token: AAADc88x773ABAJaTdBUuHumvzzICTdQGUlAHXXC6fYFwHVOShzalxZBTrMnrUmJKAN92PWLgs9FBcUBwVE8ipHUbc1ISLGhWi9Gtr653y12hZBm2Am
-raw_attributes:
-  :access_token: AAADc88x773ABAJaTdBUuHumvzzICTdQGUlAHXXC6fYFwHVOShzalxZBTrMnrUmJKAN92PWLgs9FBcUBwVE8ipHUbc1ISLGhWi9Gtr653y12hZBm2Am
-  :link: http://kavigator.ru/articles/24458
-  :message: Врио главы Дагестана Рамазан Абдулатипов заявил, что выбирать руководителя
-    республики скорее всего будет региональный парламент.
-  id: '155670801267019'
-cached_collections:
-  :comments:
-name:
-link: http://kavigator.ru/articles/24458
-description:
-icon:
-picture:
-message: Врио главы Дагестана Рамазан Абдулатипов заявил, что выбирать руководителя
-  республики скорее всего будет региональный парламент.
+    protected function _quoteMessage($message = ''){
+        $message = addslashes($message);
+        $message = strip_tags($message);
+        $message = preg_replace("#\t#si",' ',$message);
+        $message = preg_replace("#\n|\r#si",'\n',$message);
+        $message = preg_replace('#(\\\n)+#si','\n',$message);
+        return trim($message);
+    }
 
+    protected function _getAtToken($code = ''){
+        if(!$this->_at){
+            if(preg_match('#AObGSA.*:\d+#', $code, $match) && isset($match[0]) && $match[0]){
+                $this->_at = $match[0];
+            }else{
+                $this->_addError('Access token parsing error');
+            }
+        }
+        return $this->_at;
+    }
 
-1.9.3p0 :015 > puts tw.to_yaml
---- !ruby/object:Twitter::Tweet
-attrs:
-  :user:
-    :id: 550036517
-    :profile_sidebar_border_color: C0DEED
-    :created_at: Tue Apr 10 11:41:05 +0000 2012
-    :verified: false
-    :follow_request_sent: false
-    :profile_background_tile: false
-    :listed_count: 1
-    :profile_sidebar_fill_color: DDEEF6
-    :profile_image_url: http://a0.twimg.com/profile_images/2852649389/bc4fa68cd1b18c9b707075c3bacadc38_normal.png
-    :utc_offset: 14400
-    :url: http://kavigator.ru
-    :following: false
-    :name: Новости Дагестана
-    :profile_image_url_https: https://si0.twimg.com/profile_images/2852649389/bc4fa68cd1b18c9b707075c3bacadc38_normal.png
-    :notifications: false
-    :protected: false
-    :profile_background_color: C0DEED
-    :is_translator: false
-    :default_profile_image: false
-    :location:
-    :profile_background_image_url_https: https://si0.twimg.com/images/themes/theme1/bg.png
-    :profile_background_image_url: http://a0.twimg.com/images/themes/theme1/bg.png
-    :favourites_count: 0
-    :profile_link_color: 0084B4
-    :entities:
-      :url:
-        :urls:
-        - :url: http://kavigator.ru
-          :indices:
-          - 0
-          - 19
-          :display_url:
-          :expanded_url:
-      :description:
-        :urls: []
-    :statuses_count: 719
-    :profile_use_background_image: true
-    :friends_count: 823
-    :contributors_enabled: false
-    :followers_count: 292
-    :time_zone: Abu Dhabi
-    :profile_text_color: '333333'
-    :id_str: '550036517'
-    :lang: ru
-    :default_profile: true
-    :description: ! 'Кавигатор - новостной агрегатор, собирающий материал о Дагестане
-      с Рунета. У нас последние #новости, #аналитика и #репортажи с #Дагестан''а'
-    :geo_enabled: true
-    :screen_name: KavkazNavigator
-  :geo:
-  :in_reply_to_user_id:
-  :retweet_count: 0
-  :favorited: false
-  :coordinates:
-  :in_reply_to_status_id_str:
-  :entities:
-    :user_mentions: []
-    :hashtags:
-    - :indices:
-      - 100
-      - 108
-      :text: Новости
-    - :indices:
-      - 109
-      - 118
-      :text: Дагестан
-    :urls: []
-  :in_reply_to_screen_name:
-  :id_str: '318683233304842240'
-  :place:
-  :in_reply_to_user_id_str:
-  :text: ! 'Дагестан. Национальный вопрос, московское быдло, дотации, безопасность,
-    туризм, люди, стереотипы. | #Новости #Дагестан''а'
-  :contributors:
-  :retweeted: false
-  :source: <a href="http://kavigator.ru" rel="nofollow">Testkaviagtor</a>
-  :id: 318683233304842240
-  :created_at: Mon Apr 01 11:16:18 +0000 2013
-  :in_reply_to_status_id:
-  :truncated: false
+    protected function _getPage($url,$post = null){
+        $options = array(
+             CURLOPT_USERAGENT => $this->_getOption('uagent')
+            ,CURLOPT_URL => $url
+            ,CURLOPT_COOKIE => $this->_getCookies()
+            ,CURLOPT_RETURNTRANSFER => TRUE
+            ,CURLOPT_FOLLOWLOCATION => TRUE
+            ,CURLOPT_SSL_VERIFYPEER => FALSE
+        );
+        if($post){
+            $options[CURLOPT_POST] = TRUE;
+            $options[CURLOPT_POSTFIELDS] = $post;
+        }
+        $response = $this->_sendRequest($options);
+        $this->_setCookies($response);
+        return $response;
+    }
+
+    protected function _getLoginData(){
+        $response = $this->_getPage($this->_getOption('login_url'));
+        $this->_setCookies($response);
+        $buf = html_entity_decode($response['body']);
+        $buf = utf8_decode($buf);
+        $buf = str_replace( '&amp;', '&', $buf );
+        $buf = str_replace( '&', '&amp;', $buf );
+        $toreturn = '';
+        $doc = new DOMDocument;
+        $doc->loadHTML($buf);
+        $inputs = $doc->getElementsByTagName('input');
+        $auth_email_field = $this->_getOption('auth_email_field');
+        $auth_pass_field = $this->_getOption('auth_pass_field');
+        foreach ($inputs as $input) {
+            switch ($input->getAttribute('name')) {
+                case $auth_email_field:
+                $toreturn .= $auth_email_field.'=' . urlencode($this->_getOption('email')) . '&';
+                break;
+                case $auth_pass_field:
+                $toreturn .= $auth_pass_field.'=' . urlencode($this->_getOption('pass')) . '&';
+                break;
+                default:
+                $toreturn .= $input->getAttribute('name') . '=' . urlencode($input->getAttribute('value')) . '&';
+            }
+        }
+        $toreturn = rtrim($toreturn, "&");
+        return array($toreturn, $doc->getElementsByTagName('form')->item(0)->getAttribute('action'));
+    }
+
+    protected function _login(){
+        $this->_cookies = array();
+        $loginData = $this->_getLoginData();
+        $response = $this->_getPage($loginData[1],$loginData[0]);
+        if(!$response['status'] || !isset($this->_cookies['SSID'])){
+            $this->_addError('Authorization Error');
+            return false;
+        }
+        return true;
+    }
+
+    protected function _logout(){
+        $this->_getPage($this->_getOption('logout_url'));
+    }
+
+    public function begin($page_id = null){
+        if($this->_login()){
+            if($page_id){
+                $this->_setOption('page_id',$page_id);
+            }
+            $page_id = $this->_getOption('page_id');
+            if(!$page_id){
+                $this->_addError('Page ID is empty');
+                return false;
+            }
+            $post_page = $this->_getOption('post_page');
+            $post_page = str_replace('$PAGE_ID',$page_id,$post_page);
+            $response = $this->_getPage($post_page);
+            if($this->_getAtToken($response['body'])){
+                $this->_begin = true;
+            }
+        }
+    }
+
+    public function end(){
+        $this->_logout();
+    }
+
+    public function postToWall($message = ''){
+        if($this->isHaveErrors()){
+            $this->_logout();
+            return false;
+        }
+        $message = $this->_quoteMessage($message);
+        if(!$message){
+            $this->_addError('Message is empty');
+            $this->_logout();
+            return false;
+        }
+        $page_id = $this->_getOption('page_id');
+        if(!$page_id){
+            $this->_logout();
+            return false;
+        }
+        if($this->_begin){
+            $at = $this->_getAtToken();
+            if($at){
+                $post = array(
+                    'at' => $at,
+                    'f.req' => '["'.$message.'","oz:'.$page_id.'.'.(time()).'.0",null,null,null,null,"[]",null,null,true,[],false,null,null,[],null,false,null,null,null,null,null,null,null,null,null,null,false,false,false,null,null,null,null,null,null,[],[[[null,null,1]],null]]'
+                );
+                $post_url = $this->_getOption('post_url');
+                $post_url = str_replace('$PAGE_ID',$page_id,$post_url);
+                $response = $this->_getPage($post_url."/?spam=20&_reqid=".(time() % 1e6)."&rt=j",$post);
+                if(!$response['status']){
+                    $this->_addError('Posting Error');
+                    $this->_logout();
+                    return false;
+                }
+                return true;
+            }
+        }
+    }
+
+}
+?>

@@ -9,6 +9,7 @@ TemplateApp::Application.routes.draw do
         post :mass_destroy
         get :vkontakte
         get :livejournal
+        get :google_plus
       end
     end
 

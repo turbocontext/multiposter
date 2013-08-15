@@ -1,11 +1,11 @@
 module ApplicationHelper
 
   def shortcut_for(net, href=nil, name = nil)
-    name ||= net.to_s.capitalize
+    name ||= net.to_s.humanize
     link = href || "/auth/#{net}"
     raw %Q{<a class="shortcut" href="#{link}">
           <span class="icon">
-            <i class="icon-#{net}"></i>
+            <i class="icon-#{net.to_s.dasherize}"></i>
           </span>
           <span class="label">
             #{name}
