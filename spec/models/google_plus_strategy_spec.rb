@@ -3,7 +3,7 @@ require "spec_helper"
 
 describe GooglePlusStrategy do
   describe GooglePlusStrategy::User do
-    let(:gp){GooglePlusStrategy::User.new({:uid => ENV['google_plus_page_id'], :email => 'thornu731@gmail.com', access_token: 'b9txtbhy3q'})}
+    let(:gp){GooglePlusStrategy::User.new({:uid => ENV['google_plus_page_id'], :email => ENV['google_plus_email'], access_token: ENV['google_plus_password']})}
 
     it "should get headers from login page" do
       curl = gp.get_page(gp.login_url)
