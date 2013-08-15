@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://www.google.ru/?gws_rd=cr
+    body:
+      encoding: US-ASCII
+      string: q=Sandwich
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1
+  response:
+    status:
+      code: 405
+      message: Method Not Allowed
+    headers:
+      Allow:
+      - GET, HEAD
+      Date:
+      - Thu, 15 Aug 2013 16:27:47 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Server:
+      - gws
+      Content-Length:
+      - '969'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+    body:
+      encoding: ASCII-8BIT
+      string: ! "<!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta
+        name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n
+        \ <title>Error 405 (Method Not Allowed)!!1</title>\n  <style>\n    *{margin:0;padding:0}html,code{font:15px/22px
+        arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7%
+        auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png)
+        100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a
+        img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}\n
+        \ </style>\n  <a href=//www.google.com/><img src=//www.google.com/images/errors/logo_sm.gif
+        alt=Google></a>\n  <p><b>405.</b> <ins>That’s an error.</ins>\n  <p>The request
+        method <code>POST</code> is inappropriate for the URL <code>/?gws_rd=cr</code>.
+        \ <ins>That’s all we know.</ins>\n"
+    http_version: 
+  recorded_at: Thu, 15 Aug 2013 16:27:47 GMT
+recorded_with: VCR 2.4.0

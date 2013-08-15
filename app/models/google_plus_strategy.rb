@@ -4,6 +4,7 @@ require "nokogiri"
 
 module GooglePlusStrategy
   class User
+    extend PageHandler
     attr_accessor :auth, :info, :login_url, :logout_url, :post_page, :post_url
     def initialize(auth)
       @auth = auth
@@ -35,42 +36,18 @@ module GooglePlusStrategy
       Nokogiri::HTML(Curl.get(page_url).body_str).at_css('title').text.scan(/(.*) – Google+/).first.first
     end
 
-    def get_page(url, cookies = nil, post_data = nil)
-      curl = Curl::Easy.new(url) do |http|
-        http.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
-        http.headers['Cookie'] = cookies unless cookies.nil?
+    def get_login_form_data(soup)
+      soup.css('input').inject({}) do |result, input|
+        result.merge(input.attr('name') => input.attr('value'))
       end
-
-      if post_data
-        curl.post_body = post_data.to_query
-        curl.http_post
-      else
-        curl.perform
-      end
-      curl
-    end
-
-    def get_headers(curl)
-      http_response, *http_headers = curl.header_str.split(/[\r\n]+/).map(&:strip)
-      http_headers = Hash[http_headers.flat_map{ |s| s.scan(/^(\S+): (.+)/) }]
-    end
-
-    def get_cookies(curl)
-      http_response, *http_headers = curl.header_str.split(/[\r\n]+/).map(&:strip)
-      cookie_strings = http_headers.select{|el| el =~ /Set-Cookie:/}
-      res = cookie_strings.inject('') do |result, string|
-        s = string.scan(/Set-Cookie: (.*?);/).flatten.first
-        result += "#{s}; "
-      end
-      res[0..-3]
     end
 
     def login
       curl = get_page(login_url)
       cookies = get_cookies(curl)
       soup = Nokogiri::HTML(curl.body_str)
-      form_action = get_form_action(soup)
-      post_data = get_post_data(soup).merge('Email' => auth[:email], 'Passwd' => auth[:access_token])
+      form_action = soup.css('form').first.attr('action')
+      post_data = get_login_form_data(soup).merge('Email' => auth[:email], 'Passwd' => auth[:access_token])
       new_curl = get_page(form_action, cookies, post_data)
       @cookies = get_cookies(new_curl)
     end
@@ -88,14 +65,5 @@ module GooglePlusStrategy
       curl = get_page(post_url + "/?spam=20&_reqid="+(Time.now.to_i % 1000000).to_s + "&rt=j", @cookies, post_data)
     end
 
-    def get_post_data(soup)
-      soup.css('input').inject({}) do |result, input|
-        result.merge(input.attr('name') => input.attr('value'))
-      end
-    end
-
-    def get_form_action(soup)
-      soup.css('form').first.attr('action')
-    end
   end
 end
