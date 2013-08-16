@@ -43,13 +43,15 @@ module GooglePlusStrategy
     end
 
     def login
-      curl = get_page(login_url)
-      cookies = get_cookies(curl)
+      curl = PageHandler.get_page(login_url)
+      cookies = PageHandler.get_cookies(curl)
+      puts cookies
       soup = Nokogiri::HTML(curl.body_str)
       form_action = soup.css('form').first.attr('action')
       post_data = get_login_form_data(soup).merge('Email' => auth[:email], 'Passwd' => auth[:access_token])
-      new_curl = get_page(form_action, cookies, post_data)
-      @cookies = get_cookies(new_curl)
+      new_curl = PageHandler.get_page(form_action, cookies, post_data)
+      puts new_curl.header_str
+      @cookies = PageHandler.get_cookies(new_curl)
     end
 
     def get_access_token
