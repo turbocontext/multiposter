@@ -53,5 +53,10 @@ describe GooglePlusStrategy do
       message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
       message.send(OpenStruct.new(text: 'long', url: "link url")).code.should == 200
     end
+
+    it "should just return true deleting message" do
+      message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
+      message.delete(stub).should be_true
+    end
   end
 end

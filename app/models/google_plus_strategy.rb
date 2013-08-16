@@ -72,7 +72,7 @@ module GooglePlusStrategy
       curl = PageHandler.get_page(post_url + "/?spam=20&_reqid="+(Time.now.to_i % 1000000).to_s + "&rt=j", login_cookies, post_data)
     end
 
-    def delete
+    def delete(message)
       true
     end
 
