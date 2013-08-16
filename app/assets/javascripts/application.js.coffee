@@ -14,13 +14,14 @@ $ ->
       $("input[name^='model_ids']").attr("checked", false)
     $("input[name^='model_ids']").trigger("change")
 
-  ids =[
+  ids = [
     'facebook',
     'facebook_community',
     'twitter',
     'google_oauth2',
     'vkontakte',
-    'livejournal'
+    'livejournal',
+    'google_plus'
   ]
   $('body').on 'keyup input paste', "#common_text", (element) ->
     for id in ids
