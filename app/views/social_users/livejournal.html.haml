@@ -9,5 +9,5 @@
         = f.text_field :uid
       .input-control.text
         = f.label :access_token, t('providers.livejournal.password')
-        = f.text_field :access_token
+        = f.text_field :access_token, type: :password
       = f.submit t('providers.livejournal.create_user')

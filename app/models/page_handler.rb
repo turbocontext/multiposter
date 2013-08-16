@@ -1,26 +1,35 @@
+require "curb"
 module PageHandler
   def self.get_page(url, cookies = nil, post_data = nil)
-    curl = Curl::Easy.new(url) do |http|
-      http.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
-      http.headers['Cookie'] = cookies unless cookies.nil?
-    end
+    HTTPI.log = false
+    request = HTTPI::Request.new(url)
+    request.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.0.1'
+    request.headers['Cookie'] = cookies unless cookies.nil?
 
-    if post_data
-      curl.post_body = post_data.to_query
-      curl.http_post
-    else
-      curl.perform
-    end
-    curl
+    method = post_data.nil? ? :get : :post
+    request.body = post_data if post_data
+    HTTPI.request(method, request, :curb)
   end
 
-  def self.get_cookies(curl)
-    http_response, *http_headers = curl.header_str.split(/[\r\n]+/).map(&:strip)
-    cookie_strings = http_headers.select{|el| el =~ /Set-Cookie:/}
-    res = cookie_strings.inject('') do |result, string|
-      s = string.scan(/Set-Cookie: (.*?);/).flatten.first
-      result += "#{s}; "
+  def self.make_cookie_string(request)
+    if request.headers["Set-Cookie"].class == String
+      extract_cookie(request.headers["Set-Cookie"])
+    else
+      request.headers["Set-Cookie"].inject('') do |result, cookie|
+        result += extract_cookie(cookie) + '; '
+      end[0..-3]
     end
-    res[0..-3]
+
+    # request.cookies.inject('') do |result, cookie|
+    #   result += cookie.name_and_value + "; "
+    # end[0..-3]
+  end
+
+  def self.extract_cookie(set_cookie_value)
+    c = CGI::Cookie.parse(set_cookie_value)
+    c.inject('') do |result, el|
+      result += el[0].to_s + "=" + el[1].first.to_s + "; " unless ["path", "expires", "domain"].include?(el[0].to_s.downcase)
+      result
+    end[0..-3]
   end
 end

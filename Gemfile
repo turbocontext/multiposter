@@ -25,6 +25,8 @@ gem 'twitter'
 gem 'vkontakte_api', '~> 1.1'
 gem 'livejournal'
 gem 'curb'
+gem 'cookiejar'
+gem 'httpi'
 
 gem 'hirb'
 gem 'haml-rails'

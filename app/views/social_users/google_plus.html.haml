@@ -9,7 +9,7 @@
         = f.text_field :email
       .input-control.text
         = f.label :access_token, t('providers.google_plus.password')
-        = f.text_field :access_token
+        = f.text_field :access_token, type: :password
       .input-control.text
         = f.label :uid, t('providers.google_plus.page_id')
         = f.text_field :uid

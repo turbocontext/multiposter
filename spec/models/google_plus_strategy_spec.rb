@@ -1,6 +1,7 @@
 # --- encoding: utf-8 ---
 require "spec_helper"
 require "page_handler"
+require "ostruct"
 
 describe GooglePlusStrategy do
   describe GooglePlusStrategy::User do
@@ -29,28 +30,28 @@ describe GooglePlusStrategy do
     it "should collect form data" do
       VCR.use_cassette 'google_login_page' do
         curl = PageHandler.get_page(gp.login_url)
-        soup = Nokogiri::HTML(curl.body_str)
+        soup = Nokogiri::HTML(curl.body)
         gp.get_login_form_data(soup)['dsh'].should =~ /\d+/i
       end
     end
 
     it "should login user and return some cookiez" do
-      VCR.use_cassette 'google_log_in' do
+      VCR.use_cassette 'google_log_in', match_requests_on: [:method] do
         gp.login.should =~ /SAPISID/
       end
     end
+  end
 
-    # it "should get long" do
-    #   VCR.turn_off!
-    #   WebMock.disable!
-    #   gp.login.should =~ /SAPISID/
-
-    #   gp.get_access_token.should =~ /AObGSA/
-    #   gp.post_wall('message from console').should == 1
-    # end
-
-    it "false shoud be true" do
-      false.should be_true
+  describe GooglePlusStrategy::GooglePlusMessage do
+    let(:social_user) do
+      FactoryGirl.create(:social_user,
+                          access_token: ENV['google_plus_password'],
+                          uid: ENV['google_plus_page_id'],
+                          email: ENV['google_plus_email'])
+    end
+    it "should post message to wall" do
+      message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
+      message.send(OpenStruct.new(text: 'long', url: "link url")).code.should == 200
     end
   end
 end
