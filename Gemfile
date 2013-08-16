@@ -27,6 +27,7 @@ gem 'livejournal'
 gem 'curb'
 gem 'cookiejar'
 gem 'httpi'
+gem 'nokogiri'
 
 gem 'hirb'
 gem 'haml-rails'

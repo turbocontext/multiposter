@@ -403,6 +403,7 @@ DEPENDENCIES
   libnotify
   livejournal
   modern-ui-sass!
+  nokogiri
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
