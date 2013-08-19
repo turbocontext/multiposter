@@ -64,12 +64,20 @@ module GooglePlusStrategy
     end
 
     def send(message)
-      text = message.text + "\\n" + (message.url || '')
+      text = text_from(message)
       post_data = {
         'at' => access_token,
         'f.req' => '["' + text + '","oz:'+user.uid+'.'+(Time.now.to_i.to_s)+'.0",null,null,null,null,"[]",null,null,true,[],false,null,null,[],null,false,null,null,null,null,null,null,null,null,null,null,false,false,false,null,null,null,null,null,null,[],[[[null,null,1]],null]]'
       }
       curl = PageHandler.get_page(post_url + "/?spam=20&_reqid="+(Time.now.to_i % 1000000).to_s + "&rt=j", login_cookies, post_data)
+    end
+
+    def text_from(message)
+      if message.text.blank?
+        message.short_text + "\\n" + (message.url || '')
+      else
+        message.text + "\\n" + (message.url || '')
+      end
     end
 
     def delete(message)

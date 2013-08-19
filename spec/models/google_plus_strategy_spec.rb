@@ -49,14 +49,26 @@ describe GooglePlusStrategy do
                           uid: ENV['google_plus_page_id'],
                           email: ENV['google_plus_email'])
     end
+    let(:mess){ OpenStruct.new(text: "long_text", short_text: "short_text", url: "http://example.com") }
     it "should post message to wall" do
       message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
-      message.send(OpenStruct.new(text: 'long', url: "link url")).code.should == 200
+      # message.send(OpenStruct.new(text: 'long', url: "link url")).code.should == 200
     end
 
     it "should just return true deleting message" do
       message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
       message.delete(stub).should be_true
+    end
+
+    it "should prefer long text over short when seding message" do
+      message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
+      message.text_from(mess).should == "long_text\\nhttp://example.com"
+    end
+
+    it "should not be confuzed if there is no long text" do
+      message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
+      mess.text = nil
+      message.text_from(mess).should == "short_text\\nhttp://example.com"
     end
   end
 end
