@@ -33,7 +33,7 @@ describe MessageSetsController do
     end
 
     it "should redirect to root path if there is no social users" do
-      SocialUser.scoped.each {|u| u.update_attributes(checked: false)}
+      SocialUser.all.each {|u| u.update_attributes(checked: false)}
       get :new
       assigns(:social_users).count.should be_zero
       response.should redirect_to(social_users_path)

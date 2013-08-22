@@ -8,10 +8,10 @@ $ ->
   $('#create_message_button').action_button('#create_message_form')
 
   $("#mark_all").click (ev) ->
-    if $(this).attr("checked")
-      $("input[name^='model_ids']").attr("checked", true)
+    if $(this).is(':checked')
+      $("input[name^='model_ids']").prop("checked", true)
     else
-      $("input[name^='model_ids']").attr("checked", false)
+      $("input[name^='model_ids']").prop("checked", false)
     $("input[name^='model_ids']").trigger("change")
 
   ids = [

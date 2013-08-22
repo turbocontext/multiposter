@@ -57,7 +57,7 @@ describe GooglePlusStrategy do
 
     it "should just return true deleting message" do
       message = GooglePlusStrategy::GooglePlusMessage.new(social_user)
-      message.delete(stub).should be_true
+      message.delete(double).should be_true
     end
 
     it "should prefer long text over short when seding message" do

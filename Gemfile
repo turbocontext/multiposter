@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'protected_attributes'
+
 gem "rails", "~> 4.0.0"
 gem 'pg'
 gem 'activerecord-postgres-hstore'
@@ -32,15 +34,14 @@ gem 'nokogiri'
 gem 'hirb'
 gem 'haml-rails'
 
-group :assets do
-  gem 'sass-rails', "~> 4.0.0"
-  gem 'coffee-rails', "~> 4.0.0"
-  gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'sass-rails', "~> 4.0.0"
+gem 'coffee-rails', "~> 4.0.0"
+gem 'bootstrap-sass', '~> 2.1.0.0'
 
-  gem 'therubyracer', '=0.10.2'
-  gem 'uglifier', '>= 1.3.0'
-end
+gem 'therubyracer', '=0.10.2'
+gem 'uglifier', '>= 1.3.0'
 
+gem "compass-rails", "~> 2.0.alpha.0"
 group :development do
   gem 'hirb'
   gem 'quiet_assets'
@@ -62,14 +63,12 @@ group :test do
   gem 'launchy'
   gem 'factory_girl'
   gem "email_spec"
-  gem 'jasminerice'
   gem 'simplecov', :require => false
   gem 'rb-inotify', '~> 0.9'
   gem 'vcr'
   # gem 'fakeweb'
   gem 'webmock'
 end
-gem 'compass-rails'
 
 # deployment
 gem 'capistrano'

@@ -2,7 +2,7 @@ TemplateApp::Application.routes.draw do
   scope "(:locale)", locale: /en|ru/ do
     devise_for :users
 
-    match "/auth/:provider/callback" => "social_users#create"
+    get "/auth/:provider/callback" => "social_users#create"
 
     resources :social_users do
       collection do

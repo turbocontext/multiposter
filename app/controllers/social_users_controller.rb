@@ -53,7 +53,7 @@ class SocialUsersController < ApplicationController
   def mass_destroy
     if params[:mass_destroy] && params[:mass_destroy][:model_ids]
       ids = params[:mass_destroy][:model_ids].split(',').map(&:to_i)
-      SocialUser.find_all_by_id(ids).each(&:destroy)
+      SocialUser.where(id: ids).each(&:destroy)
     end
     redirect_to :back
   rescue ActionController::RedirectBackError

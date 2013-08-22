@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 Given(/^I create message$/) do
-  SocialUser.scoped.each do |suser|
+  SocialUser.all.each do |suser|
     within("#social_user_#{suser.id}") do
       check("model_ids_")
     end
