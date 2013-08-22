@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem "rails", "~> 4.0.0"
 gem 'pg'
 gem 'activerecord-postgres-hstore'
 
@@ -33,12 +33,12 @@ gem 'hirb'
 gem 'haml-rails'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.2'
+  gem 'sass-rails', "~> 4.0.0"
+  gem 'coffee-rails', "~> 4.0.0"
   gem 'bootstrap-sass', '~> 2.1.0.0'
 
   gem 'therubyracer', '=0.10.2'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 1.3.0'
 end
 
 group :development do
@@ -49,11 +49,11 @@ end
 group :test do
   gem 'guard'
   gem 'guard-spork'
-  gem 'guard-cucumber', git: 'git://github.com/guard/guard-cucumber.git'
+  gem 'guard-cucumber'
   gem 'guard-rspec'
-  gem 'rspec-rails', git: 'git@github.com:rspec/rspec-rails.git'
+  gem 'rspec-rails'
   gem 'capybara'
-  gem 'spork-rails'
+  gem 'spork-rails', :github => 'sporkrb/spork-rails'
   gem 'libnotify'
   gem 'selenium-webdriver'
   gem 'cucumber-rails', :require => false
@@ -69,7 +69,6 @@ group :test do
   # gem 'fakeweb'
   gem 'webmock'
 end
-gem 'modern-ui-sass', git: 'git://github.com/thorn/modern-ui-sass.git'
 gem 'compass-rails'
 
 # deployment
