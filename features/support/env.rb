@@ -14,10 +14,11 @@ Spork.prefork do
   # need to restart spork for it take effect.
 
   require 'cucumber/rails'
+  require 'capybara/poltergeist'
 
   Capybara.default_selector = :css
 
-  Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :poltergeist
 
   ActionController::Base.allow_rescue = false
 

@@ -47,19 +47,19 @@ group :development do
   gem 'quiet_assets'
 end
 
+gem 'capybara'
+gem 'poltergeist'
 group :test do
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'rspec-rails'
-  gem 'capybara'
   gem 'spork-rails', :github => 'sporkrb/spork-rails'
   gem 'libnotify'
   gem 'selenium-webdriver'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'capybara-webkit'
   gem 'launchy'
   gem 'factory_girl'
   gem "email_spec"

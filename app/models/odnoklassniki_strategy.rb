@@ -1,53 +1,54 @@
 # --- encoding: utf-8 ---
-require "curb"
 require "nokogiri"
 require "page_handler"
+require "capybara/poltergeist"
 
 module OdnoklassnikiStrategy
   class User
-    attr_accessor :auth, :info, :login_url, :logout_url
-    def initialize(auth)
-      @auth = auth
+    include Capybara::DSL
 
-      @login_url = 'https://accounts.google.com/ServiceLogin'
-      @logout_url = 'https://www.google.com/m/logout'
+    attr_accessor :auth, :info
+
+    def initialize(auth)
+      Capybara.current_driver = :poltergeist
+      Capybara.javascript_driver = :poltergeist
+      @auth = auth
     end
 
     def main_user
-      page_name = get_page_name
       return OpenStruct.new({
-        provider: 'google_plus',
+        provider: 'odnoklassniki',
         uid: @auth[:uid],
-        url: "https://plus.google.com/u/0/#{auth[:uid]}/posts",
+        url: get_user_url,
         email: @auth[:email],
-        nickname: page_name,
+        nickname: get_user_name,
         access_token: @auth[:access_token]
       })
+    end
+
+    def get_user_url
+      page = login
+      click_on get_user_name
+      current_url
+    end
+
+    def get_user_name
+      page = login
+      page.find('.mctc_nameLink.bl').text
     end
 
     def subusers
       []
     end
 
-    def get_page_name
-      page_url = "https://plus.google.com/#{auth[:uid]}/posts"
-      Nokogiri::HTML(Curl.get(page_url).body_str).at_css('title').text.scan(/(.*) – Google+/).first.first
-    end
-
-    def get_login_form_data(soup)
-      soup.css('input').inject({}) do |result, input|
-        result.merge(input.attr('name') => input.attr('value'))
-      end
-    end
-
     def login
-      curl = PageHandler.get_page(login_url)
-      cookies = PageHandler.make_cookie_string(curl)
-      soup = Nokogiri::HTML(curl.body)
-      form_action = soup.css('form').first.attr('action')
-      post_data = get_login_form_data(soup).merge('Email' => auth[:email], 'Passwd' => auth[:access_token])
-      new_curl = PageHandler.get_page(form_action, cookies, post_data)
-      PageHandler.make_cookie_string(new_curl)
+      return @login if @login
+      return page if page.text =~ /Основное/i
+      visit "http://www.odnoklassniki.ru"
+      fill_in 'Логин', with: auth[:email]
+      fill_in 'Пароль', with: auth[:access_token]
+      click_on 'Войти'
+      @login = page
     end
   end
 
