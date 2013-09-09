@@ -27,6 +27,10 @@ describe OdnoklassnikiStrategy do
       user.url.should == od_url
     end
 
+    it "should return subusers" do
+      od.subusers.length.should == 1
+    end
+
     it "should be false" do
       true.should be_falsy
     end

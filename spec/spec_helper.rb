@@ -39,8 +39,7 @@ Spork.prefork do
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
 
-    # include Devise test helpers
-    config.include Devise::TestHelpers, :type => :controller
+
   end
 end
 
