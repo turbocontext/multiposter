@@ -32,12 +32,13 @@ module OdnoklassnikiStrategy
 
     def get_user_url
       page = login
-      page.click_on get_user_name
+      page.click_on 'Основное'
       page.current_url
     end
 
     def get_user_name
       page = login
+      # page.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
       page.find('.mctc_nameLink.bl').text
     end
 
@@ -51,19 +52,18 @@ module OdnoklassnikiStrategy
     end
 
     def login
-      # return @login if @login
-      # return page if page.text =~ /Основное/i
-      # visit "http://www.odnoklassniki.ru"
-      # fill_in 'Логин', with: auth[:email]
-      # fill_in 'Пароль', with: auth[:access_token]
-      # click_on 'Войти'
-      # @login = page
-      s = Capybara::Session.new(OdnoklassnikiStrategy::JAVASCRIPT_DRIVER)
-      s.visit "http://www.odnoklassniki.ru"
-      s.fill_in 'Логин', with: auth[:email]
-      s.fill_in 'Пароль', with: auth[:access_token]
-      s.click_on 'Войти'
-      s
+      if @login && @login.has_selector?('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st\.cmd\=userMain&st\.\_aid\=NavMenu_User_Main"]')
+        puts "no real login"
+        return @login
+      else
+        puts "real login"
+      end
+      @login = Capybara::Session.new(OdnoklassnikiStrategy::JAVASCRIPT_DRIVER)
+      @login.visit "http://www.odnoklassniki.ru"
+      @login.fill_in 'Логин', with: auth[:email]
+      @login.fill_in 'Пароль', with: auth[:access_token]
+      @login.click_on 'Войти'
+      @login
     end
   end
 

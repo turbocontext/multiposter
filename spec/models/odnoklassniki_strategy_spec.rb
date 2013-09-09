@@ -6,7 +6,7 @@ describe OdnoklassnikiStrategy do
 
     let(:od){OdnoklassnikiStrategy::User.new({:email => ENV['odnoklassniki_email'], access_token: ENV['odnoklassniki_password']})}
     let(:od_name){'Кавказский Навигатор'}
-    let(:od_url){'http://www.odnoklassniki.ru/profile/529740250964/about'}
+    let(:od_url){'http://www.odnoklassniki.ru/profile/529740250964'}
 
     it "should login user" do
       page = od.login
