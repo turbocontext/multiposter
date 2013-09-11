@@ -1,0 +1,13 @@
+= render 'action_name', name: t('providers.odnoklassniki.action_names.new')
+
+.row
+  .span31
+    = form_for @social_user do |f|
+      = f.hidden_field :provider, value: 'odnoklassniki'
+      .input-control.text
+        = f.label :email, t('providers.odnoklassniki.username')
+        = f.text_field :email
+      .input-control.text
+        = f.label :access_token, t('providers.odnoklassniki.password')
+        = f.text_field :access_token, type: :password
+      = f.submit t('providers.odnoklassniki.create_user')

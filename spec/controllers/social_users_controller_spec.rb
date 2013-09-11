@@ -122,4 +122,11 @@ describe SocialUsersController do
       expect {delete :mass_destroy, mass_destroy: {model_ids: "#{user1.id},#{user2.id}"}}.to change(SocialUser, :count).by(-2)
     end
   end
+
+  describe "GET 'odnoklassniki'" do
+    it "should be ok" do
+      get :odnoklassniki
+      response.should be_ok
+    end
+  end
 end

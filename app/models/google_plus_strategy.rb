@@ -17,7 +17,7 @@ module GooglePlusStrategy
       page_name = get_page_name
       return OpenStruct.new({
         provider: 'google_plus',
-        uid: @auth[:uid],
+        uid: @auth[:email],
         url: "https://plus.google.com/u/0/#{auth[:uid]}/posts",
         email: @auth[:email],
         nickname: page_name,

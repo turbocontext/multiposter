@@ -48,6 +48,12 @@ en:
       action_names:
         new: "Vkontakte profile"
       create_user: "Create Vkontakte user"
+    odnoklassniki:
+      username: "Username"
+      password: "Passsword"
+      create_user: "Create Odnoklassniki user"
+      action_names:
+        new: "Odnoklassniki profile"
     facebook:
       name: "Facebook"
     twitter:

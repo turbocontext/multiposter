@@ -10,6 +10,7 @@ TemplateApp::Application.routes.draw do
         get :vkontakte
         get :livejournal
         get :google_plus
+        get :odnoklassniki
       end
     end
 

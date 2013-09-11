@@ -45,6 +45,12 @@ ru:
       action_names:
         new: "Добавление учетной записи ВКонтакте"
       create_user: "Создать пользователя ВКонтакте"
+    odnoklassniki:
+      username: "Логин"
+      password: "Пароль"
+      create_user: "Создать пользователя Одноклассники"
+      action_names:
+        new: "Профиль Одноклассники"
     facebook:
       name: "Facebook"
     twitter:

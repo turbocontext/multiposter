@@ -22,18 +22,22 @@ module OdnoklassnikiStrategy
     def main_user
       return OpenStruct.new({
         provider: 'odnoklassniki',
-        uid: @auth[:uid],
+        uid: @auth['email'],
         url: get_user_url,
-        email: @auth[:email],
+        email: @auth['email'],
         nickname: get_user_name,
-        access_token: @auth[:access_token]
+        access_token: @auth['access_token']
       })
     end
 
     def get_user_url
       page = login
-      page.click_on 'Основное'
+      page.find('.mctc_navMenuSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
       page.current_url
+    end
+
+    def goto_profile_page
+      visit "http://www.odnoklassniki.com"
     end
 
     def get_user_name
@@ -43,25 +47,39 @@ module OdnoklassnikiStrategy
     end
 
     def subusers
-      # page = login
-      # click_on "Группы"
-      # page.find('#listBlockPanelUserGroupsListBlock .cardsList .cardsList_li a').each do |el|
-      #   click_on el
-      # end
-      []
+      lg = login
+      groups_pages(lg).inject([]) do |res, link|
+        lg.visit(link)
+        # lg.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
+        if lg.has_selector?('#posting_form_text_field_labeled')
+          res << OpenStruct.new({
+            provider: 'odnoklassniki',
+            uid: 'odnoklassniki_uid',
+            url: lg.current_url,
+            email: auth['email'],
+            nickname: lg.find('.mctc_name_holder.textWrap').text,
+            access_token: auth['access_token']
+          })
+        end
+        res
+      end
+    end
+
+    def groups_pages(lg = nil)
+      lg ||= login
+      groups_link = lg.find('.mctc_navMenuSec[hrefattrs="st.cmd=userAltGroup&st._aid=NavMenu_User_AltGroups"]')
+      lg.visit("http://www.odnoklassniki.ru#{groups_link['href']}")
+      groups = lg.all('#listBlockPanelUserGroupsListBlock .cardsList .cardsList_li a').inject([]) do |res, el|
+        res << "http://www.odnoklassniki.ru#{el['href']}"
+      end
     end
 
     def login
-      if @login && @login.has_selector?('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st\.cmd\=userMain&st\.\_aid\=NavMenu_User_Main"]')
-        puts "no real login"
-        return @login
-      else
-        puts "real login"
-      end
+      return @login if @login && @login.has_selector?('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st\.cmd\=userMain&st\.\_aid\=NavMenu_User_Main"]')
       @login = Capybara::Session.new(OdnoklassnikiStrategy::JAVASCRIPT_DRIVER)
       @login.visit "http://www.odnoklassniki.ru"
-      @login.fill_in 'Логин', with: auth[:email]
-      @login.fill_in 'Пароль', with: auth[:access_token]
+      @login.fill_in 'Логин', with: auth['email']
+      @login.fill_in 'Пароль', with: auth['access_token']
       @login.click_on 'Войти'
       @login
     end
