@@ -14,18 +14,27 @@ describe OdnoklassnikiStrategy do
     # end
 
     # it "should get page name" do
-    #   od.get_user_name.should == od_name
+    #   od.user_name.should == od_name
     # end
 
     # it "should get profile url" do
-    #   od.get_user_url.should == od_url
+    #   od.user_url.should == od_url
     # end
 
-    # it "should return main user with key attributes" do
-    #   user = od.main_user
-    #   user.nickname.should == od_name
-    #   user.url.should == od_url
+    # it "should get uid from long format" do
+    #   od.get_uid(od_url).should == '529740250964'
     # end
+
+    # it "should get uid from short format" do
+    #   od.get_uid('http://www.odnoklassniki.ru/profile').should == 'profile'
+    # end
+
+    it "should return main user with key attributes" do
+      user = od.main_user
+      user.nickname.should == od_name
+      user.url.should == od_url
+      user.uid.should == '529740250964'
+    end
 
     # it "should return links to user's groups" do
     #   od.groups_pages(od.login).should == ["http://www.odnoklassniki.ru/group/52076969984084", "http://www.odnoklassniki.ru/goodwears"]
