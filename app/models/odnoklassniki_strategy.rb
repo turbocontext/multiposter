@@ -17,14 +17,7 @@ module OdnoklassnikiStrategy
     end
 
     def main_user
-      return OpenStruct.new({
-        provider: 'odnoklassniki',
-        uid: user_uid,
-        url: user_url,
-        email: auth[:email],
-        nickname: user_name,
-        access_token: auth[:access_token]
-      })
+      user_struct(auth[:email], auth[:access_token], get_uid(user_url), user_url, user_name)
     end
 
     def subusers
@@ -32,14 +25,7 @@ module OdnoklassnikiStrategy
       groups_pages.inject([]) do |res, link|
         lg.visit(link)
         if lg.has_selector?('#posting_form_text_field_labeled')
-          res << OpenStruct.new({
-            provider: 'odnoklassniki',
-            uid: get_uid(page_url(lg)),
-            url: page_url(lg),
-            email: auth[:email],
-            nickname: page_name(lg),
-            access_token: auth[:access_token]
-          })
+          res << user_struct(auth[:email], auth[:access_token], get_uid(page_url(lg)), page_url(lg), page_name(lg))
         end
         res
       end
@@ -51,10 +37,6 @@ module OdnoklassnikiStrategy
 
     def user_name
       @user_name ||= login.find('.mctc_nameLink.bl').text
-    end
-
-    def user_uid
-      @user_uid ||= get_uid(user_url)
     end
 
     def get_uid(url)
@@ -94,47 +76,69 @@ module OdnoklassnikiStrategy
         end
       else
         puts "real login"
-        @login = initialize_session
-        @login.visit "http://www.odnoklassniki.ru"
-        @login.fill_in 'Логин', with: email
-        @login.fill_in 'Пароль', with: password
-        @login.click_on 'Войти'
-        @login.click_on 'Основное'
-        @login
+        @login = OdnoklassnikiStrategy.login(email, password)
       end
     end
 
-    def initialize_session(driver = :poltergeist)
-      if driver == :poltergeist || driver == 'poltergeist'
-        Capybara.register_driver :poltergeist do |app|
-          Capybara::Poltergeist::Driver.new(app, js_errors: false)
-        end
-      end
-      Capybara.current_driver = driver
-      Capybara.javascript_driver = driver
-      Capybara::Session.new(driver)
+    def user_struct(email, token, uid, url, nickname)
+      OpenStruct.new({
+        provider: 'odnoklassniki',
+        uid: uid,
+        url: url,
+        email: email,
+        nickname: nickname,
+        access_token: token
+      })
     end
+
   end
 
   class OdnoklassnikiMessage
-    attr_accessor :user, :post_page, :post_url
+    attr_accessor :user, :login
     def initialize(user)
       @user = user
     end
 
     def send(message)
+      login = OdnoklassnikiStrategy.login(user.email, user.access_token)
+      login.visit(user.url)
+      login.find('#posting_form_text_field_labeled').click
+      login.fill_in('any_text_here', with: text_from(message))
+      login.find('#opentext').click
+      login.fill_in('1.posting_form_text_field', with: message.url)
+      sleep 3
+      login.click_on 'Поделиться'
     end
 
     def text_from(message)
-      if message.text.blank?
-        message.short_text + "\\n" + (message.url || '')
-      else
-        message.text + "\\n" + (message.url || '')
-      end
+      message.text.blank? ? message.short_text : message.text
     end
 
     def delete(message)
       true
     end
+  end
+
+
+  def self.initialize_session(driver = :poltergeist)
+    if driver == :poltergeist || driver == 'poltergeist'
+      Capybara.register_driver :poltergeist do |app|
+        Capybara::Poltergeist::Driver.new(app, js_errors: false)
+      end
+    end
+    Capybara.current_driver = driver
+    Capybara.javascript_driver = driver
+    Capybara::Session.new(driver)
+  end
+
+  def self.login(email, password)
+    login = initialize_session
+    login = OdnoklassnikiStrategy.initialize_session
+    login.visit "http://www.odnoklassniki.ru"
+    login.fill_in 'Логин', with: email
+    login.fill_in 'Пароль', with: password
+    login.click_on 'Войти'
+    login.click_on 'Основное'
+    login
   end
 end

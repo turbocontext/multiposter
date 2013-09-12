@@ -21,7 +21,8 @@ $ ->
     'google_oauth2',
     'vkontakte',
     'livejournal',
-    'google_plus'
+    'google_plus',
+    'odnoklassniki'
   ]
   $('body').on 'keyup input paste', "#common_text", (element) ->
     for id in ids
