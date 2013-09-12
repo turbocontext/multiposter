@@ -20,7 +20,7 @@ class SocialUsersController < ApplicationController
     # raise params.to_yaml
     @social_users = SocialUser.from_omniauth(request.env['omniauth.auth'] || params[:social_user])
     @social_users.each do |social_user|
-      if user = current_user.social_users.find_by_uid(social_user.uid)
+      if user = current_user.social_users.find_by_uid_and_provider(social_user.uid, social_user.provider)
         user.clone_from(social_user)
         social_user.destroy
       else

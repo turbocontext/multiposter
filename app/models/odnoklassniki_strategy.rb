@@ -27,30 +27,10 @@ module OdnoklassnikiStrategy
       })
     end
 
-    def user_url
-      # login.find('.mctc_navMenuSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
-      @user_url ||= login.current_url
-    end
-
-    def user_name
-      @user_name ||= login.find('.mctc_nameLink.bl').text
-    end
-
-    def user_uid
-      @user_uid ||= get_uid(user_url)
-    end
-
-    def get_uid(url)
-      long_regex = /http:\/\/www\.odnoklassniki\.ru\/profile\/(\d*)\z/
-      short_regex = /http:\/\/www\.odnoklassniki\.ru\/(\w*)\z/
-      (url.match(long_regex) || url.match(short_regex))[1]
-    end
-
     def subusers
       lg = login
-      groups_pages(lg).inject([]) do |res, link|
+      groups_pages.inject([]) do |res, link|
         lg.visit(link)
-        # lg.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
         if lg.has_selector?('#posting_form_text_field_labeled')
           res << OpenStruct.new({
             provider: 'odnoklassniki',
@@ -65,6 +45,25 @@ module OdnoklassnikiStrategy
       end
     end
 
+    def user_url
+      @user_url ||= login.current_url
+    end
+
+    def user_name
+      @user_name ||= login.find('.mctc_nameLink.bl').text
+    end
+
+    def user_uid
+      @user_uid ||= get_uid(user_url)
+    end
+
+    def get_uid(url)
+      long_regex = /http:\/\/www\.odnoklassniki\.ru\/profile\/(\d*)\z/
+      short_regex = /http:\/\/www\.odnoklassniki\.ru\/(\w*)\z/
+      group_regex = /http:\/\/www\.odnoklassniki\.ru\/group\/(\d*)\z/
+      (url.match(long_regex) || url.match(short_regex) || url.match(group_regex))[1]
+    end
+
     def page_url(lg)
       lg.current_url
     end
@@ -73,10 +72,11 @@ module OdnoklassnikiStrategy
       lg.find('.mctc_name_holder.textWrap').text
     end
 
-    def groups_pages(lg)
-      groups_link = page.find('.mctc_navMenuSec[hrefattrs="st.cmd=userAltGroup&st._aid=NavMenu_User_AltGroups"]')
-      page.visit("http://www.odnoklassniki.ru#{groups_link['href']}")
-      groups = page.all('#listBlockPanelUserGroupsListBlock .cardsList .cardsList_li a').inject([]) do |res, el|
+    def groups_pages
+      lg = login
+      groups_link = lg.find('.mctc_navMenuSec[hrefattrs="st.cmd=userAltGroup&st._aid=NavMenu_User_AltGroups"]')
+      lg.visit("http://www.odnoklassniki.ru#{groups_link['href']}")
+      groups = lg.all('#listBlockPanelUserGroupsListBlock .cardsList .cardsList_li a').inject([]) do |res, el|
         res << "http://www.odnoklassniki.ru#{el['href']}"
       end
     end
@@ -88,7 +88,9 @@ module OdnoklassnikiStrategy
           return @login
         else
           puts "no real login, going to main page"
+          visit "http://www.odnoklassniki.ru"
           @login.find('.mctc_navMenuSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
+          @login
         end
       else
         puts "real login"
