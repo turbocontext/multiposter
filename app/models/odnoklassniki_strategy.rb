@@ -107,7 +107,8 @@ module OdnoklassnikiStrategy
       login.find('#opentext').click
       login.fill_in('1.posting_form_text_field', with: message.url)
       sleep 3
-      login.click_on 'Поделиться'
+      login.find('.button-pro.form-actions_a.form-actions__yes').click
+      # login.click_on 'Поделиться'
     end
 
     def text_from(message)
@@ -135,10 +136,14 @@ module OdnoklassnikiStrategy
     login = initialize_session
     login = OdnoklassnikiStrategy.initialize_session
     login.visit "http://www.odnoklassniki.ru"
-    login.fill_in 'Логин', with: email
-    login.fill_in 'Пароль', with: password
-    login.click_on 'Войти'
-    login.click_on 'Основное'
+    login.fill_in 'st.email', with: email
+    login.fill_in 'st.password', with: password
+    login.click_on 'hook_FormButton_button_go'
+    sleep 3
+    login.find('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
+    login.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
+
+    # login.click_on 'Основное'
     login
   end
 end
