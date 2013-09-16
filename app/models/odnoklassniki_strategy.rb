@@ -1,7 +1,5 @@
 # --- encoding: utf-8 ---
 # page.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
-require "nokogiri"
-require "page_handler"
 require "capybara/poltergeist"
 
 module OdnoklassnikiStrategy
@@ -64,20 +62,8 @@ module OdnoklassnikiStrategy
     end
 
     def login
-      if @login
-        if @login.has_selector?('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st\.cmd\=userMain&st\.\_aid\=NavMenu_User_Main"]')
-          puts "no real login, main page"
-          return @login
-        else
-          puts "no real login, going to main page"
-          visit "http://www.odnoklassniki.ru"
-          @login.find('.mctc_navMenuSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
-          @login
-        end
-      else
-        puts "real login"
-        @login = OdnoklassnikiStrategy.login(email, password)
-      end
+      return @login if @login && @login.has_selector?('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st\.cmd\=userMain&st\.\_aid\=NavMenu_User_Main"]')
+      @login = OdnoklassnikiStrategy.login(email, password)
     end
 
     def user_struct(email, token, uid, url, nickname)
@@ -90,7 +76,6 @@ module OdnoklassnikiStrategy
         access_token: token
       })
     end
-
   end
 
   class OdnoklassnikiMessage
@@ -108,7 +93,6 @@ module OdnoklassnikiStrategy
       login.fill_in('1.posting_form_text_field', with: message.url)
       sleep 3
       login.find('.button-pro.form-actions_a.form-actions__yes').click
-      # login.click_on 'Поделиться'
     end
 
     def text_from(message)
@@ -122,7 +106,7 @@ module OdnoklassnikiStrategy
 
 
   def self.initialize_session(driver = :poltergeist)
-    if driver == :poltergeist || driver == 'poltergeist'
+    if driver.to_s == 'poltergeist'
       Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, js_errors: false)
       end
@@ -133,7 +117,6 @@ module OdnoklassnikiStrategy
   end
 
   def self.login(email, password)
-    login = initialize_session
     login = OdnoklassnikiStrategy.initialize_session
     login.visit "http://www.odnoklassniki.ru"
     login.fill_in 'st.email', with: email
@@ -141,9 +124,6 @@ module OdnoklassnikiStrategy
     login.click_on 'hook_FormButton_button_go'
     sleep 3
     login.find('.mctc_navMenuSec.mctc_navMenuActiveSec[hrefattrs="st.cmd=userMain&st._aid=NavMenu_User_Main"]').click
-    login.save_screenshot Rails.root.join("tmp/capybara/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png")
-
-    # login.click_on 'Основное'
     login
   end
 end
